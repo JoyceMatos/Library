@@ -8,20 +8,17 @@
 
 import Foundation
 
-// TODO: - Remove Sample books from code. This is only for testing Swift objects
-// TODO: - Refactor DataStore 
+// TODO: - Refactor DataStore
 
 final class LibraryDataStore {
     
     static let sharedInstance = LibraryDataStore()
     let libraryAPI = LibraryAPIClient.sharedInstance
     var books = [Book]()
-    var sampleBooks = [SampleBook]()
     private init() { }
     
     func getBooks() {
         books.removeAll()
-        sampleBooks.removeAll()
         
         libraryAPI.get { (library) in
             
@@ -29,27 +26,17 @@ final class LibraryDataStore {
                 // Handle nil value
                 return
             }
-
+            
             // Map instead?
             for element in library {
                 if let book = Book(dictionary: element) {
-                    print("AUTHOR: \(book.author)")
-                self.books.append(book)
+                    print("AUTHOR: \(book.lastCheckedOut)")
+                    self.books.append(book)
+                }
+                
+                print("MY BOOKS: \(self.books)")
+                
             }
-    
-                // NOTE: - Just for testing
-                let swiftBook = SampleBook(JSON: element)
-                self.sampleBooks.append(swiftBook)
-            }
-            
-            print("MY SWIFT BOOKS: \(self.sampleBooks)")
-            print("MY BOOKS: \(self.books)")
-
         }
     }
-    
-    
-    
-    
-    
 }

@@ -14,6 +14,7 @@
 
 @interface Book: NSObject
 
+// NOTE: - Check to see if you need nonatomic, copy, rewrite for your properties
 @property (nonatomic, copy, readwrite) NSString *author;
 @property (nonatomic, copy, readwrite) NSString *categories;
 @property (nonatomic, copy, readwrite) NSString *id;
