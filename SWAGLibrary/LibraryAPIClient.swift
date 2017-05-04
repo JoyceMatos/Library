@@ -27,7 +27,7 @@ final class LibraryAPIClient {
             completion(nil)
             return
         }
-        
+
         // NOTE: - Default is get but perhaps include url request
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data,
@@ -118,7 +118,6 @@ final class LibraryAPIClient {
             }
             
             completion(responseJSON)
-   
         }
         task.resume()
         
