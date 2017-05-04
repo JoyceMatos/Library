@@ -13,25 +13,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    LibraryAPIClient.sharedInstance.get { (JSON) in
-        print("JSON: \(JSON)")
+        let store = LibraryDataStore.sharedInstance
         
-        // Check to see whether JSON is nil or not
-
+        store.getBooks()
         
-        }
-        
-//        LibraryAPIClient.sharedInstance.post(author: "Joan Didion", categories: "Nonfiction", title: "Slouching Towards Bethlehem", publisher: "Penguin") { (JSON) in
-//            
-//        //
-//        }
-        
-      
-        
-        LibraryAPIClient.sharedInstance.put(name: "Christina", book: 2) { (Book) in
-            //
-        }
-    
     }
 
   

@@ -14,6 +14,10 @@
 		250819051EBB7FD8005740FE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250819031EBB7FD8005740FE /* LaunchScreen.storyboard */; };
 		250819101EBB92B9005740FE /* LibraryAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */; };
 		250819121EBB92D1005740FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819111EBB92D1005740FE /* Constants.swift */; };
+		250819141EBBBCAB005740FE /* SampleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819131EBBBCAB005740FE /* SampleBook.swift */; };
+		250819171EBBBE09005740FE /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 250819161EBBBE09005740FE /* Book.m */; };
+		2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191A1EBBC0C0005740FE /* HTTPMethod.swift */; };
+		2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,12 @@
 		250819061EBB7FD8005740FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryAPIClient.swift; sourceTree = "<group>"; };
 		250819111EBB92D1005740FE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		250819131EBBBCAB005740FE /* SampleBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleBook.swift; sourceTree = "<group>"; };
+		250819151EBBBE09005740FE /* SWAGLibrary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SWAGLibrary-Bridging-Header.h"; sourceTree = "<group>"; };
+		250819161EBBBE09005740FE /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		250819181EBBBE26005740FE /* Book.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		2508191A1EBBC0C0005740FE /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryDataStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +84,11 @@
 			isa = PBXGroup;
 			children = (
 				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
+				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
+				2508191A1EBBC0C0005740FE /* HTTPMethod.swift */,
 				250819111EBB92D1005740FE /* Constants.swift */,
+				250819131EBBBCAB005740FE /* SampleBook.swift */,
+				250819191EBBBE2C005740FE /* ObjC */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -92,6 +106,16 @@
 				250818FC1EBB7FD8005740FE /* ViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		250819191EBBBE2C005740FE /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				250819161EBBBE09005740FE /* Book.m */,
+				250819181EBBBE26005740FE /* Book.h */,
+				250819151EBBBE09005740FE /* SWAGLibrary-Bridging-Header.h */,
+			);
+			name = ObjC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +151,7 @@
 					250818F61EBB7FD8005740FE = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = U442XCZ4BT;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -169,7 +194,11 @@
 			files = (
 				250819101EBB92B9005740FE /* LibraryAPIClient.swift in Sources */,
 				250818FD1EBB7FD8005740FE /* ViewController.swift in Sources */,
+				2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */,
 				250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */,
+				250819141EBBBCAB005740FE /* SampleBook.swift in Sources */,
+				2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */,
+				250819171EBBBE09005740FE /* Book.m in Sources */,
 				250819121EBB92D1005740FE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,11 +322,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U442XCZ4BT;
 				INFOPLIST_FILE = SWAGLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Joyce-Matos.SWAGLibrary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SWAGLibrary/SWAGLibrary-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -306,11 +338,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = U442XCZ4BT;
 				INFOPLIST_FILE = SWAGLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Joyce-Matos.SWAGLibrary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SWAGLibrary/SWAGLibrary-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -334,6 +368,7 @@
 				2508190B1EBB7FD8005740FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

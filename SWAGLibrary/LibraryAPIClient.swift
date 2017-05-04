@@ -17,6 +17,7 @@ typealias JSON = [String: Any]
 
 final class LibraryAPIClient {
     
+    // Is this necessary?
     static let sharedInstance = LibraryAPIClient()
     
     // MARK - GET method for retrieving all books
@@ -37,7 +38,6 @@ final class LibraryAPIClient {
             }
             
             DispatchQueue.global(qos: .userInitiated).async {
-                print("This is the response: \(responseJSON)")
                 completion(responseJSON)
             }
         }
