@@ -17,12 +17,13 @@ final class LibraryDataStore {
     var books = [Book]()
     private init() { }
     
-    func getBooks() {
+    func getBooks(completion: @escaping (Bool) -> Void) {
         books.removeAll()
         
         libraryAPI.get { (library) in
             
             guard let library = library else {
+                completion(false)
                 // Handle nil value
                 return
             }
@@ -37,6 +38,9 @@ final class LibraryDataStore {
                 print("MY BOOKS: \(self.books)")
                 
             }
+            
+            completion(true)
         }
+        
     }
 }

@@ -14,6 +14,7 @@ typealias JSON = [String: Any]
 // TODO: - Create more abstraction with url paths
 // TODO: - Store string literals in constants
 // TODO: - Check status ie: 200, 204
+// TODO: - GCD for all functions
 
 final class LibraryAPIClient {
     
