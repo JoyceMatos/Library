@@ -12,13 +12,25 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+    LibraryAPIClient.sharedInstance.get { (JSON) in
+        print("JSON: \(JSON)")
+        
+        // Check to see whether JSON is nil or not
+
+        
+        }
+        
+//        LibraryAPIClient.sharedInstance.post(author: "Joan Didion", categories: "Nonfiction", title: "Slouching Towards Bethlehem", publisher: "Penguin") { (JSON) in
+//            
+//        //
+//        }
+        
+        LibraryAPIClient.sharedInstance.put(name: "Christina", book: 4)
+    
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
 
 
 }
