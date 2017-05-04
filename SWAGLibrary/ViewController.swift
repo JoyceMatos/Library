@@ -26,7 +26,11 @@ class ViewController: UIViewController {
 //        //
 //        }
         
-        LibraryAPIClient.sharedInstance.put(name: "Christina", book: 4)
+      
+        
+        LibraryAPIClient.sharedInstance.put(name: "Christina", book: 2) { (Book) in
+            //
+        }
     
     }
 
