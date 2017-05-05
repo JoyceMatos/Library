@@ -17,7 +17,7 @@
 // NOTE: - Check to see if you need nonatomic, copy, rewrite for your properties
 @property (nonatomic, copy, readwrite) NSString *author;
 @property (nonatomic, copy, readwrite) NSString *categories;
-@property (nonatomic, copy, readwrite) NSString *id;
+@property (nonatomic, copy, readwrite) NSNumber *id;
 @property (nonatomic, copy, readwrite) NSString *publisher;
 @property (nonatomic, copy, readwrite) NSString *title;
 @property (nonatomic, copy, readwrite) NSString *url;

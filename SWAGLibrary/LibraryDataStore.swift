@@ -19,12 +19,9 @@ final class LibraryDataStore {
     
     func getBooks(completion: @escaping (Bool) -> Void) {
         books.removeAll()
-        print("Before API Completion")
         libraryAPI.get { (library) in
             let libraryQueue = DispatchQueue(label: "library", qos: .userInitiated)
-            print("Inside completion")
             libraryQueue.async {
-                print("Inside Library Queue")
                 guard let library = library else {
                     completion(false)
                     // Handle nil value
@@ -38,15 +35,12 @@ final class LibraryDataStore {
                         self.books.append(book)
                     }
                     
-                    print("MY BOOKS: \(self.books)")
-                    
                 }
                 
                 completion(true)
             }
            
         }
-        print("Outside of completion")
         
     }
 }

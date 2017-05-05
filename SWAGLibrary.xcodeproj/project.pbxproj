@@ -21,6 +21,7 @@
 		250819271EBBDA3D005740FE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819261EBBDA3D005740FE /* DetailView.swift */; };
 		250819291EBBE353005740FE /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819281EBBE353005740FE /* BookCell.swift */; };
 		25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE061EBBF1CB00B02001 /* DetailVC.swift */; };
+		25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE081EBC0FC500B02001 /* AddBookVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		250819261EBBDA3D005740FE /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		250819281EBBE353005740FE /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		25FEBE061EBBF1CB00B02001 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		25FEBE081EBC0FC500B02001 /* AddBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			children = (
 				250818FC1EBB7FD8005740FE /* LibraryVC.swift */,
 				25FEBE061EBBF1CB00B02001 /* DetailVC.swift */,
+				25FEBE081EBC0FC500B02001 /* AddBookVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */,
 				250819291EBBE353005740FE /* BookCell.swift in Sources */,
 				250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */,
+				25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */,
 				250819141EBBBCAB005740FE /* SampleBook.swift in Sources */,
 				2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */,
 				250819171EBBBE09005740FE /* Book.m in Sources */,

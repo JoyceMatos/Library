@@ -26,6 +26,11 @@ class LibraryVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        tableView.reloadData()
+    }
+    
     func fetch() {
         self.store.getBooks { (success) in
             

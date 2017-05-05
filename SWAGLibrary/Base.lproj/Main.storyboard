@@ -61,7 +61,11 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Rl-5k-0yd">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="5cl-6t-Ywb"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="5cl-6t-Ywb">
+                            <connections>
+                                <segue destination="NBP-EK-YiH" kind="presentation" id="eHh-8i-cqW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="f0H-fU-rgz" id="WsA-5L-LjV"/>
@@ -69,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="116.49175412293854"/>
+            <point key="canvasLocation" x="735" y="116"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="1ir-s3-w0W">
@@ -140,12 +144,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfE-Dn-V8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856.8" y="115.59220389805098"/>
+            <point key="canvasLocation" x="1614" y="116"/>
         </scene>
-        <!--View Controller-->
+        <!--Add BookVC-->
         <scene sceneID="Eo1-Vp-xyy">
             <objects>
-                <viewController id="NBP-EK-YiH" sceneMemberID="viewController">
+                <viewController id="NBP-EK-YiH" customClass="AddBookVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iF0-9w-KdE"/>
                         <viewControllerLayoutGuide type="bottom" id="gZO-MH-rHe"/>
@@ -186,14 +190,23 @@
                                 <rect key="frame" x="163" y="419" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitTapped:" destination="NBP-EK-YiH" eventType="touchUpInside" id="1eX-KX-qsz"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="authorField" destination="DTM-OC-LcK" id="3Te-Lc-BNc"/>
+                        <outlet property="categoriesField" destination="7Yg-6d-5yy" id="gIk-oU-bbO"/>
+                        <outlet property="publisherField" destination="1Wk-t1-cFK" id="PkO-93-XyA"/>
+                        <outlet property="titleField" destination="Lx8-Vu-XbD" id="lwn-cm-Wkt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="slm-GB-ZEU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623.1999999999998" y="115.59220389805098"/>
+            <point key="canvasLocation" x="734" y="826"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eWz-dl-d9r">
@@ -211,7 +224,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukb-iB-czj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="116.49175412293854"/>
+            <point key="canvasLocation" x="-220" y="116"/>
         </scene>
     </scenes>
 </document>

@@ -28,30 +28,30 @@ class DetailVC: UIViewController {
     
     func configureViews() {
         
-        // NOTE: - App crashes because of null value. Research: Inheriting objc objects in swift
-        
+        // TODO: - Refactor
         guard let title = book?.title,
         let author = book?.author,
         let publisher = book?.publisher,
-            let checkedOut = book?.lastCheckedOut else {
+        let checkedOut = book?.lastCheckedOut else {
                 // Handle nils
                 return
                 
         }
-        
-    print(book?.lastCheckedOut)
-        if book?.lastCheckedOut is NSNull {
-            book?.lastCheckedOut = nil
-        }
-        
-        print(book?.lastCheckedOut)
 
-        // TODO: Give nils default value or guard against them somehow
         titleLabel.text = book?.title
         authorLabel.text = book?.author
         publisherLabel.text = book?.publisher
-     //   checkedOutLabel.text = book?.lastCheckedOut as? String ?? "Never checked out"
+        checkedOutLabel.text = nullToNil(book?.lastCheckedOut) as? String ?? "Not checked out"
         
+    }
+    
+    // TODO: - Make function Swiftier or convert to protocol/extension
+    func nullToNil(_ value: AnyObject?) -> AnyObject? {
+        if value is NSNull {
+            return nil
+        } else {
+            return value
+        }
     }
     
     
@@ -64,3 +64,4 @@ class DetailVC: UIViewController {
     
     
 }
+
