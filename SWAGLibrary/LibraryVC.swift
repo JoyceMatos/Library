@@ -18,7 +18,6 @@ class LibraryVC: UIViewController {
     
     let store = LibraryDataStore.sharedInstance
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

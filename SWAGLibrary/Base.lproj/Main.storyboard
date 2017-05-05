@@ -52,7 +52,7 @@
                                         <connections>
                                             <outlet property="authorLabel" destination="i3D-a7-Idm" id="9kv-Ss-eHr"/>
                                             <outlet property="titleLabel" destination="1Bg-GI-EMJ" id="uwu-JC-ynL"/>
-                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetail" action="showDetailViewController:sender:" id="Ke3-Zv-2ja"/>
+                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetail" id="7t5-Y3-Ljg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -78,7 +78,7 @@
         <!--Details-->
         <scene sceneID="1ir-s3-w0W">
             <objects>
-                <viewController title="Details" hidesBottomBarWhenPushed="YES" id="qrI-jX-rlR" customClass="DetailVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Details" id="qrI-jX-rlR" customClass="DetailVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kHh-ze-DPp"/>
                         <viewControllerLayoutGuide type="bottom" id="UET-3g-yth"/>
@@ -130,22 +130,17 @@
                                     <action selector="checkoutTapped:" destination="qrI-jX-rlR" eventType="touchUpInside" id="8vG-sk-I7u"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ue3-4x-h5s">
-                                <rect key="frame" x="16" y="75" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="X"/>
-                                <connections>
-                                    <action selector="checkoutTapped:" destination="qrI-jX-rlR" eventType="touchUpInside" id="e97-yZ-Pux"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="a09-zq-b0Z">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="9qK-uo-TUM"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="9qK-uo-TUM">
+                            <connections>
+                                <action selector="shareTapped:" destination="qrI-jX-rlR" id="WSQ-Dp-66X"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="authorLabel" destination="X9w-qH-cLx" id="Evd-be-K5B"/>
                         <outlet property="checkedOutLabel" destination="2JC-RG-2MM" id="qv9-t1-7La"/>
