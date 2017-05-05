@@ -10,7 +10,7 @@ import UIKit
 
 class DetailVC: UIViewController {
     
-    // TODO: - Add sharing capabilities
+    // TODO: - Add sharing capabilities (built-in sharing dialogue)
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!

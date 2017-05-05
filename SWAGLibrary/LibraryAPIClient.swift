@@ -15,6 +15,9 @@ typealias JSON = [String: Any]
 // TODO: - Store string literals in constants
 // TODO: - Check status ie: 200, 204
 // TODO: - GCD for all functions
+// TODO: - Error handle for connection, etc
+
+// NOTE: - Books have url. Perhaps you could use this in your endpoints
 
 final class LibraryAPIClient {
     
@@ -24,7 +27,7 @@ final class LibraryAPIClient {
     // MARK - GET method for retrieving all books
     func get(completion: @escaping ([JSON]?) -> Void) {
         
-        let urlString = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d/books"
+        let urlString = API.baseURL + Endpoint.getLibrary.path
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
@@ -52,7 +55,7 @@ final class LibraryAPIClient {
     
     func post(author: String, categories: String, title: String, publisher: String, completion: @escaping ([JSON]?) -> Void) {
         
-        let urlString = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d/books"
+        let urlString = API.baseURL + Endpoint.getLibrary.path
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
@@ -87,8 +90,8 @@ final class LibraryAPIClient {
     // MARK - PUT method for updating a book
     
     //TODO: - Return JSON
-    func put(name: String, book: Int, completion: @escaping (JSON?) -> Void) {
-        let urlString = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d/books/\(book)"
+    func put(name: String, book id: Int, completion: @escaping (JSON?) -> Void) {
+        let urlString = API.baseURL + Endpoint.getBook(id).path
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
@@ -129,8 +132,8 @@ final class LibraryAPIClient {
     // MARK: - DELETE method for deleting a book
     
     // TODO: - Return JSON in completion
-    func delete(book path: Int) {
-        let urlString = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d/books/\(path)"
+    func delete(book id: Int) {
+        let urlString = API.baseURL + Endpoint.getBook(id).path
         guard let url = URL(string: urlString) else {
             //  completion(nil)
             return
@@ -158,7 +161,7 @@ final class LibraryAPIClient {
     
     // TODO: - Pass some value into completion (if necessary)
     func delete(all completion: () -> Void) {
-        let urlString = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d/clean"
+        let urlString = API.baseURL + Endpoint.deleteLibrary.path
         guard let url = URL(string: urlString) else {
             //  completion(nil)
             return

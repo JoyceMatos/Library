@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+struct API {
+    
+    static let baseURL = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d"
+    
+}
+
+struct Request {
+    
+    
+}

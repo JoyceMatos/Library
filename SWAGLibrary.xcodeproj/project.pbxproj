@@ -22,6 +22,7 @@
 		250819291EBBE353005740FE /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819281EBBE353005740FE /* BookCell.swift */; };
 		25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE061EBBF1CB00B02001 /* DetailVC.swift */; };
 		25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE081EBC0FC500B02001 /* AddBookVC.swift */; };
+		25FEBE0B1EBC1B3200B02001 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		250819281EBBE353005740FE /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		25FEBE061EBBF1CB00B02001 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		25FEBE081EBC0FC500B02001 /* AddBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookVC.swift; sourceTree = "<group>"; };
+		25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
 				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
 				2508191A1EBBC0C0005740FE /* HTTPMethod.swift */,
+				25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */,
 				250819111EBB92D1005740FE /* Constants.swift */,
 				250819131EBBBCAB005740FE /* SampleBook.swift */,
 				250819191EBBBE2C005740FE /* ObjC */,
@@ -207,6 +210,7 @@
 				250819101EBB92B9005740FE /* LibraryAPIClient.swift in Sources */,
 				250818FD1EBB7FD8005740FE /* LibraryVC.swift in Sources */,
 				25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */,
+				25FEBE0B1EBC1B3200B02001 /* Endpoint.swift in Sources */,
 				250819271EBBDA3D005740FE /* DetailView.swift in Sources */,
 				2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */,
 				250819291EBBE353005740FE /* BookCell.swift in Sources */,

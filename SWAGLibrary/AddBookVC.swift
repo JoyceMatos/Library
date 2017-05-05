@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - Add  Done button to close screen. If there is text fields, confirm that user wants to leave with unsaved changes
 class AddBookVC: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
@@ -23,6 +24,8 @@ class AddBookVC: UIViewController {
     }
     
     @IBAction func submitTapped(_ sender: Any) {
+        
+        // TODO: Title & author required, if empty & press submire, show alert with error message
         
         // NOTE: - Guard vs if lets
        if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {

@@ -8,6 +8,10 @@
 
 import UIKit
 
+// TODO: - The app should allow users to update a book information
+// TODO: - The app should allow users to delete a specific book
+// TODO: - The app should allow users to delete all books at once
+
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -22,9 +26,12 @@ class LibraryVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        fetch()
         
+        fetch()
+                
     }
+    
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         
