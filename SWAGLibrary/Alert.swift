@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol AlertDelegate: class {
-    func displayAlert(message type: AlertMessage, with handler: @escaping () -> Void)
+    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void)
     
     // TODO: - Add actionAlert for more customization
 }

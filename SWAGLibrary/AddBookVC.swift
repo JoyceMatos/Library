@@ -16,9 +16,22 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
     
+    var alertDelegate: AlertDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        alertDelegate = self
+        
+    }
+    
+    func missingFieldAction() {
+        
+        let missingFieldMessage = AlertMessage(title: "Missing fields", message: "Please type in the titles and/or author")
+        alertDelegate?.displayAlert(message: missingFieldMessage, with: { (noValue) in
+            
+            // Figure out what to do here (This gives me no value)
+        })
         
     }
     
@@ -62,24 +75,21 @@ class AddBookVC: UIViewController {
             return
         }
         
+     validateFields()
         
-         if title.characters.count > 0 || author.characters.count > 0 || publisher.characters.count > 0 || categories.characters.count > 0 {
-            
-            let alert = UIAlertController(title: "", message: "Do you want to leave without saving your changes?", preferredStyle: .alert)
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-            let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
-                                    self.dismiss(animated: true, completion: nil)
-            })
-            
-            alert.addAction(cancel)
-            alert.addAction(confirm)
-            
-            self.present(alert, animated: true, completion: nil)
-
-         } else {
+    }
+    
+    func validateFields() {
+        
+        guard let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text else {
+            return
+        }
+        
+        // Perhaps switch instead
+        if title.characters.count > 0 || author.characters.count > 0 || publisher.characters.count > 0 || categories.characters.count > 0 {
+            missingFieldAction()
+        } else {
             self.dismiss(animated: true, completion: nil)
-            
         }
         
     }
@@ -90,5 +100,30 @@ class AddBookVC: UIViewController {
     }
     
     
+    
+}
+
+// TODO: - Figure out how to add 2 alert controllers with this protocol ; Perhaps make a UIAlertAction factory (Function that takes in array of UIAlertActions) ie: AlertActions can be enums
+extension AddBookVC: AlertDelegate {
+    
+    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
+        
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
+            
+            
+            self.dismiss(animated: true, completion: nil)
+            handler(nil)
+        })
+        
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
     
 }

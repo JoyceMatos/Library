@@ -63,7 +63,7 @@ class LibraryVC: UIViewController {
     
     func alertAction(_ book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
-        self.alertDelegate?.displayAlert(message: deleteMessage, with: {
+        self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
             
             // Abstract this function even further?
             LibraryAPIClient.sharedInstance.delete(book: book, completion: { (success) in
@@ -131,14 +131,14 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 
 extension LibraryVC: AlertDelegate {
     
-    func displayAlert(message type: AlertMessage, with handler: @escaping () -> Void) {
+    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
         
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
 
-                handler()
+                handler(nil)
         })
         
         alert.addAction(cancel)
