@@ -15,6 +15,18 @@ struct API {
 }
 
 struct Request {
+    static let value = "application/json"
+    static let key = "Content-Type"
     
+}
+
+struct SegueIdentifier {
     
+    static let showDetail = "showDetail"
+    
+}
+
+struct CellIdentifier {
+    
+    static let bookCell = "bookCell"
 }

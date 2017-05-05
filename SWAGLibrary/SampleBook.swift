@@ -28,13 +28,7 @@ struct SampleBook {
         self.publisher = JSON["publisher"] as! String
         self.title = JSON["title"] as! String
         self.url = JSON["url"] as! String
-        
-//       guard let self.lastCheckedOut = JSON["lastCheckedOut"] as! String?,
-//        let self.lastCheckedOutBy = JSON["lastCheckedOutBy"] as! String? else {
-//            self.lastCheckedOut = nil
-//            self.lastCheckedOutBy = nil
-//            
-//        }
+
     }
     
 }

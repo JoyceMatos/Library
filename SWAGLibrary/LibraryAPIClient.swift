@@ -68,7 +68,7 @@ final class LibraryAPIClient {
         if let jsonData = try? JSONSerialization.data(withJSONObject: book, options: []) {
             
             request.httpMethod = "POST"
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue(Request.value, forHTTPHeaderField: Request.key )
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
@@ -105,7 +105,7 @@ final class LibraryAPIClient {
         let updatedInfo = ["lastCheckedOutBy": name]
         
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.addValue(Request.value, forHTTPHeaderField: Request.key)
             request.httpBody = data
         }
         

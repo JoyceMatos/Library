@@ -23,21 +23,21 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         
         configureViews()
-
+        
     }
     
     func configureViews() {
         
         // TODO: - Refactor
         guard let title = book?.title,
-        let author = book?.author,
-        let publisher = book?.publisher,
-        let checkedOut = book?.lastCheckedOut else {
+            let author = book?.author,
+            let publisher = book?.publisher,
+            let checkedOut = book?.lastCheckedOut else {
                 // Handle nils
                 return
                 
         }
-
+        
         titleLabel.text = book?.title
         authorLabel.text = book?.author
         publisherLabel.text = book?.publisher

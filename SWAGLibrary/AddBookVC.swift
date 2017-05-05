@@ -15,12 +15,11 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var authorField: UITextField!
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -28,20 +27,20 @@ class AddBookVC: UIViewController {
         // TODO: Title & author required, if empty & press submire, show alert with error message
         
         // NOTE: - Guard vs if lets
-       if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
-        
-        LibraryAPIClient.sharedInstance.post(author: author, categories: categories, title: title, publisher: publisher, completion: { (JSON) in
+        if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
             
-            print(JSON)
-        })
-        
-        
+            LibraryAPIClient.sharedInstance.post(author: author, categories: categories, title: title, publisher: publisher, completion: { (JSON) in
+                
+                print(JSON)
+            })
+            
+            
         }
         
-    dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
     
-
-
+    
+    
 }

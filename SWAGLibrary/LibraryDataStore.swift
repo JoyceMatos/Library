@@ -32,7 +32,6 @@ final class LibraryDataStore {
                 // Map instead?
                 for element in library {
                     if let book = Book(dictionary: element) {
-                        print("AUTHOR: \(book.lastCheckedOut)")
                         self.books.append(book)
                     }
                     

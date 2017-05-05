@@ -15,26 +15,23 @@ import UIKit
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-
     
     let store = LibraryDataStore.sharedInstance
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.delegate = self
         tableView.dataSource = self
         
-        
         fetch()
-                
+        
     }
     
- 
+    
     
     override func viewWillAppear(_ animated: Bool) {
-        
         tableView.reloadData()
     }
     
@@ -50,7 +47,7 @@ class LibraryVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == SegueIdentifier.showDetail {
             let destVC = segue.destination as! DetailVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
@@ -58,7 +55,7 @@ class LibraryVC: UIViewController {
             destVC.book = store.books[indexPath.row]
         }
     }
-
+    
 }
 
 extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
@@ -72,18 +69,11 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookCell
-//        let cell = Bundle.main.loadNibNamed("bookCell", owner: self, options: nil)?.first as! BookCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.bookCell, for: indexPath) as! BookCell
         let book = store.books[indexPath.row]
-        
-       // if let bookTitle = book.title, let bookAuthor = book.author {
         
         cell.titleLabel.text = book.title
         cell.authorLabel.text = book.author
-        //  }
-        print(book.title)
-        print(book.author)
-
         
         return cell
     }

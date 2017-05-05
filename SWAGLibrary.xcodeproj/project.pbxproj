@@ -18,7 +18,6 @@
 		250819171EBBBE09005740FE /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 250819161EBBBE09005740FE /* Book.m */; };
 		2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191A1EBBC0C0005740FE /* HTTPMethod.swift */; };
 		2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */; };
-		250819271EBBDA3D005740FE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819261EBBDA3D005740FE /* DetailView.swift */; };
 		250819291EBBE353005740FE /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819281EBBE353005740FE /* BookCell.swift */; };
 		25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE061EBBF1CB00B02001 /* DetailVC.swift */; };
 		25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE081EBC0FC500B02001 /* AddBookVC.swift */; };
@@ -41,7 +40,6 @@
 		250819181EBBBE26005740FE /* Book.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		2508191A1EBBC0C0005740FE /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryDataStore.swift; sourceTree = "<group>"; };
-		250819261EBBDA3D005740FE /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		250819281EBBE353005740FE /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		25FEBE061EBBF1CB00B02001 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		25FEBE081EBC0FC500B02001 /* AddBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookVC.swift; sourceTree = "<group>"; };
@@ -83,7 +81,6 @@
 				2508190C1EBB9223005740FE /* Model */,
 				2508190D1EBB922A005740FE /* View */,
 				250818FE1EBB7FD8005740FE /* Main.storyboard */,
-				250819261EBBDA3D005740FE /* DetailView.swift */,
 				250819281EBBE353005740FE /* BookCell.swift */,
 				2508190E1EBB9237005740FE /* Controller */,
 				250819011EBB7FD8005740FE /* Assets.xcassets */,
@@ -219,7 +216,6 @@
 				250818FD1EBB7FD8005740FE /* LibraryVC.swift in Sources */,
 				25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */,
 				25FEBE0B1EBC1B3200B02001 /* Endpoint.swift in Sources */,
-				250819271EBBDA3D005740FE /* DetailView.swift in Sources */,
 				2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */,
 				250819291EBBE353005740FE /* BookCell.swift in Sources */,
 				250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */,
