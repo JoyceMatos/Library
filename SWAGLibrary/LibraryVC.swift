@@ -25,14 +25,14 @@ class LibraryVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        fetch()
+      //  fetch()
         
     }
     
     
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        fetch()
     }
     
     func fetch() {
