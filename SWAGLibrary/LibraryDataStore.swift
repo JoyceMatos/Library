@@ -19,28 +19,34 @@ final class LibraryDataStore {
     
     func getBooks(completion: @escaping (Bool) -> Void) {
         books.removeAll()
-        
+        print("Before API Completion")
         libraryAPI.get { (library) in
-            
-            guard let library = library else {
-                completion(false)
-                // Handle nil value
-                return
-            }
-            
-            // Map instead?
-            for element in library {
-                if let book = Book(dictionary: element) {
-                    print("AUTHOR: \(book.lastCheckedOut)")
-                    self.books.append(book)
+            let libraryQueue = DispatchQueue(label: "library", qos: .userInitiated)
+            print("Inside completion")
+            libraryQueue.async {
+                print("Inside Library Queue")
+                guard let library = library else {
+                    completion(false)
+                    // Handle nil value
+                    return
                 }
                 
-                print("MY BOOKS: \(self.books)")
+                // Map instead?
+                for element in library {
+                    if let book = Book(dictionary: element) {
+                        print("AUTHOR: \(book.lastCheckedOut)")
+                        self.books.append(book)
+                    }
+                    
+                    print("MY BOOKS: \(self.books)")
+                    
+                }
                 
+                completion(true)
             }
-            
-            completion(true)
+           
         }
+        print("Outside of completion")
         
     }
 }

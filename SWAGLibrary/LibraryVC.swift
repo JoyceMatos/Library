@@ -21,23 +21,30 @@ class LibraryVC: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-       
-        print("Before Dispatch")
-            self.store.getBooks { (success) in
-                DispatchQueue.main.async {
-
-                print("Inside store.getbooks")
-                    self.tableView.reloadData()
-                }
-            print("After reloading data")
+        
+        fetch()
+        
+    }
+    
+    func fetch() {
+        self.store.getBooks { (success) in
+            
+            // TODO: - If success do something, if not do something else
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
-        
-        print("Outside of dispatch")
-        
-        self.tableView.reloadData()
-
-        
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            let destVC = segue.destination as! DetailVC
+            guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
+                return
+            }
+            destVC.book = store.books[indexPath.row]
+        }
     }
 
 }
@@ -49,18 +56,22 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return store.books.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookCell
 //        let cell = Bundle.main.loadNibNamed("bookCell", owner: self, options: nil)?.first as! BookCell
-       // let book = store.books[indexPath.row]
+        let book = store.books[indexPath.row]
         
-//        cell.titleLabel.text = book.title
-//        cell.authorLabel.text = book.author
+       // if let bookTitle = book.title, let bookAuthor = book.author {
         
-        print("Cell Created")
+        cell.titleLabel.text = book.title
+        cell.authorLabel.text = book.author
+        //  }
+        print(book.title)
+        print(book.author)
+
         
         return cell
     }
