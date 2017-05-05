@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - Go over arguement labels and Swifty syntax
 // TODO: - The app should allow users to update a book information
 // TODO: - The app should allow users to delete all books at once
 // TODO: - Remove notification at some point
@@ -17,12 +18,14 @@ class LibraryVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     let store = LibraryDataStore.sharedInstance
+    var alertDelegate: AlertDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        alertDelegate = self
         
         observe()        
     }
@@ -56,6 +59,24 @@ class LibraryVC: UIViewController {
             }
             print("data has been reloaded")
         }
+    }
+    
+    func alertAction(_ book: Int) {
+        let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
+        self.alertDelegate?.displayAlert(message: deleteMessage, with: {
+            
+            // Abstract this function even further?
+            LibraryAPIClient.sharedInstance.delete(book: book, completion: { (success) in
+                
+                // TODO: - handle if not success
+                
+                if success {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        self.fetch()
+                    }
+                }
+            })
+        })
     }
     
     
@@ -94,43 +115,38 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let bookID = self.store.books[indexPath.row].id as! Int
         
+        // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            
-            // TODO: - Protocol for alert controllers
-            
-            let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this book?", preferredStyle: .alert)
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-            let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
-                
-                LibraryAPIClient.sharedInstance.delete(book: bookID, completion: { (success) in
-                    
-                    // TODO: - handle if not success
-                    
-                    if success {
-                        DispatchQueue.global(qos: .userInitiated).async {
-                            self.fetch()
-                        }
-                    }
-                })
-                
-            })
-            
-            alert.addAction(cancel)
-            alert.addAction(yes)
-            
-            self.present(alert, animated: true, completion: nil)
-            
+                self.alertAction(bookID)
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
             // TODO: - Display a window for editing
-            
         }
         return [delete, edit]
     }
+
     
+}
+
+extension LibraryVC: AlertDelegate {
     
+    func displayAlert(message type: AlertMessage, with handler: @escaping () -> Void) {
+        
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+
+                handler()
+        })
+        
+        alert.addAction(cancel)
+        alert.addAction(yes)
+        
+        self.present(alert, animated: true, completion: nil)
+ 
+    }   
     
 }
 

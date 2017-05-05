@@ -16,7 +16,12 @@ class DetailVC: UIViewController {
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var checkedOutLabel: UILabel!
     
-    var book: Book?
+    var book: Book?  {
+        didSet {
+          //  configureViews()
+        
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,24 +30,32 @@ class DetailVC: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+      //  configureViews()
+    }
+    
     func configureViews() {
         
         // TODO: - Refactor
-        guard let title = book?.title,
-            let author = book?.author,
-            let publisher = book?.publisher,
-            let checkedOut = book?.lastCheckedOut else {
-                // Handle nils
-                return
-                
+//        guard let title = book?.title,
+//            let author = book?.author,
+//            let publisher = book?.publisher,
+//            let checkedOut = book?.lastCheckedOut else {
+//                // Handle nils
+//                return
+//                
+//        }
+        
+        guard let book = book else {
+            return
         }
         
         // TODO: - Format date label
         
-        titleLabel.text = book?.title
-        authorLabel.text = book?.author
-        publisherLabel.text = book?.publisher
-        checkedOutLabel.text = nullToNil(book?.lastCheckedOut) as? String ?? "Not checked out"
+        titleLabel.text = book.title
+        authorLabel.text = book.author
+        publisherLabel.text = book.publisher
+        checkedOutLabel.text = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
         
     }
     
@@ -75,12 +88,15 @@ class DetailVC: UIViewController {
                 return
             }
             
-            // TODO: - This function should return book so that we can update and configure views
             LibraryAPIClient.sharedInstance.put(name: name, book: bookID as! Int, completion: { (JSON) in
  
+                // TODO: - Return book to  update view OR didSet property, OR notificationCenter    
+
+                DispatchQueue.main.async {
+                    self.configureViews()
+                }
                 
             })
-            
             
             })
         
