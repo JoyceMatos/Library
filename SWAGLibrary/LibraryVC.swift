@@ -78,6 +78,41 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let bookID = self.store.books[indexPath.row].id as! Int
+
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            
+            // TODO: - Protocol for alert controllers
+            
+            let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this book?", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+            let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+
+                LibraryAPIClient.sharedInstance.delete(book: bookID)
+                
+            })
+            
+           
+            alert.addAction(cancel)
+            alert.addAction(yes)
+
+            self.present(alert, animated: true, completion: nil)
+            
+            // TODO: - Work on reloading data 
+            tableView.reloadData()
+
+            
+        }
+        
+        let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
+           // TODO: - Display a window for editing
+            
+        }
+        return [delete, edit]
+    }
+    
     
     
 }

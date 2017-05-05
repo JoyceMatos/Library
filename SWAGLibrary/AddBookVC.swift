@@ -24,8 +24,23 @@ class AddBookVC: UIViewController {
     
     @IBAction func submitTapped(_ sender: Any) {
         
-        // TODO: Title & author required, if empty & press submire, show alert with error message
+        // TODO: - Create delegate for alert controller
+        // TODO: - Fix Validator
         
+        if titleField.text == nil || authorField.text == nil {
+            
+            print("HELLOOO")
+            
+            let alert = UIAlertController(title: "Missing fields", message: "Please type in the title and/or author", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in })
+            
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+
         // NOTE: - Guard vs if lets
         if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
             
@@ -38,6 +53,7 @@ class AddBookVC: UIViewController {
         }
         
         dismiss(animated: true, completion: nil)
+        }
         
     }
     
