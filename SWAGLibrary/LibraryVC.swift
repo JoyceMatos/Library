@@ -16,6 +16,9 @@ import UIKit
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var deleteLibraryButton: UIButton!
+    @IBOutlet weak var addBookButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     
     let store = LibraryDataStore.sharedInstance
     var alertDelegate: AlertDelegate?
@@ -60,6 +63,36 @@ class LibraryVC: UIViewController {
             print("data has been reloaded")
         }
     }
+    
+    
+    // TODO: - Configure views called when validating menu button ; Setup enum for hiding buttons and switch
+    
+    func configureViews() {
+        
+        deleteLibraryButton.isHidden = true
+        addBookButton.isHidden = true
+        
+        }
+    
+    @IBAction func menuPressed(_ sender: Any) {
+        
+        
+    }
+    
+    
+    
+    @IBAction func deleteLibraryTapped(_ sender: Any) {
+        LibraryAPIClient.sharedInstance.delete {
+            DispatchQueue.global().async {
+                
+                // TODO: - Refresh Screen
+                self.fetch()
+            }
+        }
+    }
+    
+    
+    
     
     func alertAction(_ book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
