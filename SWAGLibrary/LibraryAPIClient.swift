@@ -51,6 +51,7 @@ final class LibraryAPIClient {
     // MARK: - POST method for retrieving a book
     
     // TODO: - Perhaps call in a Book object instead of individual arguements
+    // TODO: - Call in an HTTP method
     // TODO: - Figure out whether or not you want to retrieve JSON from this method through it's completion
     
     func post(author: String, categories: String, title: String, publisher: String, completion: @escaping ([JSON]?) -> Void) {

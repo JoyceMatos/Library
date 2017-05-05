@@ -79,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				250818FA1EBB7FD8005740FE /* AppDelegate.swift */,
+				25FEBE0C1EBC24EB00B02001 /* API */,
 				2508190C1EBB9223005740FE /* Model */,
 				2508190D1EBB922A005740FE /* View */,
 				250818FE1EBB7FD8005740FE /* Main.storyboard */,
@@ -95,8 +96,6 @@
 		2508190C1EBB9223005740FE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
-				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
 				2508191A1EBBC0C0005740FE /* HTTPMethod.swift */,
 				25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */,
 				250819111EBB92D1005740FE /* Constants.swift */,
@@ -131,6 +130,15 @@
 				250819151EBBBE09005740FE /* SWAGLibrary-Bridging-Header.h */,
 			);
 			name = ObjC;
+			sourceTree = "<group>";
+		};
+		25FEBE0C1EBC24EB00B02001 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
+				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
+			);
+			name = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

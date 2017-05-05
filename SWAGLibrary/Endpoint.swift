@@ -8,6 +8,8 @@
 
 import Foundation
 
+// NOTE: - Decide whether or not to use Library protocol
+
 protocol Library: Path {
 
     var baseURL: URL? { get }
