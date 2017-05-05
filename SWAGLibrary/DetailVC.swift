@@ -10,8 +10,6 @@ import UIKit
 
 class DetailVC: UIViewController {
     
-    // TODO: - Add sharing capabilities (built-in sharing dialogue)
-    
     // TODO : - didSet properties for labels so you don't have to configure views
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -82,13 +80,6 @@ class DetailVC: UIViewController {
  
                 
             })
-            
-       
-            
-            
-        
-            
-            
             
             
             })

@@ -56,6 +56,35 @@ class AddBookVC: UIViewController {
         
     }
     
+    @IBAction func doneTapped(_ sender: Any) {
+        
+        guard let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text else {
+            return
+        }
+        
+        
+         if title.characters.count > 0 || author.characters.count > 0 || publisher.characters.count > 0 || categories.characters.count > 0 {
+            
+            let alert = UIAlertController(title: "", message: "Do you want to leave without saving your changes?", preferredStyle: .alert)
+            
+            let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+            let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
+                                    self.dismiss(animated: true, completion: nil)
+            })
+            
+            alert.addAction(cancel)
+            alert.addAction(confirm)
+            
+            self.present(alert, animated: true, completion: nil)
+
+         } else {
+            self.dismiss(animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    
     func postNotification() {
         NotificationCenter.default.post(name: .dismiss, object: nil)
     }

@@ -205,7 +205,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Add Book" id="Sxg-0Y-2HW">
-                                        <barButtonItem key="rightBarButtonItem" title="Done" id="6nm-Ry-HUt"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="6nm-Ry-HUt">
+                                            <connections>
+                                                <action selector="doneTapped:" destination="NBP-EK-YiH" id="YmM-DE-Z13"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

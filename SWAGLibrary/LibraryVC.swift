@@ -58,6 +58,7 @@ class LibraryVC: UIViewController {
         }
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.showDetail {
             let destVC = segue.destination as! DetailVC
