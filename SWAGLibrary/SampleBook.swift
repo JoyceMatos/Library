@@ -38,3 +38,15 @@ struct SampleBook {
     }
     
 }
+
+class SwiftBook: Book {
+    
+    override init() {
+        super.init()
+        
+        if self.lastCheckedOut == nil {
+            self.lastCheckedOut = ""
+        }
+    }
+    
+}

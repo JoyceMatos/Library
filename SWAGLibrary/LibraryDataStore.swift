@@ -9,6 +9,7 @@
 import Foundation
 
 // TODO: - Refactor DataStore
+// TODO: - Sort books?
 
 final class LibraryDataStore {
     
@@ -17,26 +18,30 @@ final class LibraryDataStore {
     var books = [Book]()
     private init() { }
     
-    func getBooks() {
+    func getBooks(completion: @escaping (Bool) -> Void) {
         books.removeAll()
-        
         libraryAPI.get { (library) in
-            
-            guard let library = library else {
-                // Handle nil value
-                return
-            }
-            
-            // Map instead?
-            for element in library {
-                if let book = Book(dictionary: element) {
-                    print("AUTHOR: \(book.lastCheckedOut)")
-                    self.books.append(book)
+            let libraryQueue = DispatchQueue(label: "library", qos: .userInitiated)
+            libraryQueue.async {
+                guard let library = library else {
+                    completion(false)
+                    // Handle nil value
+                    return
                 }
                 
-                print("MY BOOKS: \(self.books)")
+                // Map instead?
+                for element in library {
+                    if let book = Book(dictionary: element) {
+                        print("AUTHOR: \(book.lastCheckedOut)")
+                        self.books.append(book)
+                    }
+                    
+                }
                 
+                completion(true)
             }
+           
         }
+        
     }
 }
