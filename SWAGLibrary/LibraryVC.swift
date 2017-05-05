@@ -25,6 +25,7 @@ class LibraryVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
+        observe()
       //  fetch()
         
     }
@@ -35,14 +36,27 @@ class LibraryVC: UIViewController {
         fetch()
     }
     
+    // TODO: - Protocol for observing/reloading/refreshing
+    func observe() {
+        
+         NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .dismiss, object: nil)
+        
+    }
+    
+    func reloadVC(notification: NSNotification) {
+        fetch()
+    }
+    
     func fetch() {
         self.store.getBooks { (success) in
             
             // TODO: - If success do something, if not do something else
-            
+            print("inside fetching")
             DispatchQueue.main.async {
+                print("about to reload data")
                 self.tableView.reloadData()
             }
+            print("data has been reloaded")
         }
     }
     
@@ -90,8 +104,20 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
             let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
             let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
 
-                LibraryAPIClient.sharedInstance.delete(book: bookID)
+                // TODO: - Fix refresh - content only deletes after 2nd try
+                print("Before deleting function")
                 
+                // Maybe create closure and run fetching inside
+                LibraryAPIClient.sharedInstance.delete(book: bookID)
+                print("inside deleting function")
+
+                DispatchQueue.global(qos: .userInitiated).async {
+
+                    print("before fetching")
+                    self.fetch()
+                }
+                print("mission complete")
+
             })
             
            
@@ -99,11 +125,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(yes)
 
             self.present(alert, animated: true, completion: nil)
-            
-            // TODO: - Work on reloading data 
-            tableView.reloadData()
-
-            
+                        
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in

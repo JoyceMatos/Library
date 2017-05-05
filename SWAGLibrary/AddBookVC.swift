@@ -25,11 +25,8 @@ class AddBookVC: UIViewController {
     @IBAction func submitTapped(_ sender: Any) {
         
         // TODO: - Create delegate for alert controller
-        // TODO: - Fix Validator
         
-        if titleField.text == nil || authorField.text == nil {
-            
-            print("HELLOOO")
+        if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             
             let alert = UIAlertController(title: "Missing fields", message: "Please type in the title and/or author", preferredStyle: .alert)
             
@@ -40,21 +37,25 @@ class AddBookVC: UIViewController {
             self.present(alert, animated: true, completion: nil)
             
         } else {
-
-        // NOTE: - Guard vs if lets
-        if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
             
-            LibraryAPIClient.sharedInstance.post(author: author, categories: categories, title: title, publisher: publisher, completion: { (JSON) in
+            // NOTE: - Guard vs if lets
+            if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
                 
-                print(JSON)
-            })
+                LibraryAPIClient.sharedInstance.post(author: author, categories: categories, title: title, publisher: publisher, completion: { (JSON) in
+                    
+                    self.postNotification()
+                    
+                })
+            }
             
+            dismiss(animated: true, completion: nil)
             
         }
         
-        dismiss(animated: true, completion: nil)
-        }
-        
+    }
+    
+    func postNotification() {
+        NotificationCenter.default.post(name: .dismiss, object: nil)
     }
     
     
