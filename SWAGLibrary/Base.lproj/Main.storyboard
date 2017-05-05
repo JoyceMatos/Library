@@ -34,16 +34,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Slouching Towards Bethlehem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-GI-EMJ">
-                                                    <rect key="frame" x="23" y="0.0" width="231" height="21"/>
+                                                    <rect key="frame" x="23" y="0.0" width="303" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joan Didion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3D-a7-Idm">
-                                                    <rect key="frame" x="23" y="32" width="91" height="21"/>
+                                                    <rect key="frame" x="23" y="32" width="121" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -52,7 +52,7 @@
                                         <connections>
                                             <outlet property="authorLabel" destination="i3D-a7-Idm" id="9kv-Ss-eHr"/>
                                             <outlet property="titleLabel" destination="1Bg-GI-EMJ" id="uwu-JC-ynL"/>
-                                            <segue destination="qrI-jX-rlR" kind="showDetail" identifier="showDetail" action="showViewController:sender:" id="Ke3-Zv-2ja"/>
+                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetail" action="showDetailViewController:sender:" id="Ke3-Zv-2ja"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -61,7 +61,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Rl-5k-0yd">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="5cl-6t-Ywb">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5cl-6t-Ywb">
                             <connections>
                                 <segue destination="NBP-EK-YiH" kind="presentation" id="eHh-8i-cqW"/>
                             </connections>
@@ -73,12 +73,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="735" y="116"/>
+            <point key="canvasLocation" x="733.60000000000002" y="115.59220389805098"/>
         </scene>
-        <!--DetailVC-->
+        <!--Details-->
         <scene sceneID="1ir-s3-w0W">
             <objects>
-                <viewController id="qrI-jX-rlR" customClass="DetailVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Details" hidesBottomBarWhenPushed="YES" id="qrI-jX-rlR" customClass="DetailVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kHh-ze-DPp"/>
                         <viewControllerLayoutGuide type="bottom" id="UET-3g-yth"/>
@@ -88,37 +88,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Slouching Towards Bethlehem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMw-n3-DA8">
-                                <rect key="frame" x="44" y="92" width="231" height="21"/>
+                                <rect key="frame" x="31" y="113" width="313" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joan Didion" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9w-qH-cLx">
-                                <rect key="frame" x="44" y="151" width="91" height="21"/>
+                                <rect key="frame" x="31" y="201" width="139" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Publisher: Penguin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oMs-af-4l6">
-                                <rect key="frame" x="44" y="207" width="143" height="21"/>
+                                <rect key="frame" x="31" y="242" width="185" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last Checked out:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHR-yR-O0z">
-                                <rect key="frame" x="44" y="265" width="139" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last Checked Out:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHR-yR-O0z">
+                                <rect key="frame" x="31" y="284" width="192" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="May 5, 2016 5:55PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2JC-RG-2MM">
-                                <rect key="frame" x="44" y="307" width="158" height="21"/>
+                                <rect key="frame" x="31" y="333" width="201" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -130,10 +130,21 @@
                                     <action selector="checkoutTapped:" destination="qrI-jX-rlR" eventType="touchUpInside" id="8vG-sk-I7u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ue3-4x-h5s">
+                                <rect key="frame" x="16" y="75" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="X"/>
+                                <connections>
+                                    <action selector="checkoutTapped:" destination="qrI-jX-rlR" eventType="touchUpInside" id="e97-yZ-Pux"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Title" id="a09-zq-b0Z">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="9qK-uo-TUM"/>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="authorLabel" destination="X9w-qH-cLx" id="Evd-be-K5B"/>
@@ -144,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfE-Dn-V8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="116"/>
+            <point key="canvasLocation" x="1613.5999999999999" y="115.59220389805098"/>
         </scene>
         <!--Add BookVC-->
         <scene sceneID="Eo1-Vp-xyy">
@@ -194,6 +205,15 @@
                                     <action selector="submitTapped:" destination="NBP-EK-YiH" eventType="touchUpInside" id="1eX-KX-qsz"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xie-oN-jEl">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Add Book" id="Sxg-0Y-2HW">
+                                        <barButtonItem key="rightBarButtonItem" title="Done" id="6nm-Ry-HUt"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

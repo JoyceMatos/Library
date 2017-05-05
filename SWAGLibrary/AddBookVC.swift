@@ -26,6 +26,8 @@ class AddBookVC: UIViewController {
         
         // TODO: - Create delegate for alert controller
         
+        // NOTE: - To consider: If you can create a book with just a title and author, find out what values you will have for publisher and categories and guard against them if they are nil
+        
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             
             let alert = UIAlertController(title: "Missing fields", message: "Please type in the title and/or author", preferredStyle: .alert)

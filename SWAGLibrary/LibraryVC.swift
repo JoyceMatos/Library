@@ -9,8 +9,8 @@
 import UIKit
 
 // TODO: - The app should allow users to update a book information
-// TODO: - The app should allow users to delete a specific book
 // TODO: - The app should allow users to delete all books at once
+// TODO: - Remove notification at some point
 
 class LibraryVC: UIViewController {
     
@@ -25,9 +25,7 @@ class LibraryVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         
-        observe()
-      //  fetch()
-        
+        observe()        
     }
     
     
@@ -36,10 +34,11 @@ class LibraryVC: UIViewController {
         fetch()
     }
     
+    
     // TODO: - Protocol for observing/reloading/refreshing
     func observe() {
         
-         NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .dismiss, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .dismiss, object: nil)
         
     }
     
@@ -94,7 +93,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let bookID = self.store.books[indexPath.row].id as! Int
-
+        
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             
             // TODO: - Protocol for alert controllers
@@ -103,33 +102,29 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
             
             let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
             let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
-
-                // TODO: - Fix refresh - content only deletes after 2nd try
-                print("Before deleting function")
                 
-                // Maybe create closure and run fetching inside
-                LibraryAPIClient.sharedInstance.delete(book: bookID)
-                print("inside deleting function")
-
-                DispatchQueue.global(qos: .userInitiated).async {
-
-                    print("before fetching")
-                    self.fetch()
-                }
-                print("mission complete")
-
+                LibraryAPIClient.sharedInstance.delete(book: bookID, completion: { (success) in
+                    
+                    // TODO: - handle if not success
+                    
+                    if success {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            self.fetch()
+                        }
+                    }
+                })
+                
             })
             
-           
             alert.addAction(cancel)
             alert.addAction(yes)
-
+            
             self.present(alert, animated: true, completion: nil)
-                        
+            
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
-           // TODO: - Display a window for editing
+            // TODO: - Display a window for editing
             
         }
         return [delete, edit]
