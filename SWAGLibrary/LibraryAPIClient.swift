@@ -15,7 +15,7 @@ typealias JSON = [String: Any]
 // TODO: - Store string literals in constants
 // TODO: - Check status ie: 200, 204
 // TODO: - GCD for all functions
-// TODO: - Error handle for connection, etc
+// TODO: - Error handle for connection, etc (Create enum instead of using bools)
 
 // NOTE: - Books have url. Perhaps you could use this in your endpoints
 
@@ -24,8 +24,8 @@ final class LibraryAPIClient {
     // Is this necessary?
     static let sharedInstance = LibraryAPIClient()
     
-    // MARK - GET method for retrieving all books
-    
+    // MARK: - GET method for retrieving all books
+    // NOTE: - This function is a GET by default
     func get(completion: @escaping ([JSON]?) -> Void) {
         
         let urlString = API.baseURL + Endpoint.getLibrary.path
@@ -34,7 +34,6 @@ final class LibraryAPIClient {
             return
         }
 
-        // NOTE: - Default is get but perhaps include url request
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data,
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [JSON] else {
@@ -53,13 +52,12 @@ final class LibraryAPIClient {
     
     // TODO: - Perhaps call in a Book object instead of individual arguements
     // TODO: - Call in an HTTP method
-    // TODO: - Figure out whether or not you want to retrieve JSON from this method through it's completion
     
-    func post(author: String, categories: String, title: String, publisher: String, completion: @escaping ([JSON]?) -> Void) {
+    func post(author: String, categories: String, title: String, publisher: String, completion: @escaping (Bool) -> Void) {
         
         let urlString = API.baseURL + Endpoint.getLibrary.path
         guard let url = URL(string: urlString) else {
-            completion(nil)
+            completion(false)
             return
         }
         
@@ -73,15 +71,14 @@ final class LibraryAPIClient {
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+
                 guard let data = data else {
                     print(error?.localizedDescription) //?? ErrorMessage.uploadingError.rawValue)
+                    completion(false)
                     return
                 }
                 
-                // TODO: - Handle Error differently
-                guard let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! JSON else {
-                    return
-                }
+                completion(true)
                 
             })
             task.resume()
@@ -91,7 +88,6 @@ final class LibraryAPIClient {
     
     // MARK - PUT method for checking out a book
     
-    // TODO: - Return JSON
     // TODO: - Merge checkout & update function to avoid code repition
     func checkout(by name: String, for id: Int, completion: @escaping (JSON?) -> Void) {
         let urlString = API.baseURL + Endpoint.getBook(id).path
@@ -129,6 +125,8 @@ final class LibraryAPIClient {
         task.resume()
         
     }
+    
+    // POST method for updating a book
     
     func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, completion: @escaping (JSON?) -> Void) {
         

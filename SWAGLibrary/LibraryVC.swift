@@ -53,14 +53,13 @@ class LibraryVC: UIViewController {
     
     func fetch() {
         self.store.getBooks { (success) in
-            
-            // TODO: - If success do something, if not do something else
-            print("inside fetching")
-            DispatchQueue.main.async {
-                print("about to reload data")
+            if !success {
+                print("Uh oh, trouble fetching books")
+                // Handle error
+            }
+                DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            print("data has been reloaded")
         }
     }
     

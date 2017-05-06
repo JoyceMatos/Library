@@ -56,10 +56,13 @@ class AddBookVC: UIViewController {
             // NOTE: - Guard vs if lets
             if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
                 
-                LibraryAPIClient.sharedInstance.post(author: author, categories: categories, title: title, publisher: publisher, completion: { (JSON) in
+                LibraryAPIClient.sharedInstance.post(author: author, categories: categories, title: title, publisher: publisher, completion: { (success) in
+                    
+                    if !success {
+                        print("Uh oh, trouble posting.")
+                    }
                     
                     self.postNotification()
-                    
                 })
             }
             
