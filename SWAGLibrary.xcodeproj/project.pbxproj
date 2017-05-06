@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		250287DF1EBD041200E659D5 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250287DE1EBD041200E659D5 /* Alert.swift */; };
 		250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250818FA1EBB7FD8005740FE /* AppDelegate.swift */; };
 		250818FD1EBB7FD8005740FE /* LibraryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250818FC1EBB7FD8005740FE /* LibraryVC.swift */; };
 		250819001EBB7FD8005740FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250818FE1EBB7FD8005740FE /* Main.storyboard */; };
@@ -19,12 +20,15 @@
 		2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191A1EBBC0C0005740FE /* HTTPMethod.swift */; };
 		2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */; };
 		250819291EBBE353005740FE /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819281EBBE353005740FE /* BookCell.swift */; };
+		25FB7CEB1EBD4CFA005B22EE /* EditBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */; };
 		25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE061EBBF1CB00B02001 /* DetailVC.swift */; };
 		25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE081EBC0FC500B02001 /* AddBookVC.swift */; };
 		25FEBE0B1EBC1B3200B02001 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */; };
+		25FEBE0E1EBCAF5700B02001 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE0D1EBCAF5700B02001 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		250287DE1EBD041200E659D5 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		250818F71EBB7FD8005740FE /* SWAGLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWAGLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		250818FA1EBB7FD8005740FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		250818FC1EBB7FD8005740FE /* LibraryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryVC.swift; sourceTree = "<group>"; };
@@ -41,9 +45,11 @@
 		2508191A1EBBC0C0005740FE /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryDataStore.swift; sourceTree = "<group>"; };
 		250819281EBBE353005740FE /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBookVC.swift; sourceTree = "<group>"; };
 		25FEBE061EBBF1CB00B02001 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		25FEBE081EBC0FC500B02001 /* AddBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBookVC.swift; sourceTree = "<group>"; };
 		25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		25FEBE0D1EBCAF5700B02001 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		250287E01EBD486500E659D5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		250818EE1EBB7FD8005740FE = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +109,8 @@
 				2508191A1EBBC0C0005740FE /* HTTPMethod.swift */,
 				25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */,
 				250819111EBB92D1005740FE /* Constants.swift */,
+				250287DE1EBD041200E659D5 /* Alert.swift */,
+				25FEBE0D1EBCAF5700B02001 /* Extensions.swift */,
 				250819131EBBBCAB005740FE /* SampleBook.swift */,
 				250819191EBBBE2C005740FE /* ObjC */,
 			);
@@ -115,6 +130,7 @@
 				250818FC1EBB7FD8005740FE /* LibraryVC.swift */,
 				25FEBE061EBBF1CB00B02001 /* DetailVC.swift */,
 				25FEBE081EBC0FC500B02001 /* AddBookVC.swift */,
+				25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -134,6 +150,7 @@
 			children = (
 				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
 				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
+				250287E01EBD486500E659D5 /* Helpers */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -217,9 +234,12 @@
 				25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */,
 				25FEBE0B1EBC1B3200B02001 /* Endpoint.swift in Sources */,
 				2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */,
+				25FB7CEB1EBD4CFA005B22EE /* EditBookVC.swift in Sources */,
 				250819291EBBE353005740FE /* BookCell.swift in Sources */,
+				250287DF1EBD041200E659D5 /* Alert.swift in Sources */,
 				250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */,
 				25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */,
+				25FEBE0E1EBCAF5700B02001 /* Extensions.swift in Sources */,
 				250819141EBBBCAB005740FE /* SampleBook.swift in Sources */,
 				2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */,
 				250819171EBBBE09005740FE /* Book.m in Sources */,

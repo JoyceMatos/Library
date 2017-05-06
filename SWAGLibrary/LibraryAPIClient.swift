@@ -133,10 +133,10 @@ final class LibraryAPIClient {
     // MARK: - DELETE method for deleting a book
     
     // TODO: - Return JSON in completion
-    func delete(book id: Int) {
+    func delete(book id: Int, completion: @escaping (Bool) -> Void) {
         let urlString = API.baseURL + Endpoint.getBook(id).path
         guard let url = URL(string: urlString) else {
-            //  completion(nil)
+            completion(false)
             return
         }
         
@@ -153,6 +153,7 @@ final class LibraryAPIClient {
             guard let data = data else {
                 return
             }
+            completion(true)
             
         }
         task.resume()

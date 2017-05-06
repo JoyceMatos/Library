@@ -8,25 +8,29 @@
 
 import UIKit
 
+// TODO: - Go over arguement labels and Swifty syntax
 // TODO: - The app should allow users to update a book information
-// TODO: - The app should allow users to delete a specific book
 // TODO: - The app should allow users to delete all books at once
+// TODO: - Remove notification at some point
 
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var deleteLibraryButton: UIButton!
+    @IBOutlet weak var addBookButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     
     let store = LibraryDataStore.sharedInstance
-    
+    var alertDelegate: AlertDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self
         tableView.dataSource = self
+        alertDelegate = self
         
-      //  fetch()
-        
+        observe()        
     }
     
     
@@ -35,16 +39,81 @@ class LibraryVC: UIViewController {
         fetch()
     }
     
+    
+    // TODO: - Protocol for observing/reloading/refreshing
+    func observe() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .dismiss, object: nil)
+        
+    }
+    
+    func reloadVC(notification: NSNotification) {
+        fetch()
+    }
+    
     func fetch() {
         self.store.getBooks { (success) in
             
             // TODO: - If success do something, if not do something else
-            
+            print("inside fetching")
             DispatchQueue.main.async {
+                print("about to reload data")
                 self.tableView.reloadData()
+            }
+            print("data has been reloaded")
+        }
+    }
+    
+    
+    // TODO: - Configure views called when validating menu button ; Setup enum for hiding buttons and switch
+    
+    func configureViews() {
+        
+        deleteLibraryButton.isHidden = true
+        addBookButton.isHidden = true
+        
+        }
+    
+    @IBAction func menuPressed(_ sender: Any) {
+        
+        
+    }
+    
+    
+    
+    @IBAction func deleteLibraryTapped(_ sender: Any) {
+        // TODO: - Ask: Are you sure you want to delete?
+        
+        LibraryAPIClient.sharedInstance.delete {
+            DispatchQueue.global().async {
+                
+                // TODO: - Refresh Screen
+                self.fetch()
             }
         }
     }
+    
+    
+    
+    
+    func alertAction(_ book: Int) {
+        let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
+        self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
+            
+            // Abstract this function even further?
+            LibraryAPIClient.sharedInstance.delete(book: book, completion: { (success) in
+                
+                // TODO: - handle if not success
+                
+                if success {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        self.fetch()
+                    }
+                }
+            })
+        })
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.showDetail {
@@ -80,40 +149,39 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let bookID = self.store.books[indexPath.row].id as! Int
-
+        
+        // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            
-            // TODO: - Protocol for alert controllers
-            
-            let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this book?", preferredStyle: .alert)
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-            let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
-
-                LibraryAPIClient.sharedInstance.delete(book: bookID)
-                
-            })
-            
-           
-            alert.addAction(cancel)
-            alert.addAction(yes)
-
-            self.present(alert, animated: true, completion: nil)
-            
-            // TODO: - Work on reloading data 
-            tableView.reloadData()
-
-            
+                self.alertAction(bookID)
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
-           // TODO: - Display a window for editing
-            
+            // TODO: - Display a window for editing
         }
         return [delete, edit]
     }
+
     
+}
+
+extension LibraryVC: AlertDelegate {
     
+    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
+        
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+
+                handler(nil)
+        })
+        
+        alert.addAction(cancel)
+        alert.addAction(yes)
+        
+        self.present(alert, animated: true, completion: nil)
+ 
+    }   
     
 }
 

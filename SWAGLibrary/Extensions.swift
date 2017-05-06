@@ -1,0 +1,16 @@
+//
+//  Extensions.swift
+//  SWAGLibrary
+//
+//  Created by Joyce Matos on 5/5/17.
+//  Copyright © 2017 Joyce Matos. All rights reserved.
+//
+
+import Foundation
+
+extension Notification.Name {
+    
+    static let dismiss = Notification.Name("dismiss")
+    
+}
+
