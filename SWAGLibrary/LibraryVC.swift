@@ -21,13 +21,6 @@ class LibraryVC: UIViewController {
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
-    @IBOutlet weak var sortButton: UIButton!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var titleButton: UIButton!
-    @IBOutlet weak var authorButton: UIButton!
-    @IBOutlet weak var publisherButton: UIButton!
-    @IBOutlet weak var categoryButton: UIButton!
-
     
     let refresher = UIRefreshControl()
     
@@ -40,7 +33,6 @@ class LibraryVC: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        
     }
     
     override func viewDidLoad() {
@@ -135,6 +127,12 @@ class LibraryVC: UIViewController {
         }
         
     }
+    
+    @IBAction func filterTapped(_ sender: Any) {
+        
+        performSegue(withIdentifier: "showFilterVC", sender: self)
+    }
+    
 
     
     
