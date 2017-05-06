@@ -8,7 +8,12 @@
 
 import UIKit
 
-// TODO: - Remove notification at some point
+// TODO: - Create an empty state for data
+// TODO: - Update delete message: "Are you sure you want to delete "book" by "author"?
+// TODO: - Consider using delegation as opposed to NotificationCenter
+// TODO: - Change alpha when removing an item
+// TODO: - Add instructions: Swipe to delete or edit
+
 
 class LibraryVC: UIViewController {
     
@@ -17,34 +22,64 @@ class LibraryVC: UIViewController {
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     
+    let refresher = UIRefreshControl()
+    
     let store = LibraryDataStore.sharedInstance
     var alertDelegate: AlertDelegate?
+    
+    
+    // MARK: - View Lifecyle
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Attach these in storyboard?
         tableView.delegate = self
         tableView.dataSource = self
+        
         alertDelegate = self
         
-        observe()
-    }
-    
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
         fetch()
+        observe()
+        refresh()
     }
     
+    
+    // MARK: - Refresh Methods
+    
+    func refresh() {
+        if #available (iOS 10.0, *) {
+            tableView.refreshControl = refresher
+        } else {
+            tableView.addSubview(refresher)
+        }
+        
+        refresher.addTarget(self, action: #selector(refreshView), for: .valueChanged)
+        
+    }
+    
+    func refreshView() {
+        fetch()
+        refresher.endRefreshing()
+    }
+    
+    // MARK: - Observe Methods
     
     // TODO: - Protocol for observing/reloading/refreshing
     func observe() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .dismiss, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .update, object: nil)
     }
     
     func reloadVC(notification: NSNotification) {
         fetch()
     }
+    
+    // MARK: - Data Store Method
     
     func fetch() {
         self.store.getBooks { (success) in
@@ -58,6 +93,7 @@ class LibraryVC: UIViewController {
         }
     }
     
+    // MARK: - View Method
     
     // TODO: - Configure views called when validating menu button ; Setup enum for hiding buttons and switch
     
@@ -67,6 +103,8 @@ class LibraryVC: UIViewController {
         addBookButton.isHidden = true
         
     }
+    
+    // MARK: - Action Methods
     
     @IBAction func menuPressed(_ sender: Any) {
         
@@ -79,20 +117,15 @@ class LibraryVC: UIViewController {
         // TODO: - Ask user: Are you sure you want to delete?
         
         LibraryAPIClient.sharedInstance.delete { (success) in
-            
             if !success {
                 print("Uh oh, could not delete library")
             }
             
-            DispatchQueue.global().async {
-                
-                // TODO: - Refresh Screen
-                self.fetch()
-            }
+            self.fetch()
+            
         }
         
     }
-    
     
     
     
@@ -114,6 +147,8 @@ class LibraryVC: UIViewController {
         })
     }
     
+    
+    // MARK: - Segue Method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Switch on segue identifier
@@ -142,6 +177,8 @@ class LibraryVC: UIViewController {
     }
     
 }
+
+// MARK: - Table View Methods
 
 extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
@@ -181,6 +218,8 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
     
 }
+
+// MARK: - Alert Delegate
 
 extension LibraryVC: AlertDelegate {
     

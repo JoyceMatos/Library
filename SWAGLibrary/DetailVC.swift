@@ -10,7 +10,7 @@ import UIKit
 
 class DetailVC: UIViewController {
     
-
+    
     // TODO : - didSet properties for labels so you don't have to configure views
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -20,7 +20,7 @@ class DetailVC: UIViewController {
     var alertDelegate: AlertDelegate?
     var book: Book?  {
         didSet {
-//              configureViews()
+            //              configureViews()
             
         }
     }
@@ -82,19 +82,16 @@ class DetailVC: UIViewController {
                 // Do something for nil value
                 return
             }
+            
             // Abstract even more?
             LibraryAPIClient.sharedInstance.checkout(by: name as! String, for: bookID as! Int, completion: { (JSON) in
                 
-             
-                
-                // TODO: - Return book to  update view OR didSet property, OR notificationCenter
-                
+                self.book = Book(dictionary: JSON)
                 DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .update, object: nil)
                     self.configureViews()
                 }
-                
             })
-            
         })
     }
     
@@ -126,7 +123,7 @@ class DetailVC: UIViewController {
         activityController.popoverPresentationController?.sourceView = self.view
         activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
         self.present(activityController, animated: true, completion: nil)
-
+        
     }
     
     
@@ -155,7 +152,7 @@ extension DetailVC: AlertDelegate {
         alertController.addAction(cancel)
         
         self.present(alertController, animated: true, completion: nil)
-
+        
     }
     
 }

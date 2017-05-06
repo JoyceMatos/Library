@@ -10,7 +10,6 @@ import Foundation
 
 extension Notification.Name {
     
-    static let dismiss = Notification.Name("dismiss")
-    
+    static let update = Notification.Name("update")
 }
 

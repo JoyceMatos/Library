@@ -12,7 +12,7 @@ typealias JSON = [String: Any]
 
 // TODO: - Create more abstraction with url paths
 // TODO: - Check status ie: 200, 204
-// TODO: - GCD for all functions
+// TODO: - GCD for all functions - create custom queues (be wary of too many global queues)
 // TODO: - Error handle for connection, etc (Create enum instead of using bools)
 
 // NOTE: - Books have url. Perhaps you could use this in your endpoints
@@ -86,7 +86,7 @@ final class LibraryAPIClient {
     
     // MARK - PUT method for checking out a book
     
-    // TODO: - Merge checkout & update function to avoid code repition
+    // TODO: - Merge checkout & update function to avoid code repition (return book & JSON)
     func checkout(by name: String, for id: Int, completion: @escaping (JSON?) -> Void) {
         let urlString = API.baseURL + Endpoint.getBook(id).path
         guard let url = URL(string: urlString) else {
@@ -219,6 +219,9 @@ final class LibraryAPIClient {
         var request = URLRequest(url:url)
         request.httpMethod = HTTPMethod.delete.rawValue
         
+       // print(urlString)
+        
+        
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
@@ -226,10 +229,20 @@ final class LibraryAPIClient {
             }
             
             if let data = data  {
-                return
+                
+                print("HELLOOO in the task")
+                DispatchQueue.global(qos: .userInitiated).async {
+                    print("Right before completion")
+                    completion(true)
+                    
+                }
+                
+                
+                
             }
             
-            completion(true)
+            
+            
             
         }
         task.resume()

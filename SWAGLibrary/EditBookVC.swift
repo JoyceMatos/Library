@@ -29,11 +29,14 @@ class EditBookVC: UIViewController {
             return
         }
         
+        // TODO: - Let text be solid text, not place holders
+        // TODO: - Add instructions: Tap field to edit text
+        
         // Add default values if nil
-        bookField.placeholder = book.title
-        authorField.placeholder = book.author
-        publisherField.placeholder = book.publisher
-        categoriesField.placeholder = book.categories
+        bookField.text = book.title
+        authorField.text = book.author
+        publisherField.text = book.publisher
+        categoriesField.text = book.categories
         
     }
     
@@ -49,6 +52,8 @@ class EditBookVC: UIViewController {
             if !success {
                 print("Uh oh, could not update book")
             }
+            
+            NotificationCenter.default.post(name: .update, object: nil)
         }
         
         dismiss(animated: true, completion: nil)

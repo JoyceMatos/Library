@@ -9,6 +9,8 @@
 import UIKit
 
 // TODO: - Add  Done button to close screen. If there is text fields, confirm that user wants to leave with unsaved changes
+// TODO: - Capitalize each letter for textfield
+
 class AddBookVC: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
@@ -99,7 +101,7 @@ class AddBookVC: UIViewController {
     
     
     func postNotification() {
-        NotificationCenter.default.post(name: .dismiss, object: nil)
+        NotificationCenter.default.post(name: .update, object: nil)
     }
     
     
