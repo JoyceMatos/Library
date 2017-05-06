@@ -19,11 +19,13 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var categoriesField: UITextField!
     
     var alertDelegate: AlertDelegate?
+    var errorHandler: ErrorHandling?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         alertDelegate = self
+        errorHandler = self
         
     }
     
@@ -61,7 +63,8 @@ class AddBookVC: UIViewController {
                 LibraryAPIClient.sharedInstance.post(author, categories: categories, title: title, publisher: publisher, completion: { (success) in
                     
                     if !success {
-                        print("Uh oh, trouble posting.")
+                        let message = AlertMessage(title: "", message: "Had trouble adding book. Please try again later.")
+                        self.errorHandler?.displayErrorAlert(message: message)
                     }
                     
                     self.postNotification()
@@ -129,6 +132,17 @@ extension AddBookVC: AlertDelegate {
         self.present(alert, animated: true, completion: nil)
         
         
+    }
+    
+}
+
+extension AddBookVC: ErrorHandling {
+    
+    func displayErrorAlert(message type: AlertMessage) {
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        alert.addAction(okayAction)
+        present(alert, animated: true, completion: nil)
     }
     
 }

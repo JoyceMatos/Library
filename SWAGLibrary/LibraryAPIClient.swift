@@ -46,7 +46,7 @@ final class LibraryAPIClient {
         task.resume()
     }
     
-    // MARK: - POST method for retrieving a book
+    // MARK: - POST method for adding a book
     
     // TODO: - Perhaps call in a Book object instead of individual arguements
     // TODO: - Call in an HTTP method

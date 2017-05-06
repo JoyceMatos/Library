@@ -15,13 +15,20 @@ class EditBookVC: UIViewController {
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
     
+    var errorHandler: ErrorHandling?
     var book: Book?
+    
+    // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        errorHandler = self
+        
         configureFields()
     }
+    
+    // MARK: - View Method
     
     func configureFields() {
         
@@ -40,6 +47,8 @@ class EditBookVC: UIViewController {
         
     }
     
+    // MARK: - Action Methods
+    
     @IBAction func saveTapped(_ sender: Any) {
         
         // TODO: - Perform validators for text
@@ -48,22 +57,31 @@ class EditBookVC: UIViewController {
         }
         
         LibraryAPIClient.sharedInstance.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
-            
             if !success {
-                print("Uh oh, could not update book")
+                let message = AlertMessage(title: "", message: "Had trouble updating book. Please try again later.")
+                self.errorHandler?.displayErrorAlert(message: message)
             }
-            
             NotificationCenter.default.post(name: .update, object: nil)
         }
-        
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelTapped(_ sender: Any) {
-        
         dismiss(animated: true, completion: nil)
-        
     }
+    
+    
+}
 
+// MARK: - Error Handling Method
+
+extension EditBookVC: ErrorHandling {
+    
+    func displayErrorAlert(message type: AlertMessage) {
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        alert.addAction(okayAction)
+        present(alert, animated: true, completion: nil)
+    }
     
 }

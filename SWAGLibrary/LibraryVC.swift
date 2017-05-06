@@ -26,6 +26,8 @@ class LibraryVC: UIViewController {
     
     let store = LibraryDataStore.sharedInstance
     var alertDelegate: AlertDelegate?
+    var errorHandler: ErrorHandling?
+    
     var didDisplayOptions = false
     
     
@@ -43,6 +45,7 @@ class LibraryVC: UIViewController {
         tableView.dataSource = self
         
         alertDelegate = self
+        errorHandler = self
         
         fetch()
         observe()
@@ -61,7 +64,6 @@ class LibraryVC: UIViewController {
         }
         
         refresher.addTarget(self, action: #selector(refreshView), for: .valueChanged)
-        
     }
     
     func refreshView() {
@@ -85,8 +87,9 @@ class LibraryVC: UIViewController {
     func fetch() {
         self.store.getBooks { (success) in
             if !success {
-                print("Uh oh, trouble fetching books")
-                // Handle error
+                let message = AlertMessage(title: "", message: "Had trouble retrieving books. Please try again later.")
+                
+                self.errorHandler?.displayErrorAlert(message: message)
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -129,29 +132,22 @@ class LibraryVC: UIViewController {
     }
     
     @IBAction func filterTapped(_ sender: Any) {
-        
         performSegue(withIdentifier: "showFilterVC", sender: self)
     }
     
 
-    
-    
-    
     @IBAction func deleteLibraryTapped(_ sender: Any) {
         // TODO: - Ask user: Are you sure you want to delete?
         
         LibraryAPIClient.sharedInstance.delete { (success) in
             if !success {
-                print("Uh oh, could not delete library")
+                let message = AlertMessage(title: "", message: "Had trouble deleting library. Please try again later.")
+                self.errorHandler?.displayErrorAlert(message: message)
             }
-            
             self.fetch()
-            
         }
         
     }
-    
-    
     
     func alertAction(_ book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
@@ -161,9 +157,9 @@ class LibraryVC: UIViewController {
             LibraryAPIClient.sharedInstance.delete(book: book, completion: { (success) in
                 
                 if !success {
-                    print("Uh oh, could not delete book")
+                    let message = AlertMessage(title: "", message: "Had trouble deleting book. Please try again later.")
+                    self.errorHandler?.displayErrorAlert(message: message)
                 }
-                
                 DispatchQueue.global(qos: .userInitiated).async {
                     self.fetch()
                 }
@@ -250,18 +246,32 @@ extension LibraryVC: AlertDelegate {
     func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
         
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        
+    
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-        let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
             
             handler(nil)
         })
         
         alert.addAction(cancel)
-        alert.addAction(yes)
+        alert.addAction(confirm)
+        
+        let yes = UIAlertAction()
+        
         
         self.present(alert, animated: true, completion: nil)
         
+    }
+    
+}
+
+extension LibraryVC: ErrorHandling {
+    
+    func displayErrorAlert(message type: AlertMessage) {
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        alert.addAction(okayAction)
+        present(alert, animated: true, completion: nil)
     }
     
 }

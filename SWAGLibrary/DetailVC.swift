@@ -18,10 +18,10 @@ class DetailVC: UIViewController {
     @IBOutlet weak var checkedOutLabel: UILabel!
     
     var alertDelegate: AlertDelegate?
+    var errorHandler: ErrorHandling?
     var book: Book?  {
         didSet {
-            //              configureViews()
-            
+         // configureViews()
         }
     }
     
@@ -30,13 +30,10 @@ class DetailVC: UIViewController {
         super.viewDidLoad()
         
         alertDelegate = self
+        errorHandler = self
         
         configureViews()
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //  configureViews()
     }
     
     func configureViews() {
@@ -77,7 +74,6 @@ class DetailVC: UIViewController {
         titleLabel.text = book.title
         authorLabel.text = book.author // // Use Null to nil here
         publisherLabel.text = book.publisher // Use Null to nil here
-      //  checkedOutLabel.text = checkOutBy + checkedOut
         
     }
     
@@ -102,6 +98,12 @@ class DetailVC: UIViewController {
             
             // Abstract even more?
             LibraryAPIClient.sharedInstance.checkout(by: name as! String, for: bookID as! Int, completion: { (JSON) in
+                
+                if JSON == nil {
+                    let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
+                    self.errorHandler?.displayErrorAlert(message: message)
+                    
+                }
                 
                 self.book = Book(dictionary: JSON)
                 DispatchQueue.main.async {
@@ -172,4 +174,14 @@ extension DetailVC: AlertDelegate {
         
     }
     
+}
+
+extension DetailVC: ErrorHandling {
+    
+    func displayErrorAlert(message type: AlertMessage) {
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        alert.addAction(okayAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
