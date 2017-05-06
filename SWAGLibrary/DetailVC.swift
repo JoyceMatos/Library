@@ -41,26 +41,48 @@ class DetailVC: UIViewController {
     
     func configureViews() {
         
-        // TODO: - Refactor
-        //        guard let title = book?.title,
-        //            let author = book?.author,
-        //            let publisher = book?.publisher,
-        //            let checkedOut = book?.lastCheckedOut else {
-        //                // Handle nils
-        //                return
-        //
-        //        }
-        
         guard let book = book else {
             return
         }
         
         // TODO: - Format date label
         
+        var checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
+        var checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
+        
+        if checkOutBy == "" && checkedOut == "Not checked out" {
+            
+            // Display default text on label
+        } else {
+            // TODO: - Create function for formating data
+            
+            print("Hello lets format!")
+            var dateformatter = DateFormatter()
+            dateformatter.dateFormat = "dd-MM-yyyy"
+            dateformatter.dateStyle = .medium
+            
+            print(checkedOut)
+            print(dateformatter.date(from: checkedOut)) // yyyy-MM-dd HH:mm:ss zzz
+            print(checkOutBy)
+            
+            // Include @ sign?
+            checkedOutLabel.text = checkOutBy + " at " + "\(dateformatter.date(from: checkedOut))"
+
+            
+            if let newDate = dateformatter.date(from: checkedOut) {
+                print("hi")
+                print(newDate)
+                
+            }
+            
+
+            // Format label
+        }
+        
         titleLabel.text = book.title
         authorLabel.text = book.author // // Use Null to nil here
         publisherLabel.text = book.publisher // Use Null to nil here
-        checkedOutLabel.text = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
+      //  checkedOutLabel.text = checkOutBy + checkedOut
         
     }
     
