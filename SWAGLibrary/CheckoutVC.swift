@@ -51,7 +51,7 @@ class CheckoutVC: UIViewController {
             
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .update, object: nil)
-                NotificationCenter.default.post(name: .updateDetail, object: nil)
+               // NotificationCenter.default.post(name: .updateDetail, object: nil)
                 
                 self.performSegue(withIdentifier: "unwindToDetailVC", sender: self)
             }

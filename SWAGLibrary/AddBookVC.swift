@@ -21,12 +21,17 @@ class AddBookVC: UIViewController {
     var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     
+    
+    // MARK - View Lifecyle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         alertDelegate = self
         errorHandler = self
     }
+    
+    // MARK: - Action Methods
     
     func missingFieldAction() {
         let missingFieldMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
@@ -36,9 +41,8 @@ class AddBookVC: UIViewController {
     
     @IBAction func submitTapped(_ sender: Any) {
         
-        // TODO: - Create delegate for alert controller
-        
         // NOTE: - To consider: If you can create a book with just a title and author, find out what values you will have for publisher and categories and guard against them if they are nil
+        // TODO: - Create Validator
         
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             
@@ -62,7 +66,7 @@ class AddBookVC: UIViewController {
                         self.errorHandler?.displayErrorAlert(message: message)
                     }
                     
-                    self.postNotification()
+                    NotificationCenter.default.post(name: .update, object: nil)
                 })
             }
             
@@ -73,13 +77,7 @@ class AddBookVC: UIViewController {
     }
     
     @IBAction func doneTapped(_ sender: Any) {
-        
-        guard let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text else {
-            return
-        }
-        
         validateFields()
-        
     }
     
     func validateFields() {
@@ -98,9 +96,6 @@ class AddBookVC: UIViewController {
     }
     
     
-    func postNotification() {
-        NotificationCenter.default.post(name: .update, object: nil)
-    } 
 }
 
 // TODO: - Figure out how to add 2 alert controllers with this protocol ; Perhaps make a UIAlertAction factory (Function that takes in array of UIAlertActions) ie: AlertActions can be enums

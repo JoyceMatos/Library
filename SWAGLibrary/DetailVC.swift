@@ -56,27 +56,23 @@ class DetailVC: UIViewController {
     // MARK: - View Method
     
     func configureViews() {
-        
         guard let book = book else {
             return
         }
         
+        // TODO: - Create validator for unwrapping values ie: function that unwraps and returns a proper book for labels , book = book , then add didSet
         // TODO: - Format date label
         
         var checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
         var checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
         
         if checkOutBy == "" && checkedOut == "Not checked out" {
-            
-            // Display default text on label
+            checkedOutLabel.text = checkedOut
         } else {
-            
-            print("Welcome, thanks for checking out \(checkOutBy)")
-            
+
             // TODO: - Work on formatting date and create a function for it
             var dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM-dd-yyyy"
-            
             let date = dateformatter.date(from: checkedOut)
             
             print("This is the date \(date)")
@@ -86,9 +82,6 @@ class DetailVC: UIViewController {
             // Include @ sign?
             checkedOutLabel.text = checkOutBy + " at " + "\(checkedOut)"
             
-            
-            
-            // Format label
         }
         
         titleLabel.text = book.title
@@ -101,14 +94,16 @@ class DetailVC: UIViewController {
     
     // TODO: - Make function Swiftier or convert to protocol/extension
     func nullToNil(_ value: AnyObject?) -> AnyObject? {
-        if value is NSNull {
+        switch value {
+        case is NSNull:
             return nil
-        } else {
+        default:
             return value
         }
     }
     
     // MARK: - Action Methods
+    
     func alertAction() {
         
         // ALERT
@@ -151,14 +146,19 @@ class DetailVC: UIViewController {
             // Handle this
             return
         }
+
+        share(book: title, by: author)
         
+    }
+    
+    // MARK: - Sharing Capabilities
+    
+    func share(book title: String, by author: String) {
         let shareMessage = ["Hey, check out \(title) by \(author)."]
         let activityController = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
-        
         activityController.popoverPresentationController?.sourceView = self.view
         activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
         self.present(activityController, animated: true, completion: nil)
-        
     }
     
     // MARK: - Segue Methods
@@ -171,11 +171,11 @@ class DetailVC: UIViewController {
     }
     
     @IBAction func unwindToDetailVC(sender: UIStoryboardSegue) {
-        
         DispatchQueue.global(qos: .userInitiated).async {
             if let sourceViewController = sender.source as? CheckoutVC {
                 self.book = sourceViewController.book
                 DispatchQueue.main.async {
+                    
                     // Find a way to use didSets instead of configuring views over and over
                     self.configureViews()
                 }
@@ -192,31 +192,22 @@ class DetailVC: UIViewController {
 extension DetailVC: AlertDelegate {
     
     func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
-        
         let alertController = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        
         let save = UIAlertAction(title: "Save", style: .default, handler: { alert -> Void in
-            
             let textField = alertController.textFields![0] as UITextField
-            
             handler(textField.text)
         })
-        
         let cancel = UIAlertAction(title: "Cancel", style: .default, handler: { (action : UIAlertAction!) -> Void in })
-        
         alertController.addTextField { (textField : UITextField!) -> Void in
             textField.placeholder = "Enter Your Name"
+            alertController.addAction(save)
+            alertController.addAction(cancel)
+            self.present(alertController, animated: true, completion: nil)
         }
-        
-        alertController.addAction(save)
-        alertController.addAction(cancel)
-        
-        self.present(alertController, animated: true, completion: nil)
-        
     }
-    
 }
 
+// MARK: - Error Handling Method
 extension DetailVC: ErrorHandling {
     
     func displayErrorAlert(message type: AlertMessage) {

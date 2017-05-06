@@ -36,14 +36,13 @@ class EditBookVC: UIViewController {
             return
         }
         
-        // TODO: - Let text be solid text, not place holders
         // TODO: - Add instructions: Tap field to edit text
         
-        // Add default values if nil
+        // Title and Author ALWAYS exist
         bookField.text = book.title
         authorField.text = book.author
-        publisherField.text = book.publisher
-        categoriesField.text = book.categories
+        publisherField.text = book.publisher ?? ""
+        categoriesField.text = book.categories ?? ""
         
     }
     
@@ -52,6 +51,8 @@ class EditBookVC: UIViewController {
     @IBAction func saveTapped(_ sender: Any) {
         
         // TODO: - Perform validators for text
+        // Title and Author MUST exist
+        
         guard let title = bookField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text, let id = book?.id as? Int else {
             return
         }
