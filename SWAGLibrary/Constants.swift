@@ -22,7 +22,8 @@ struct Request {
 
 struct SegueIdentifier {
     
-    static let showDetail = "showDetail"
+    static let showDetailVC = "showDetail"
+    static let showEditVC = "showEditVC"
     
 }
 
@@ -30,6 +31,9 @@ struct CellIdentifier {
     
     static let bookCell = "bookCell"
 }
+
+
+
 
 
 

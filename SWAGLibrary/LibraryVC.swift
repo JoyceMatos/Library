@@ -8,9 +8,6 @@
 
 import UIKit
 
-// TODO: - Go over arguement labels and Swifty syntax
-// TODO: - The app should allow users to update a book information
-// TODO: - The app should allow users to delete all books at once
 // TODO: - Remove notification at some point
 
 class LibraryVC: UIViewController {
@@ -30,7 +27,7 @@ class LibraryVC: UIViewController {
         tableView.dataSource = self
         alertDelegate = self
         
-        observe()        
+        observe()
     }
     
     
@@ -42,9 +39,7 @@ class LibraryVC: UIViewController {
     
     // TODO: - Protocol for observing/reloading/refreshing
     func observe() {
-        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .dismiss, object: nil)
-        
     }
     
     func reloadVC(notification: NSNotification) {
@@ -57,7 +52,7 @@ class LibraryVC: UIViewController {
                 print("Uh oh, trouble fetching books")
                 // Handle error
             }
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
@@ -71,7 +66,7 @@ class LibraryVC: UIViewController {
         deleteLibraryButton.isHidden = true
         addBookButton.isHidden = true
         
-        }
+    }
     
     @IBAction func menuPressed(_ sender: Any) {
         
@@ -81,15 +76,21 @@ class LibraryVC: UIViewController {
     
     
     @IBAction func deleteLibraryTapped(_ sender: Any) {
-        // TODO: - Ask: Are you sure you want to delete?
+        // TODO: - Ask user: Are you sure you want to delete?
         
-        LibraryAPIClient.sharedInstance.delete {
+        LibraryAPIClient.sharedInstance.delete { (success) in
+            
+            if !success {
+                print("Uh oh, could not delete library")
+            }
+            
             DispatchQueue.global().async {
                 
                 // TODO: - Refresh Screen
                 self.fetch()
             }
         }
+        
     }
     
     
@@ -102,12 +103,12 @@ class LibraryVC: UIViewController {
             // Abstract this function even further?
             LibraryAPIClient.sharedInstance.delete(book: book, completion: { (success) in
                 
-                // TODO: - handle if not success
+                if !success {
+                    print("Uh oh, could not delete book")
+                }
                 
-                if success {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        self.fetch()
-                    }
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self.fetch()
                 }
             })
         })
@@ -116,20 +117,27 @@ class LibraryVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Switch on segue identifier
-        if segue.identifier == SegueIdentifier.showDetail {
+        guard let identifier = segue.identifier else {
+            return
+        }
+        
+        switch identifier {
+        case SegueIdentifier.showDetailVC:
+            
             let destVC = segue.destination as! DetailVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
             destVC.book = store.books[indexPath.row]
-        }
-        
-        if segue.identifier == "showEditVC" {
+        case SegueIdentifier.showEditVC:
             let destVC = segue.destination as! EditBookVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
             destVC.book = store.books[indexPath.row]
+        default:
+            print("Could not segue")
+            // Handle
         }
     }
     
@@ -160,18 +168,17 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         
         // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-                self.alertAction(bookID)
+            self.alertAction(bookID)
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            // TODO: - Display a window for editing
             
             // Sender is tableviewcell
             self.performSegue(withIdentifier: "showEditVC", sender: tableView.cellForRow(at: indexPath))
         }
         return [delete, edit]
     }
-
+    
     
 }
 
@@ -183,16 +190,16 @@ extension LibraryVC: AlertDelegate {
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         let yes = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
-
-                handler(nil)
+            
+            handler(nil)
         })
         
         alert.addAction(cancel)
         alert.addAction(yes)
         
         self.present(alert, animated: true, completion: nil)
- 
-    }   
+        
+    }
     
 }
 

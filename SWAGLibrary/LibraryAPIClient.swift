@@ -10,9 +10,7 @@ import Foundation
 
 typealias JSON = [String: Any]
 
-// TODO: - Make arguement labels more swifty
 // TODO: - Create more abstraction with url paths
-// TODO: - Store string literals in constants
 // TODO: - Check status ie: 200, 204
 // TODO: - GCD for all functions
 // TODO: - Error handle for connection, etc (Create enum instead of using bools)
@@ -26,14 +24,14 @@ final class LibraryAPIClient {
     
     // MARK: - GET method for retrieving all books
     // NOTE: - This function is a GET by default
-    func get(completion: @escaping ([JSON]?) -> Void) {
+    func get(_ completion: @escaping ([JSON]?) -> Void) {
         
         let urlString = API.baseURL + Endpoint.getLibrary.path
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
         }
-
+        
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data,
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as! [JSON] else {
@@ -53,7 +51,7 @@ final class LibraryAPIClient {
     // TODO: - Perhaps call in a Book object instead of individual arguements
     // TODO: - Call in an HTTP method
     
-    func post(author: String, categories: String, title: String, publisher: String, completion: @escaping (Bool) -> Void) {
+    func post(_ author: String, categories: String, title: String, publisher: String, completion: @escaping (Bool) -> Void) {
         
         let urlString = API.baseURL + Endpoint.getLibrary.path
         guard let url = URL(string: urlString) else {
@@ -66,12 +64,12 @@ final class LibraryAPIClient {
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: book, options: []) {
             
-            request.httpMethod = "POST"
+            request.httpMethod = HTTPMethod.post.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key )
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-
+                
                 guard let data = data else {
                     print(error?.localizedDescription) //?? ErrorMessage.uploadingError.rawValue)
                     completion(false)
@@ -98,60 +96,9 @@ final class LibraryAPIClient {
         
         let session = URLSession.shared
         var request = URLRequest(url:url)
-        request.httpMethod = "PUT"
+        request.httpMethod = HTTPMethod.put.rawValue
         
         let updatedInfo = ["lastCheckedOutBy": name]
-        
-        if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
-            request.addValue(Request.value, forHTTPHeaderField: Request.key)
-            request.httpBody = data
-        }
-        
-        let task = session.dataTask(with: request) { (data, response, error) in
-            
-            if error != nil {
-                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
-            }
-            
-            // NOTE: - Perhaps change to if let
-            guard let data = data,
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
-                    completion(nil)
-                return
-            }
-            
-            completion(responseJSON)
-        }
-        task.resume()
-        
-    }
-    
-    // POST method for updating a book
-    
-    func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, completion: @escaping (JSON?) -> Void) {
-        
-        guard let title = title,
-            let author = author,
-            let publisher = publisher,
-            let categories = categories else {
-            // handle
-            return
-        }
-        
-        let urlString = API.baseURL + Endpoint.getBook(id).path
-        guard let url = URL(string: urlString) else {
-            completion(nil)
-            return
-        }
-        
-        let session = URLSession.shared
-        var request = URLRequest(url:url)
-        request.httpMethod = "PUT"
-
-        print("These are my attributes: \(title), \(author), \(publisher), \(categories)")
-        
-        // TODO: - Remember to guard against nil values
-        let updatedInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
         
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
             request.addValue(Request.value, forHTTPHeaderField: Request.key)
@@ -176,7 +123,56 @@ final class LibraryAPIClient {
         task.resume()
         
     }
-
+    
+    // PUT method for updating a book
+    
+    func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, completion: @escaping (Bool) -> Void) {
+        
+        guard let title = title,
+            let author = author,
+            let publisher = publisher,
+            let categories = categories else {
+                // handle
+                return
+        }
+        
+        let urlString = API.baseURL + Endpoint.getBook(id).path
+        guard let url = URL(string: urlString) else {
+            completion(false)
+            return
+        }
+        
+        let session = URLSession.shared
+        var request = URLRequest(url:url)
+        request.httpMethod = HTTPMethod.put.rawValue
+        
+        // TODO: - Remember to guard against nil values
+        let updatedInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
+        
+        if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
+            request.addValue(Request.value, forHTTPHeaderField: Request.key)
+            request.httpBody = data
+        }
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
+            }
+            
+            // NOTE: - Perhaps change to if let
+            guard let data = data,
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
+                    completion(false)
+                    return
+            }
+            
+            completion(true)
+        }
+        task.resume()
+        
+    }
+    
     
     
     
@@ -192,11 +188,12 @@ final class LibraryAPIClient {
         
         let session = URLSession.shared
         var request = URLRequest(url:url)
-        request.httpMethod = "DELETE"
+        request.httpMethod = HTTPMethod.delete.rawValue
         
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
+                completion(false)
                 print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
             }
             
@@ -211,16 +208,16 @@ final class LibraryAPIClient {
     
     // MARK: - Delete method for deleting all books
     
-    // TODO: - Pass some value into completion (if necessary)
-    func delete(all completion: () -> Void) {
+    // TODO: - Check to see if you are handling error correctly with completion
+    func delete(library completion: @escaping (Bool) -> Void) {
         let urlString = API.baseURL + Endpoint.deleteLibrary.path
         guard let url = URL(string: urlString) else {
-            //  completion(nil)
+            completion(false)
             return
         }
         let session = URLSession.shared
         var request = URLRequest(url:url)
-        request.httpMethod = "DELETE"
+        request.httpMethod = HTTPMethod.delete.rawValue
         
         let task = session.dataTask(with: request) { (data, response, error) in
             
@@ -228,13 +225,14 @@ final class LibraryAPIClient {
                 print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
             }
             
-            guard let data = data else {
+            if let data = data  {
                 return
             }
             
+            completion(true)
+            
         }
         task.resume()
-        
         
     }
     

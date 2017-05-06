@@ -16,15 +16,15 @@ class EditBookVC: UIViewController {
     @IBOutlet weak var categoriesField: UITextField!
     
     var book: Book?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureFields()
     }
     
     func configureFields() {
-
+        
         guard let book = book else {
             return
         }
@@ -44,10 +44,11 @@ class EditBookVC: UIViewController {
             return
         }
         
-        LibraryAPIClient.sharedInstance.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (JSON) in
+        LibraryAPIClient.sharedInstance.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
             
-            // Do something with JSON?
-            print(JSON)
+            if !success {
+                print("Uh oh, could not update book")
+            }
         }
         
         dismiss(animated: true, completion: nil)
@@ -58,8 +59,6 @@ class EditBookVC: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
-    
-    
 
-
+    
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class DetailVC: UIViewController {
     
+
     // TODO : - didSet properties for labels so you don't have to configure views
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -82,8 +83,9 @@ class DetailVC: UIViewController {
                 return
             }
             // Abstract even more?
-            
             LibraryAPIClient.sharedInstance.checkout(by: name as! String, for: bookID as! Int, completion: { (JSON) in
+                
+             
                 
                 // TODO: - Return book to  update view OR didSet property, OR notificationCenter
                 

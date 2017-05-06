@@ -59,7 +59,7 @@
                                         <connections>
                                             <outlet property="authorLabel" destination="i3D-a7-Idm" id="9kv-Ss-eHr"/>
                                             <outlet property="titleLabel" destination="1Bg-GI-EMJ" id="uwu-JC-ynL"/>
-                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetaul" id="u7x-k2-fsW"/>
+                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetail" id="u7x-k2-fsW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
