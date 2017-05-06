@@ -10,7 +10,7 @@ import UIKit
 
 class DetailVC: UIViewController {
     
-    
+    // TODO: -  Check every alert controller and make sure buttons and colors are correct
     // TODO : - didSet properties for labels so you don't have to configure views
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -21,10 +21,17 @@ class DetailVC: UIViewController {
     var errorHandler: ErrorHandling?
     var book: Book?  {
         didSet {
-         // configureViews()
+            
+            // may willSet?
+            // configureViews()
         }
     }
     
+    // MARK: - View Lifecycle
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +40,20 @@ class DetailVC: UIViewController {
         errorHandler = self
         
         configureViews()
+        observe()
         
     }
+    
+    func observe() {
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .updateDetail, object: nil)
+    }
+    
+    func reloadVC(notification: NSNotification) {
+        
+        print("Helllooooo notification should configure")
+        configureViews()
+    }
+    // MARK: - View Method
     
     func configureViews() {
         
@@ -51,12 +70,13 @@ class DetailVC: UIViewController {
             
             // Display default text on label
         } else {
-           
+            
+            print("Welcome, thanks for checking out \(checkOutBy)")
             
             // TODO: - Work on formatting date and create a function for it
             var dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM-dd-yyyy"
-
+            
             let date = dateformatter.date(from: checkedOut)
             
             print("This is the date \(date)")
@@ -65,9 +85,9 @@ class DetailVC: UIViewController {
             
             // Include @ sign?
             checkedOutLabel.text = checkOutBy + " at " + "\(checkedOut)"
-
             
-
+            
+            
             // Format label
         }
         
@@ -76,6 +96,8 @@ class DetailVC: UIViewController {
         publisherLabel.text = book.publisher // Use Null to nil here
         
     }
+    
+    // MARK: - Helper Method
     
     // TODO: - Make function Swiftier or convert to protocol/extension
     func nullToNil(_ value: AnyObject?) -> AnyObject? {
@@ -86,8 +108,10 @@ class DetailVC: UIViewController {
         }
     }
     
+    // MARK: - Action Methods
     func alertAction() {
         
+        // ALERT
         let checkOutMessage = AlertMessage(title: "Check Out", message: "Please enter your name")
         alertDelegate?.displayAlert(message: checkOutMessage, with: { (textField) in
             
@@ -115,28 +139,20 @@ class DetailVC: UIViewController {
     }
     
     
-    @IBAction func checkoutTapped(_ sender: Any) {
-        
-        alertAction()
-        
+    @IBAction func checkoutTapped(_ sender: Any) {        
+        performSegue(withIdentifier: SegueIdentifier.showCheckoutVC, sender: self)
     }
     
     @IBAction func shareTapped(_ sender: Any) {
         
         // TODO: - Share to Facebook/Twitter
         
-        guard let title = book?.title else {
-            // Handle this
-            return
-        }
-        
-        guard let author = book?.author else {
+        guard let title = book?.title, let author = book?.author else {
             // Handle this
             return
         }
         
         let shareMessage = ["Hey, check out \(title) by \(author)."]
-        
         let activityController = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
         
         activityController.popoverPresentationController?.sourceView = self.view
@@ -144,6 +160,31 @@ class DetailVC: UIViewController {
         self.present(activityController, animated: true, completion: nil)
         
     }
+    
+    // MARK: - Segue Methods
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifier.showCheckoutVC {
+            let destVC = segue.destination as! CheckoutVC
+            destVC.book = book
+        }
+    }
+    
+    @IBAction func unwindToDetailVC(sender: UIStoryboardSegue) {
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let sourceViewController = sender.source as? CheckoutVC {
+                self.book = sourceViewController.book
+                DispatchQueue.main.async {
+                    // Find a way to use didSets instead of configuring views over and over
+                    self.configureViews()
+                }
+            }
+        }
+        
+    }
+    
+    
     
     
 }

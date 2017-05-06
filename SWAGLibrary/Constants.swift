@@ -24,6 +24,8 @@ struct SegueIdentifier {
     
     static let showDetailVC = "showDetail"
     static let showEditVC = "showEditVC"
+    static let showCheckoutVC = "showCheckoutVC"
+    static let unwindToDetailVC = "unwindToDetailVC"
     
 }
 

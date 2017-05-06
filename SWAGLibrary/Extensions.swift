@@ -11,5 +11,6 @@ import Foundation
 extension Notification.Name {
     
     static let update = Notification.Name("update")
+    static let updateDetail = Notification.Name("updateDetail")
 }
 
