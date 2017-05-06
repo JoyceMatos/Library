@@ -39,18 +39,18 @@ class EditBookVC: UIViewController {
     
     @IBAction func saveTapped(_ sender: Any) {
         
-        guard let book = book else {
-            // handle
+        // TODO: - Perform validators for text
+        guard let title = bookField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text, let id = book?.id as? Int else {
             return
         }
         
-        LibraryAPIClient.sharedInstance.update(book) { (JSON) in
+        LibraryAPIClient.sharedInstance.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (JSON) in
             
+            // Do something with JSON?
             print(JSON)
-            
-            // DO something with JSON ; Error check
         }
         
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelTapped(_ sender: Any) {

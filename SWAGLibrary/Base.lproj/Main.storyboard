@@ -114,7 +114,7 @@
                         <outlet property="deleteLibraryButton" destination="GxZ-V5-WL1" id="3iA-qe-FVU"/>
                         <outlet property="menuButton" destination="sI9-ib-Ssr" id="ysY-9N-C59"/>
                         <outlet property="tableView" destination="f0H-fU-rgz" id="WsA-5L-LjV"/>
-                        <segue destination="IP6-Aj-cuQ" kind="presentation" identifier="showEditVC" id="SYB-IC-Etf"/>
+                        <segue destination="IP6-Aj-cuQ" kind="presentation" identifier="showEditVC" id="prb-8o-MNi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -303,21 +303,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Book" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x0E-Uc-3uy">
-                                <rect key="frame" x="14" y="182" width="163" height="30"/>
+                                <rect key="frame" x="14" y="182" width="317" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Author" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="juQ-gO-iab">
-                                <rect key="frame" x="14" y="253" width="163" height="30"/>
+                                <rect key="frame" x="14" y="253" width="317" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Publisher" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dYj-WY-XeN">
-                                <rect key="frame" x="16" y="326" width="163" height="30"/>
+                                <rect key="frame" x="16" y="326" width="315" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -375,7 +375,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Categories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lE9-An-XmT">
-                                <rect key="frame" x="14" y="406" width="163" height="30"/>
+                                <rect key="frame" x="14" y="406" width="317" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -393,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9cq-o9-X1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="847"/>
+            <point key="canvasLocation" x="1237.5999999999999" y="846.9265367316342"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eWz-dl-d9r">

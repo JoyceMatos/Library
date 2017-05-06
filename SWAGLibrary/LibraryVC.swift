@@ -164,10 +164,11 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
                 self.alertAction(bookID)
         }
         
-        let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
+        let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             // TODO: - Display a window for editing
             
-            self.performSegue(withIdentifier: "showEditVC", sender: nil)
+            // Sender is tableviewcell
+            self.performSegue(withIdentifier: "showEditVC", sender: tableView.cellForRow(at: indexPath))
         }
         return [delete, edit]
     }

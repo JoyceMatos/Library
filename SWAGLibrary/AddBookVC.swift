@@ -27,7 +27,7 @@ class AddBookVC: UIViewController {
     
     func missingFieldAction() {
         
-        let missingFieldMessage = AlertMessage(title: "Missing fields", message: "Please type in the titles and/or author")
+        let missingFieldMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
         alertDelegate?.displayAlert(message: missingFieldMessage, with: { (noValue) in
             
             // Figure out what to do here (This gives me no value)

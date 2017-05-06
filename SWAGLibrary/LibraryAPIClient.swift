@@ -130,13 +130,12 @@ final class LibraryAPIClient {
         
     }
     
-    func update(_ book: Book, completion: @escaping (JSON?) -> Void) {
+    func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, completion: @escaping (JSON?) -> Void) {
         
-        guard let id = book.id as? Int,
-            let title = book.title,
-            let author = book.author,
-            let publisher = book.publisher,
-            let categories = book.categories else {
+        guard let title = title,
+            let author = author,
+            let publisher = publisher,
+            let categories = categories else {
             // handle
             return
         }
@@ -151,6 +150,7 @@ final class LibraryAPIClient {
         var request = URLRequest(url:url)
         request.httpMethod = "PUT"
 
+        print("These are my attributes: \(title), \(author), \(publisher), \(categories)")
         
         // TODO: - Remember to guard against nil values
         let updatedInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
