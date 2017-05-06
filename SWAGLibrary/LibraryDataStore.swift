@@ -32,7 +32,7 @@ final class LibraryDataStore {
                 // Map instead?
                 for element in library {
                     if let book = Book(dictionary: element) {
-                        self.books.append(book)
+                        self.books.insert(book, at: 0)
                     }
                     
                 }

@@ -21,11 +21,19 @@ class LibraryVC: UIViewController {
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var titleButton: UIButton!
+    @IBOutlet weak var authorButton: UIButton!
+    @IBOutlet weak var publisherButton: UIButton!
+    @IBOutlet weak var categoryButton: UIButton!
+
     
     let refresher = UIRefreshControl()
     
     let store = LibraryDataStore.sharedInstance
     var alertDelegate: AlertDelegate?
+    var didDisplayOptions = false
     
     
     // MARK: - View Lifecyle
@@ -47,6 +55,7 @@ class LibraryVC: UIViewController {
         fetch()
         observe()
         refresh()
+        hideMenuButtons()
     }
     
     
@@ -96,20 +105,37 @@ class LibraryVC: UIViewController {
     // MARK: - View Method
     
     // TODO: - Configure views called when validating menu button ; Setup enum for hiding buttons and switch
-    
-    func configureViews() {
+    func showMenuButtons() {
+        deleteLibraryButton.isHidden = false
+        addBookButton.isHidden = false
         
+        // TODO: - Animate menu button state
+    }
+    
+    func hideMenuButtons() {
         deleteLibraryButton.isHidden = true
         addBookButton.isHidden = true
         
+        // TODO: - Animate menu button state
+
     }
     
     // MARK: - Action Methods
     
     @IBAction func menuPressed(_ sender: Any) {
+        // TODO: - Create enum or function that validates this info 
         
+        if didDisplayOptions == false {
+            didDisplayOptions = true
+            showMenuButtons()
+            
+        } else {
+            didDisplayOptions = false
+            hideMenuButtons()
+        }
         
     }
+
     
     
     

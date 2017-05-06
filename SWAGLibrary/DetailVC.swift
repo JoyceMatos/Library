@@ -54,26 +54,21 @@ class DetailVC: UIViewController {
             
             // Display default text on label
         } else {
-            // TODO: - Create function for formating data
+           
             
-            print("Hello lets format!")
+            // TODO: - Work on formatting date and create a function for it
             var dateformatter = DateFormatter()
-            dateformatter.dateFormat = "dd-MM-yyyy"
-            dateformatter.dateStyle = .medium
+            dateformatter.dateFormat = "MM-dd-yyyy"
+
+            let date = dateformatter.date(from: checkedOut)
             
+            print("This is the date \(date)")
             print(checkedOut)
             print(dateformatter.date(from: checkedOut)) // yyyy-MM-dd HH:mm:ss zzz
-            print(checkOutBy)
             
             // Include @ sign?
-            checkedOutLabel.text = checkOutBy + " at " + "\(dateformatter.date(from: checkedOut))"
+            checkedOutLabel.text = checkOutBy + " at " + "\(checkedOut)"
 
-            
-            if let newDate = dateformatter.date(from: checkedOut) {
-                print("hi")
-                print(newDate)
-                
-            }
             
 
             // Format label
