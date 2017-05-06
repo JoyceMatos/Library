@@ -50,9 +50,7 @@ class CheckoutVC: UIViewController {
             self.book = Book(dictionary: JSON)
             
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .update, object: nil)
-               // NotificationCenter.default.post(name: .updateDetail, object: nil)
-                
+                NotificationCenter.default.post(name: .update, object: nil)                
                 self.performSegue(withIdentifier: "unwindToDetailVC", sender: self)
             }
         })

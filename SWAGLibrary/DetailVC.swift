@@ -29,10 +29,6 @@ class DetailVC: UIViewController {
     
     // MARK: - View Lifecycle
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,19 +36,9 @@ class DetailVC: UIViewController {
         errorHandler = self
         
         configureViews()
-        observe()
         
     }
     
-    func observe() {
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .updateDetail, object: nil)
-    }
-    
-    func reloadVC(notification: NSNotification) {
-        
-        print("Helllooooo notification should configure")
-        configureViews()
-    }
     // MARK: - View Method
     
     func configureViews() {
