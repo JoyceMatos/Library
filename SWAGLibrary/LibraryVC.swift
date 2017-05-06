@@ -82,6 +82,8 @@ class LibraryVC: UIViewController {
     
     
     @IBAction func deleteLibraryTapped(_ sender: Any) {
+        // TODO: - Ask: Are you sure you want to delete?
+        
         LibraryAPIClient.sharedInstance.delete {
             DispatchQueue.global().async {
                 

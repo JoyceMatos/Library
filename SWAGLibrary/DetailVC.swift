@@ -19,7 +19,7 @@ class DetailVC: UIViewController {
     var alertDelegate: AlertDelegate?
     var book: Book?  {
         didSet {
-            //  configureViews()
+//              configureViews()
             
         }
     }
@@ -57,8 +57,8 @@ class DetailVC: UIViewController {
         // TODO: - Format date label
         
         titleLabel.text = book.title
-        authorLabel.text = book.author
-        publisherLabel.text = book.publisher
+        authorLabel.text = book.author // // Use Null to nil here
+        publisherLabel.text = book.publisher // Use Null to nil here
         checkedOutLabel.text = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
         
     }
@@ -105,6 +105,8 @@ class DetailVC: UIViewController {
     }
     
     @IBAction func shareTapped(_ sender: Any) {
+        
+        // TODO: - Share to Facebook/Twitter
         
         guard let title = book?.title else {
             // Handle this

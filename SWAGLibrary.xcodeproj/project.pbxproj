@@ -61,6 +61,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		250287E01EBD486500E659D5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 		250818EE1EBB7FD8005740FE = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +147,7 @@
 			children = (
 				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
 				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
+				250287E01EBD486500E659D5 /* Helpers */,
 			);
 			name = API;
 			sourceTree = "<group>";
