@@ -116,8 +116,17 @@ class LibraryVC: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Switch on segue identifier
         if segue.identifier == SegueIdentifier.showDetail {
             let destVC = segue.destination as! DetailVC
+            guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
+                return
+            }
+            destVC.book = store.books[indexPath.row]
+        }
+        
+        if segue.identifier == "showEditVC" {
+            let destVC = segue.destination as! EditBookVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
@@ -157,6 +166,8 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         
         let edit = UITableViewRowAction(style: .normal, title: "Share") { (action, indexPath) in
             // TODO: - Display a window for editing
+            
+            self.performSegue(withIdentifier: "showEditVC", sender: nil)
         }
         return [delete, edit]
     }

@@ -14,13 +14,42 @@ class EditBookVC: UIViewController {
     @IBOutlet weak var authorField: UITextField!
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
+    
+    var book: Book?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureFields()
+    }
+    
+    func configureFields() {
+
+        guard let book = book else {
+            return
+        }
+        
+        // Add default values if nil
+        bookField.placeholder = book.title
+        authorField.placeholder = book.author
+        publisherField.placeholder = book.publisher
+        categoriesField.placeholder = book.categories
+        
     }
     
     @IBAction func saveTapped(_ sender: Any) {
+        
+        guard let book = book else {
+            // handle
+            return
+        }
+        
+        LibraryAPIClient.sharedInstance.update(book) { (JSON) in
+            
+            print(JSON)
+            
+            // DO something with JSON ; Error check
+        }
         
     }
     

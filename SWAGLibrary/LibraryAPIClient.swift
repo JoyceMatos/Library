@@ -25,6 +25,7 @@ final class LibraryAPIClient {
     static let sharedInstance = LibraryAPIClient()
     
     // MARK - GET method for retrieving all books
+    
     func get(completion: @escaping ([JSON]?) -> Void) {
         
         let urlString = API.baseURL + Endpoint.getLibrary.path
@@ -88,10 +89,11 @@ final class LibraryAPIClient {
         
     }
     
-    // MARK - PUT method for updating a book
+    // MARK - PUT method for checking out a book
     
-    //TODO: - Return JSON
-    func put(name: String, book id: Int, completion: @escaping (JSON?) -> Void) {
+    // TODO: - Return JSON
+    // TODO: - Merge checkout & update function to avoid code repition
+    func checkout(by name: String, for id: Int, completion: @escaping (JSON?) -> Void) {
         let urlString = API.baseURL + Endpoint.getBook(id).path
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -127,6 +129,56 @@ final class LibraryAPIClient {
         task.resume()
         
     }
+    
+    func update(_ book: Book, completion: @escaping (JSON?) -> Void) {
+        
+        guard let id = book.id as? Int,
+            let title = book.title,
+            let author = book.author,
+            let publisher = book.publisher,
+            let categories = book.categories else {
+            // handle
+            return
+        }
+        
+        let urlString = API.baseURL + Endpoint.getBook(id).path
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        
+        let session = URLSession.shared
+        var request = URLRequest(url:url)
+        request.httpMethod = "PUT"
+
+        
+        // TODO: - Remember to guard against nil values
+        let updatedInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
+        
+        if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
+            request.addValue(Request.value, forHTTPHeaderField: Request.key)
+            request.httpBody = data
+        }
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
+            }
+            
+            // NOTE: - Perhaps change to if let
+            guard let data = data,
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
+                    completion(nil)
+                    return
+            }
+            
+            completion(responseJSON)
+        }
+        task.resume()
+        
+    }
+
     
     
     

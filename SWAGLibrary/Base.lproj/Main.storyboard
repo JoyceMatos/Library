@@ -59,7 +59,7 @@
                                         <connections>
                                             <outlet property="authorLabel" destination="i3D-a7-Idm" id="9kv-Ss-eHr"/>
                                             <outlet property="titleLabel" destination="1Bg-GI-EMJ" id="uwu-JC-ynL"/>
-                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetail" id="7t5-Y3-Ljg"/>
+                                            <segue destination="qrI-jX-rlR" kind="show" identifier="showDetaul" id="u7x-k2-fsW"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -114,11 +114,12 @@
                         <outlet property="deleteLibraryButton" destination="GxZ-V5-WL1" id="3iA-qe-FVU"/>
                         <outlet property="menuButton" destination="sI9-ib-Ssr" id="ysY-9N-C59"/>
                         <outlet property="tableView" destination="f0H-fU-rgz" id="WsA-5L-LjV"/>
+                        <segue destination="IP6-Aj-cuQ" kind="presentation" identifier="showEditVC" id="SYB-IC-Etf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733.60000000000002" y="115.59220389805098"/>
+            <point key="canvasLocation" x="713" y="52"/>
         </scene>
         <!--Details-->
         <scene sceneID="1ir-s3-w0W">
@@ -287,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="slm-GB-ZEU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="733.60000000000002" y="825.33733133433293"/>
+            <point key="canvasLocation" x="386" y="860"/>
         </scene>
         <!--Edit BookVC-->
         <scene sceneID="B1e-lq-bEf">
@@ -392,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9cq-o9-X1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584.8" y="811.84407796101959"/>
+            <point key="canvasLocation" x="1239" y="847"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eWz-dl-d9r">

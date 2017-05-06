@@ -81,10 +81,9 @@ class DetailVC: UIViewController {
                 // Do something for nil value
                 return
             }
-            
-            
             // Abstract even more?
-            LibraryAPIClient.sharedInstance.put(name: name as! String, book: bookID as! Int, completion: { (JSON) in
+            
+            LibraryAPIClient.sharedInstance.checkout(by: name as! String, for: bookID as! Int, completion: { (JSON) in
                 
                 // TODO: - Return book to  update view OR didSet property, OR notificationCenter
                 
