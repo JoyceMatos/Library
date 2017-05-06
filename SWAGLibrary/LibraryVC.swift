@@ -13,6 +13,7 @@ import UIKit
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
 // TODO: - Add instructions: Swipe to delete or edit
+// TODO: - Look over client property - check to see if this should be singleton or not
 
 
 class LibraryVC: UIViewController {
@@ -24,12 +25,11 @@ class LibraryVC: UIViewController {
     
     let refresher = UIRefreshControl()
     
+    let client = LibraryAPIClient.sharedInstance
     let store = LibraryDataStore.sharedInstance
     var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
-    
     var didDisplayOptions = false
-    
     
     // MARK: - View Lifecyle
     
@@ -97,10 +97,11 @@ class LibraryVC: UIViewController {
         }
     }
     
-    // MARK: - View Method
+    // MARK: - View Methods
     
-    // TODO: - Configure views called when validating menu button ; Setup enum for hiding buttons and switch
     func showMenuButtons() {
+        didDisplayOptions = true
+        
         deleteLibraryButton.isHidden = false
         addBookButton.isHidden = false
         
@@ -108,45 +109,39 @@ class LibraryVC: UIViewController {
     }
     
     func hideMenuButtons() {
+        didDisplayOptions = false
+        
         deleteLibraryButton.isHidden = true
         addBookButton.isHidden = true
         
         // TODO: - Animate menu button state
-
+        
+    }
+    
+    func validateButtonStatus() {
+        switch didDisplayOptions {
+        case false:
+            showMenuButtons()
+        case true:
+            hideMenuButtons()
+        }
     }
     
     // MARK: - Action Methods
     
     @IBAction func menuPressed(_ sender: Any) {
-        // TODO: - Create enum or function that validates this info 
-        
-        if didDisplayOptions == false {
-            didDisplayOptions = true
-            showMenuButtons()
-            
-        } else {
-            didDisplayOptions = false
-            hideMenuButtons()
-        }
-        
+        validateButtonStatus()
     }
     
     @IBAction func filterTapped(_ sender: Any) {
         performSegue(withIdentifier: "showFilterVC", sender: self)
     }
     
-
+    
     @IBAction func deleteLibraryTapped(_ sender: Any) {
         // TODO: - Ask user: Are you sure you want to delete?
         
-        LibraryAPIClient.sharedInstance.delete { (success) in
-            if !success {
-                let message = AlertMessage(title: "", message: "Had trouble deleting library. Please try again later.")
-                self.errorHandler?.displayErrorAlert(message: message)
-            }
-            self.fetch()
-        }
-        
+        deleteLibrary()
     }
     
     func alertAction(_ book: Int) {
@@ -154,8 +149,7 @@ class LibraryVC: UIViewController {
         self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
             
             // Abstract this function even further?
-            LibraryAPIClient.sharedInstance.delete(book: book, completion: { (success) in
-                
+            self.client.delete(book: book, completion: { (success) in
                 if !success {
                     let message = AlertMessage(title: "", message: "Had trouble deleting book. Please try again later.")
                     self.errorHandler?.displayErrorAlert(message: message)
@@ -167,6 +161,17 @@ class LibraryVC: UIViewController {
         })
     }
     
+    // MARK: - API Method
+    
+    func deleteLibrary() {
+        client.delete { (success) in
+            if !success {
+                let message = AlertMessage(title: "", message: "Had trouble deleting library. Please try again later.")
+                self.errorHandler?.displayErrorAlert(message: message)
+            }
+            self.fetch()
+        }
+    }
     
     // MARK: - Segue Method
     
@@ -229,13 +234,10 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            
-            // Sender is tableviewcell
-            self.performSegue(withIdentifier: "showEditVC", sender: tableView.cellForRow(at: indexPath))
+            self.performSegue(withIdentifier: SegueIdentifier.showEditVC, sender: tableView.cellForRow(at: indexPath))
         }
         return [delete, edit]
     }
-    
     
 }
 
@@ -244,25 +246,16 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 extension LibraryVC: AlertDelegate {
     
     func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
-        
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-    
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
-            
             handler(nil)
         })
-        
         alert.addAction(cancel)
         alert.addAction(confirm)
-        
         let yes = UIAlertAction()
-        
-        
         self.present(alert, animated: true, completion: nil)
-        
     }
-    
 }
 
 extension LibraryVC: ErrorHandling {

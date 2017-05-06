@@ -26,17 +26,12 @@ class AddBookVC: UIViewController {
         
         alertDelegate = self
         errorHandler = self
-        
     }
     
     func missingFieldAction() {
-        
         let missingFieldMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
         alertDelegate?.displayAlert(message: missingFieldMessage, with: { (noValue) in
-            
-            // Figure out what to do here (This gives me no value)
         })
-        
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -105,35 +100,23 @@ class AddBookVC: UIViewController {
     
     func postNotification() {
         NotificationCenter.default.post(name: .update, object: nil)
-    }
-    
-    
-    
+    } 
 }
 
 // TODO: - Figure out how to add 2 alert controllers with this protocol ; Perhaps make a UIAlertAction factory (Function that takes in array of UIAlertActions) ie: AlertActions can be enums
 extension AddBookVC: AlertDelegate {
     
     func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
-        
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
         let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
-            
-            
             self.dismiss(animated: true, completion: nil)
             handler(nil)
         })
-        
         alert.addAction(cancel)
         alert.addAction(confirm)
-        
         self.present(alert, animated: true, completion: nil)
-        
-        
     }
-    
 }
 
 extension AddBookVC: ErrorHandling {
