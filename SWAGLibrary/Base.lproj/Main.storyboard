@@ -418,7 +418,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syQ-Yz-gep" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xZW-mk-Yqd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="293.70314842578711"/>
+            <point key="canvasLocation" x="2495" y="519"/>
         </scene>
         <!--Add BookVC-->
         <scene sceneID="Eo1-Vp-xyy">

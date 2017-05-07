@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class DetailVC: UIViewController {
     
@@ -17,6 +18,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var checkedOutLabel: UILabel!
     
+    let client = LibraryAPIClient.sharedInstance
     var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     var book: Book?  {
@@ -55,7 +57,7 @@ class DetailVC: UIViewController {
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
         } else {
-
+            
             // TODO: - Work on formatting date and create a function for it
             var dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM-dd-yyyy"
@@ -96,56 +98,97 @@ class DetailVC: UIViewController {
         let checkOutMessage = AlertMessage(title: "Check Out", message: "Please enter your name")
         alertDelegate?.displayAlert(message: checkOutMessage, with: { (textField) in
             
-            guard let bookID = self.book?.id, let name = textField else {
+            guard let bookID = self.book?.id as? Int, let name = textField as? String else {
                 // Do something for nil value
                 return
             }
             
-            // Abstract even more?
-            LibraryAPIClient.sharedInstance.checkout(by: name as! String, for: bookID as! Int, completion: { (JSON) in
-                
-                if JSON == nil {
-                    let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
-                    self.errorHandler?.displayErrorAlert(message: message)
-                    
-                }
-                
-                self.book = Book(dictionary: JSON)
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .update, object: nil)
-                    self.configureViews()
-                }
-            })
+            self.checkOut(by: name, for: bookID)
         })
     }
     
-    
-    @IBAction func checkoutTapped(_ sender: Any) {        
+    @IBAction func checkoutTapped(_ sender: Any) {
         performSegue(withIdentifier: SegueIdentifier.showCheckoutVC, sender: self)
     }
     
     @IBAction func shareTapped(_ sender: Any) {
-        
-        // TODO: - Share to Facebook/Twitter
-        
         guard let title = book?.title, let author = book?.author else {
             // Handle this
             return
         }
-
-        share(book: title, by: author)
+        
+        presentSharing(for: title, by: author)
+    }
+    
+    // MARK: - API Method
+    
+    func checkOut(by name: String, for book: Int) {
+        client.checkout(by: name, for: book, completion: { (JSON) in
+            if JSON == nil {
+                let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
+                self.errorHandler?.displayErrorAlert(message: message)
+            }
+            
+            self.book = Book(dictionary: JSON)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .update, object: nil)
+                self.configureViews()
+            }
+        })
         
     }
+
     
     // MARK: - Sharing Capabilities
     
-    func share(book title: String, by author: String) {
-        let shareMessage = ["Hey, check out \(title) by \(author)."]
-        let activityController = UIActivityViewController(activityItems: [shareMessage], applicationActivities: nil)
-        activityController.popoverPresentationController?.sourceView = self.view
-        activityController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook ]
-        self.present(activityController, animated: true, completion: nil)
+    func presentSharing(for book: String, by author: String) {
+        let alertController = UIAlertController(title: "Share on social media", message: "", preferredStyle: .actionSheet)
+        
+        let fbButton = UIAlertAction(title: "Share on Facebook", style: .default, handler: { (action) -> Void in
+            self.shareOnFacebook(book, by: author)
+        })
+        
+        let twitterButton = UIAlertAction(title: "Share on Twitter", style: .default, handler: { (action) -> Void in
+            self.shareOnTwitter(book, by: author)
+        })
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in })
+        
+        alertController.addAction(fbButton)
+        alertController.addAction(twitterButton)
+        alertController.addAction(cancelButton)
+        
+        self.navigationController!.present(alertController, animated: true, completion: nil)
     }
+    
+    func shareOnFacebook(_ title: String, by author: String) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
+            let fbShare = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            fbShare?.setInitialText("Hey, check out \(title) by \(author).")
+            if let share = fbShare {
+                self.present(share, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func shareOnTwitter(_ title: String, by author: String) {
+        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
+            let tweetShare = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            tweetShare?.setInitialText("Hey, check out \(title) by \(author).")
+            if let share = tweetShare {
+                self.present(share, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to tweet.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     // MARK: - Segue Methods
     
