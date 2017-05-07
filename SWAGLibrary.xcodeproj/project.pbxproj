@@ -110,9 +110,7 @@
 				2508190C1EBB9223005740FE /* Model */,
 				2508190D1EBB922A005740FE /* View */,
 				2508190E1EBB9237005740FE /* Controller */,
-				250819011EBB7FD8005740FE /* Assets.xcassets */,
-				250819031EBB7FD8005740FE /* LaunchScreen.storyboard */,
-				250819061EBB7FD8005740FE /* Info.plist */,
+				2564A0281EBEDA7700AB034A /* Supporting Files */,
 			);
 			path = SWAGLibrary;
 			sourceTree = "<group>";
@@ -157,6 +155,16 @@
 				250819151EBBBE09005740FE /* SWAGLibrary-Bridging-Header.h */,
 			);
 			name = ObjC;
+			sourceTree = "<group>";
+		};
+		2564A0281EBEDA7700AB034A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				250819031EBB7FD8005740FE /* LaunchScreen.storyboard */,
+				250819061EBB7FD8005740FE /* Info.plist */,
+				250819011EBB7FD8005740FE /* Assets.xcassets */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		25FEBE0C1EBC24EB00B02001 /* API */ = {
