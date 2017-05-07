@@ -56,13 +56,16 @@ class EditBookVC: UIViewController {
     
     // MARK: - API Method
     
-    func update(book title: String, by author: String, for id: Int, publisher: String, categories: String) {
+    func update(book title: String, by author: String, for id: Int, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
         client.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
             if !success {
-                self.errorUpdatingBook()
-            }
-            
+                DispatchQueue.main.async {
+                    self.errorUpdatingBook()
+                }
+            } else {
             NotificationCenter.default.post(name: .update, object: nil)
+                handler(true)
+            }
         }
     }
     // MARK: - Action Methods
@@ -76,9 +79,11 @@ class EditBookVC: UIViewController {
             return
         }
         
-        update(book: title, by: author, for: id, publisher: publisher, categories: categories)
-        dismiss(animated: true, completion: nil)
-        
+        update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
+            if success {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     

@@ -16,3 +16,17 @@ protocol ErrorHandling: class {
 //    func generateMessage(for alert: AlertType) -> AlertMessage
 }
 
+enum ErrorType {
+    
+    case retrievingBooks
+    case deletingBook
+    case deletingLibrary
+    case edittingBook
+    case addingBook
+    
+}
+
+
+// TODO: - display error based on type
+// TODO: - Create Alert Message constants
+

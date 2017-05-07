@@ -12,7 +12,6 @@ import UIKit
 protocol AlertDelegate: class {
     func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void)
     
-    // TODO: - Add actionAlert for more customization
 }
 
 
@@ -20,6 +19,8 @@ struct AlertMessage {
     
     let title: String
     let message: String
+    
+    // TODO: - Custom Init: init(for type: ErrorType)
     
 }
 
@@ -31,7 +32,6 @@ enum AlertType {
     
 }
 
-
 protocol TestAlert: class {
     func displayAlert(message type: AlertMessage, for alert: AlertType, performing action: UIAlertAction, with handler: @escaping (Any?) -> Void)
 
@@ -41,11 +41,11 @@ extension TestAlert {
     
     func displayAlert(message type: AlertMessage, for alert: AlertType, performing action: UIAlertAction, with handler: @escaping (Any?) -> Void) {
         
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+//        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
         
         
 //
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })        
+//        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })        
         
 //        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
 //            

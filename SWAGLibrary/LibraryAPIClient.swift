@@ -71,7 +71,7 @@ final class LibraryAPIClient {
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
                 
                 guard let data = data else {
-                    print(error?.localizedDescription) //?? ErrorMessage.uploadingError.rawValue)
+                    print(error?.localizedDescription ?? "Error adding book")
                     completion(false)
                     return
                 }
@@ -108,7 +108,7 @@ final class LibraryAPIClient {
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))") // ?? ErrorMessage.deletingError.rawValue)
             }
             
             // NOTE: - Perhaps change to if let
@@ -157,7 +157,7 @@ final class LibraryAPIClient {
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))") // ?? ErrorMessage.deletingError.rawValue)
             }
             
             // NOTE: - Perhaps change to if let
@@ -194,7 +194,7 @@ final class LibraryAPIClient {
             
             if error != nil {
                 completion(false)
-                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))")
             }
             
             guard let data = data else {
@@ -219,38 +219,21 @@ final class LibraryAPIClient {
         var request = URLRequest(url:url)
         request.httpMethod = HTTPMethod.delete.rawValue
         
-       // print(urlString)
-        
-        
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(error?.localizedDescription)") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))")
+                completion(false)
             }
-            
-            if let data = data  {
-                
-                print("HELLOOO in the task")
-                DispatchQueue.global(qos: .userInitiated).async {
-                    print("Right before completion")
-                    completion(true)
-                    
+                if let data = data  {
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        completion(true)
+                        
+                    }
                 }
-                
-                
-                
             }
-            
-            
-            
-            
-        }
         task.resume()
-        
     }
-    
-    
-    
     
     
     

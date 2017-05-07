@@ -8,13 +8,14 @@
 
 import UIKit
 
-// TODO: - Create an empty state for data
+// TODO: - Look through all files and seperate view & model functionality from VC
+// TODO: - Customize Library title to follow suit
 // TODO: - Update delete message: "Are you sure you want to delete "book" by "author"?
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
 // TODO: - Add instructions: Swipe to delete or edit
 // TODO: - Look over client property - check to see if this should be singleton or not
-// TODO: - Work on keyboard!!
+// TODO: - If there is nothing to delete, tell user 
 
 
 class LibraryVC: UIViewController {
@@ -52,6 +53,10 @@ class LibraryVC: UIViewController {
         observe()
         refresh()
         hideMenuButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureEmptyState()
     }
     
     
@@ -112,6 +117,21 @@ class LibraryVC: UIViewController {
         }
     }
     
+    // Create custom struct view for this to seperate view logic
+    func configureEmptyState() {
+        if tableView(tableView, numberOfRowsInSection: 1) == 0 {
+            // Constrain
+            let emptyStateLabel = UILabel(frame: tableView.frame)
+            emptyStateLabel.text = "Click '+' to add a book"
+            emptyStateLabel.textAlignment = .center
+            emptyStateLabel.textColor = UIColor.darkGray
+            emptyStateLabel.font = UIFont(name: "Avenir", size: 20)
+            tableView.backgroundView = emptyStateLabel
+        } else {
+            tableView.backgroundView = nil
+        }
+    }
+    
     // MARK: - Action Methods
     
     @IBAction func menuPressed(_ sender: Any) {
@@ -138,6 +158,7 @@ class LibraryVC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // TODO: - Find out if this is being called
     func deleteBookAlertAction(for book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
         self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
@@ -178,9 +199,10 @@ class LibraryVC: UIViewController {
         self.client.delete(book: book, completion: { (success) in
             if !success {
                 self.errorDeletingBook()
-            }
+            } else {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.fetch()
+                }
             }
         })
     }
@@ -189,10 +211,10 @@ class LibraryVC: UIViewController {
         self.store.getBooks { (success) in
             if !success {
                 self.errorRetrievingBooks()
-            }
-            
+            } else {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
             }
         }
     }
@@ -249,11 +271,15 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        // Is force casting necessary?
         let bookID = self.store.books[indexPath.row].id as! Int
+        let title = self.store.books[indexPath.row].title as! String
+        let author = self.store.books[indexPath.row].author as! Int
         
         // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.deleteBookAlertAction(for: bookID)
+            self.deleteBook(bookID)
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
@@ -263,6 +289,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
 
 // MARK: - Alert Delegate
 
@@ -276,7 +303,6 @@ extension LibraryVC: AlertDelegate {
         })
         alert.addAction(cancel)
         alert.addAction(confirm)
-        let yes = UIAlertAction()
         self.present(alert, animated: true, completion: nil)
     }
 }

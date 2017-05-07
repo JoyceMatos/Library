@@ -8,6 +8,9 @@
 
 import UIKit
 
+// TODO: - Research outlet collection
+// TODO: - Add functionality to buttons
+
 class FilterVC: UIViewController {
 
     override func viewDidLoad() {
@@ -21,6 +24,33 @@ class FilterVC: UIViewController {
         dismiss(animated: true, completion: nil)
         
     }
+    
+    @IBAction func resetTapped(_ sender: Any) {
+    }
+    
+    @IBAction func titleTapped(_ sender: Any) {
+    }
+    
+    @IBAction func authorTapped(_ sender: Any) {
+    }
+    
+    @IBAction func pubisherTapped(_ sender: Any) {
+    }
+    
+    @IBAction func categoryTapped(_ sender: Any) {
+    }
+    
+    @IBAction func ascendingTapped(_ sender: Any) {
+    }
+    
+    @IBAction func descendingTapped(_ sender: Any) {
+    }
+    
+    @IBAction func applyAllTapped(_ sender: Any) {
+    }
+    
+    
+    
   
 
 }

@@ -35,7 +35,7 @@ class AddBookVC: UIViewController {
     // MARK: - Error Method
     
     func errorAddingBook() {
-        let message = AlertMessage(title: "", message: "Had trouble adding book. Please try again later.")
+        let message = AlertMessage(title: "", message: "Having trouble adding book. Please try again later.")
         self.errorHandler?.displayErrorAlert(message: message)
     }
     
@@ -64,10 +64,13 @@ class AddBookVC: UIViewController {
             // NOTE: - Guard vs if lets
             if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
                 
-                addBook(by: author, title: title, publisher: publisher, categories: categories)
+                addBook(by: author, title: title, publisher: publisher, categories: categories, handler: { (success) in
+                    if success {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                })
             }
-            dismiss(animated: true, completion: nil)
-            
+
         }
         
     }
@@ -78,12 +81,17 @@ class AddBookVC: UIViewController {
     
     // MARK: - API Method
     
-    func addBook(by author: String, title: String, publisher: String, categories: String) {
+    func addBook(by author: String, title: String, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
         client.post(author, categories: categories, title: title, publisher: publisher, completion: { (success) in
             if !success {
-                self.errorAddingBook()
-            }
+                DispatchQueue.main.async {
+                    self.errorAddingBook()
+                }
+            } else {
             NotificationCenter.default.post(name: .update, object: nil)
+            handler(true)
+            }
+            
         })
     }
     
@@ -127,7 +135,7 @@ extension AddBookVC: ErrorHandling {
     
     func displayErrorAlert(message type: AlertMessage) {
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
     }

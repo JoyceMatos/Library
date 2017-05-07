@@ -10,10 +10,10 @@ import Foundation
 
 // NOTE: - Decide whether or not to use Library protocol
 
-protocol Library: Path {
-
-    var baseURL: URL? { get }
-}
+//protocol Library: Path {
+//
+//    var baseURL: URL? { get }
+//}
 
 protocol Path {
     
@@ -44,13 +44,13 @@ extension Endpoint: Path {
     
 }
 
-extension Endpoint: Library {
-    
-    var baseURL: URL? {
-        return URL(string: "https://api.github.com")
-    }
-
-}
+//extension Endpoint: Library {
+//    
+//    var baseURL: URL? {
+//        return URL(string: "https://api.github.com")
+//    }
+//
+//}
 
 //func url(for route: Library) -> URL {
 //    
