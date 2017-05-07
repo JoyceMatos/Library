@@ -9,7 +9,7 @@
 import UIKit
 
 // TODO: - Look through all files and seperate view & model functionality from VC
-// TODO: - Create an empty state for data
+// TODO: - Customize Library title to follow suit
 // TODO: - Update delete message: "Are you sure you want to delete "book" by "author"?
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
@@ -158,6 +158,7 @@ class LibraryVC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    // TODO: - Find out if this is being called
     func deleteBookAlertAction(for book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
         self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
@@ -270,11 +271,15 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        // Is force casting necessary?
         let bookID = self.store.books[indexPath.row].id as! Int
+        let title = self.store.books[indexPath.row].title as! String
+        let author = self.store.books[indexPath.row].author as! Int
         
         // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.deleteBookAlertAction(for: bookID)
+            self.deleteBook(bookID)
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in

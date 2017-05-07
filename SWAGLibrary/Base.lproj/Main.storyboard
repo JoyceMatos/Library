@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--LibraryVC-->
+        <!--Library-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="LibraryVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
@@ -110,7 +110,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="9Rl-5k-0yd">
+                    <navigationItem key="navigationItem" title="Library" id="9Rl-5k-0yd">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5cl-6t-Ywb">
                             <connections>
                                 <segue destination="NBP-EK-YiH" kind="presentation" id="eHh-8i-cqW"/>
@@ -677,7 +677,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1qs-xz-8Gq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="kji-Y6-az5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kji-Y6-az5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
