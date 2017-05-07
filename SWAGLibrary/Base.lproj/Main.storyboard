@@ -148,6 +148,9 @@
                                 <state key="normal" title="Title ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="titleTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="N7F-9g-glN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I33-hC-9Qh">
                                 <rect key="frame" x="195" y="149" width="56" height="30"/>
@@ -156,6 +159,9 @@
                                 <state key="normal" title="Author">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="authorTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="XxS-jp-eAY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-KN-dh6">
                                 <rect key="frame" x="191" y="205" width="64" height="30"/>
@@ -164,6 +170,9 @@
                                 <state key="normal" title="Publisher">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="pubisherTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="rp8-Rn-Phq"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bE-J0-nJh">
                                 <rect key="frame" x="191" y="258" width="69" height="30"/>
@@ -172,6 +181,9 @@
                                 <state key="normal" title="Category">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="categoryTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="MTt-fz-8CN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARM-lB-s93">
                                 <rect key="frame" x="211" y="376" width="69" height="30"/>
@@ -180,6 +192,9 @@
                                 <state key="normal" title="Z-A">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="descendingTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="d0E-lv-VZ1"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK7-AG-UKR">
                                 <rect key="frame" x="72" y="376" width="69" height="30"/>
@@ -188,6 +203,9 @@
                                 <state key="normal" title="A-Z">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="ascendingTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="lIg-Nx-1jG"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xbV-E9-Hin">
                                 <rect key="frame" x="80" y="149" width="52" height="21"/>
@@ -238,6 +256,9 @@
                                 <state key="normal" title="Apply all">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="applyAllTapped:" destination="BlV-SZ-UiO" eventType="touchUpInside" id="UfK-PW-rNS"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vaa-x2-oHr">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -247,14 +268,25 @@
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <items>
                                     <navigationItem id="Ygd-5K-NlA">
-                                        <barButtonItem key="leftBarButtonItem" title="X" id="38N-GH-dDE"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Reset" id="TBM-aD-vZ1"/>
+                                        <barButtonItem key="leftBarButtonItem" title="X" id="38N-GH-dDE">
+                                            <connections>
+                                                <action selector="cancelPressed:" destination="BlV-SZ-UiO" id="cp8-sc-AjZ"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Reset" id="TBM-aD-vZ1">
+                                            <connections>
+                                                <action selector="resetTapped:" destination="BlV-SZ-UiO" id="pEG-i3-YXy"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="ascendingTapped" destination="dK7-AG-UKR" id="BSR-fs-O1X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SRG-Au-vzy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

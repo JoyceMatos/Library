@@ -84,15 +84,6 @@ class LibraryVC: UIViewController {
     
     // MARK: - View Methods
     
-    func configureViews() {
-        
-//        // Nav Bar
-//        self.navigationController?.uico
-//        
-        hideMenuButtons()
-        
-    }
-    
     func showMenuButtons() {
         didDisplayOptions = true
         
