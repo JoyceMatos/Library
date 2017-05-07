@@ -168,7 +168,7 @@ class LibraryVC: UIViewController {
     func deleteLibrary() {
         client.delete { (success) in
             if !success {
-               errorDeletingLibrary()
+               self.errorDeletingLibrary()
             }
             self.fetch()
         }
@@ -177,7 +177,7 @@ class LibraryVC: UIViewController {
     func deleteBook(_ book: Int) {
         self.client.delete(book: book, completion: { (success) in
             if !success {
-                errorDeletingBook()
+                self.errorDeletingBook()
             }
             DispatchQueue.global(qos: .userInitiated).async {
                 self.fetch()
@@ -188,7 +188,7 @@ class LibraryVC: UIViewController {
     func fetch() {
         self.store.getBooks { (success) in
             if !success {
-                errorRetrievingBooks()
+                self.errorRetrievingBooks()
             }
             
             DispatchQueue.main.async {
@@ -285,7 +285,7 @@ extension LibraryVC: ErrorHandling {
     
     func displayErrorAlert(message type: AlertMessage) {
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
     }

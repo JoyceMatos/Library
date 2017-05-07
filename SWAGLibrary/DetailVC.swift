@@ -92,21 +92,6 @@ class DetailVC: UIViewController {
     
     // MARK: - Action Methods
     
-    func alertAction() {
-        
-        // ALERT
-        let checkOutMessage = AlertMessage(title: "Check Out", message: "Please enter your name")
-        alertDelegate?.displayAlert(message: checkOutMessage, with: { (textField) in
-            
-            guard let bookID = self.book?.id as? Int, let name = textField as? String else {
-                // Do something for nil value
-                return
-            }
-            
-            self.checkOut(by: name, for: bookID)
-        })
-    }
-    
     @IBAction func checkoutTapped(_ sender: Any) {
         performSegue(withIdentifier: SegueIdentifier.showCheckoutVC, sender: self)
     }
@@ -120,24 +105,12 @@ class DetailVC: UIViewController {
         presentSharing(for: title, by: author)
     }
     
-    // MARK: - API Method
+    // MARK: - Error Method
     
-    func checkOut(by name: String, for book: Int) {
-        client.checkout(by: name, for: book, completion: { (JSON) in
-            if JSON == nil {
-                let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
-                self.errorHandler?.displayErrorAlert(message: message)
-            }
-            
-            self.book = Book(dictionary: JSON)
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .update, object: nil)
-                self.configureViews()
-            }
-        })
-        
+    func errorCheckingOutBook() {
+        let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
+        self.errorHandler?.displayErrorAlert(message: message)
     }
-
     
     // MARK: - Sharing Capabilities
     
@@ -161,6 +134,8 @@ class DetailVC: UIViewController {
         self.navigationController!.present(alertController, animated: true, completion: nil)
     }
     
+    
+    // Create enum that shares depending on platform
     func shareOnFacebook(_ title: String, by author: String) {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
             let fbShare = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
@@ -204,16 +179,12 @@ class DetailVC: UIViewController {
             if let sourceViewController = sender.source as? CheckoutVC {
                 self.book = sourceViewController.book
                 DispatchQueue.main.async {
-                    
                     // Find a way to use didSets instead of configuring views over and over
                     self.configureViews()
                 }
             }
         }
-        
     }
-    
-    
     
     
 }
@@ -241,7 +212,7 @@ extension DetailVC: ErrorHandling {
     
     func displayErrorAlert(message type: AlertMessage) {
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
     }

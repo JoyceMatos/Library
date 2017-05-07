@@ -15,6 +15,7 @@ class EditBookVC: UIViewController {
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
     
+    let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
     var book: Book?
     
@@ -46,6 +47,24 @@ class EditBookVC: UIViewController {
         
     }
     
+    // MARK: - Error Method
+    
+    func errorUpdatingBook() {
+        let message = AlertMessage(title: "", message: "Had trouble updating book. Please try again later.")
+        self.errorHandler?.displayErrorAlert(message: message)
+    }
+    
+    // MARK: - API Method
+    
+    func update(book title: String, by author: String, for id: Int, publisher: String, categories: String) {
+        client.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
+            if !success {
+                self.errorUpdatingBook()
+            }
+            
+            NotificationCenter.default.post(name: .update, object: nil)
+        }
+    }
     // MARK: - Action Methods
     
     @IBAction func saveTapped(_ sender: Any) {
@@ -57,15 +76,11 @@ class EditBookVC: UIViewController {
             return
         }
         
-        LibraryAPIClient.sharedInstance.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
-            if !success {
-                let message = AlertMessage(title: "", message: "Had trouble updating book. Please try again later.")
-                self.errorHandler?.displayErrorAlert(message: message)
-            }
-            NotificationCenter.default.post(name: .update, object: nil)
-        }
+        update(book: title, by: author, for: id, publisher: publisher, categories: categories)
         dismiss(animated: true, completion: nil)
+        
     }
+    
     
     @IBAction func cancelTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)

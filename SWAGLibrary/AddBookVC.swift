@@ -18,6 +18,7 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
     
+    let client = LibraryAPIClient.sharedInstance
     var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     
@@ -29,6 +30,13 @@ class AddBookVC: UIViewController {
         
         alertDelegate = self
         errorHandler = self
+    }
+    
+    // MARK: - Error Method
+    
+    func errorAddingBook() {
+        let message = AlertMessage(title: "", message: "Had trouble adding book. Please try again later.")
+        self.errorHandler?.displayErrorAlert(message: message)
     }
     
     // MARK: - Action Methods
@@ -47,11 +55,8 @@ class AddBookVC: UIViewController {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             
             let alert = UIAlertController(title: "Missing fields", message: "Please type in the title and/or author", preferredStyle: .alert)
-            
             let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in })
-            
             alert.addAction(okAction)
-            
             self.present(alert, animated: true, completion: nil)
             
         } else {
@@ -59,17 +64,8 @@ class AddBookVC: UIViewController {
             // NOTE: - Guard vs if lets
             if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
                 
-                LibraryAPIClient.sharedInstance.post(author, categories: categories, title: title, publisher: publisher, completion: { (success) in
-                    
-                    if !success {
-                        let message = AlertMessage(title: "", message: "Had trouble adding book. Please try again later.")
-                        self.errorHandler?.displayErrorAlert(message: message)
-                    }
-                    
-                    NotificationCenter.default.post(name: .update, object: nil)
-                })
+                addBook(by: author, title: title, publisher: publisher, categories: categories)
             }
-            
             dismiss(animated: true, completion: nil)
             
         }
@@ -79,6 +75,19 @@ class AddBookVC: UIViewController {
     @IBAction func doneTapped(_ sender: Any) {
         validateFields()
     }
+    
+    // MARK: - API Method
+    
+    func addBook(by author: String, title: String, publisher: String, categories: String) {
+        client.post(author, categories: categories, title: title, publisher: publisher, completion: { (success) in
+            if !success {
+                self.errorAddingBook()
+            }
+            NotificationCenter.default.post(name: .update, object: nil)
+        })
+    }
+    
+    // MARK: - Helper Method
     
     func validateFields() {
         
