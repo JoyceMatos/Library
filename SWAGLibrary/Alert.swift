@@ -20,6 +20,8 @@ struct AlertMessage {
     let title: String
     let message: String
     
+    // TODO: - Custom Init: init(for type: ErrorType)
+    
 }
 
 enum AlertType {
@@ -29,7 +31,6 @@ enum AlertType {
     case deleteBook
     
 }
-
 
 protocol TestAlert: class {
     func displayAlert(message type: AlertMessage, for alert: AlertType, performing action: UIAlertAction, with handler: @escaping (Any?) -> Void)

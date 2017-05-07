@@ -98,7 +98,6 @@ class DetailVC: UIViewController {
         guard let title = book?.title, let author = book?.author else {
             return
         }
-        
         presentSharing(for: title, by: author)
     }
     

@@ -84,7 +84,6 @@ class EditBookVC: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
     }
     
     
