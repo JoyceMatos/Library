@@ -13,7 +13,7 @@ typealias JSON = [String: Any]
 // TODO: - Create more abstraction with url paths
 // TODO: - Check status ie: 200, 204
 // TODO: - GCD for all functions - create custom queues (be wary of too many global queues)
-// TODO: - Error handle for connection, etc (Create enum instead of using bools)
+// TODO: - Consider Alamofire for networking
 
 // NOTE: - Books have url. Perhaps you could use this in your endpoints
 
@@ -25,7 +25,6 @@ final class LibraryAPIClient {
     // MARK: - GET method for retrieving all books
     // NOTE: - This function is a GET by default
     func get(_ completion: @escaping ([JSON]?) -> Void) {
-        
         let urlString = API.baseURL + Endpoint.getLibrary.path
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -60,28 +59,23 @@ final class LibraryAPIClient {
         }
         
         let book = ["author": author, "categories": categories, "title": title, "publisher": publisher]
-        var request = URLRequest(url: url)
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: book, options: []) {
-            
+            var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.post.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key )
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-                
                 guard let data = data else {
                     print(error?.localizedDescription ?? "Error adding book")
                     completion(false)
                     return
                 }
-                
                 completion(true)
-                
             })
             task.resume()
         }
-        
     }
     
     // MARK - PUT method for checking out a book
@@ -94,17 +88,17 @@ final class LibraryAPIClient {
             return
         }
         
-        let session = URLSession.shared
-        var request = URLRequest(url:url)
-        request.httpMethod = HTTPMethod.put.rawValue
-        
         let updatedInfo = ["lastCheckedOutBy": name]
         
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
+            var request = URLRequest(url:url)
+            request.httpMethod = HTTPMethod.put.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key)
             request.httpBody = data
         }
         
+        // let property may not be necessary
+        let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
@@ -120,10 +114,9 @@ final class LibraryAPIClient {
             }
         }
         task.resume()
-        
     }
     
-    // PUT method for updating a book
+    // MARK: - PUT method for updating a book
     
     func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, completion: @escaping (Bool) -> Void) {
         
@@ -141,22 +134,22 @@ final class LibraryAPIClient {
             return
         }
         
-        let session = URLSession.shared
-        var request = URLRequest(url:url)
-        request.httpMethod = HTTPMethod.put.rawValue
-        
         // TODO: - Remember to guard against nil values
         let updatedInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
         
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
+            var request = URLRequest(url:url)
+            request.httpMethod = HTTPMethod.put.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key)
             request.httpBody = data
         }
         
+        let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(String(describing: error?.localizedDescription))") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))")
+                completion(nil)
             }
             
             // NOTE: - Perhaps change to if let
@@ -224,13 +217,13 @@ final class LibraryAPIClient {
                 print("ERROR 1: \(String(describing: error?.localizedDescription))")
                 completion(false)
             }
-                if let data = data  {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        completion(true)
-                        
-                    }
+            if let data = data  {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    completion(true)
+                    
                 }
             }
+        }
         task.resume()
     }
     
