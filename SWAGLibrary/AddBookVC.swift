@@ -19,7 +19,6 @@ class AddBookVC: UIViewController {
     var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     
-    
     // MARK - View Lifecyle
     
     override func viewDidLoad() {
@@ -31,24 +30,17 @@ class AddBookVC: UIViewController {
     
     // MARK: - Error Method
     
-    func errorAddingBook() {
-        let message = AlertMessage(title: "", message: "Having trouble adding book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
+    func error(_ type: ErrorType) {
+        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
     }
     
     // MARK: - Alert Methods
+    // TODO: - Work on these alerts, they're excessive a
     
     func unsavedChangesAlert() {
         let unsavedMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
         alertDelegate?.displayAlert(message: unsavedMessage, with: { (noValue) in
         })
-    }
-    
-    func missingFieldAlert() {
-        let alert = UIAlertController(title: "Missing fields", message: "Please type in the title and/or author", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in })
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -67,7 +59,7 @@ class AddBookVC: UIViewController {
             switch success {
             case false:
                 DispatchQueue.main.async {
-                    self.errorAddingBook()
+                    self.error(.addingBook)
                 }
             case true:
                 NotificationCenter.default.post(name: .update, object: nil)
@@ -97,7 +89,7 @@ class AddBookVC: UIViewController {
     
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
-            missingFieldAlert()
+            error(.missingFields)
         } else {
             
             guard let title = titleField.text,

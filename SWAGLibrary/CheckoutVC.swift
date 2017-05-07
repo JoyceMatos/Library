@@ -36,10 +36,8 @@ class CheckoutVC: UIViewController {
     
     // MARK: - Error Method
     
-    func errorCheckingOutBook() {
-        print("in error alert function")
-        let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
+    func error(_ type: ErrorType) {
+        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
     }
     
     
@@ -48,16 +46,13 @@ class CheckoutVC: UIViewController {
         guard let name = nameField.text, let bookID = book?.id as? Int else {
             return
         }
-        
         // TODO: - Do something about these trailing brackets
         client.checkout(by: name, for: bookID, completion: { (JSON) in
             if JSON == nil {
                 DispatchQueue.main.async {
-                    self.errorCheckingOutBook()
+                    self.error(.checkingOut)
                 }
-                print("Hellloooooo no JSON")
             } else {
-                print("Uhhhh how did we get here with no wifi?")
                 self.book = Book(dictionary: JSON)
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .update, object: nil)
@@ -73,7 +68,6 @@ class CheckoutVC: UIViewController {
 extension CheckoutVC: ErrorHandling {
     
     func displayErrorAlert(message type: AlertMessage) {
-        print("We are inside the alert y'all")
         let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)

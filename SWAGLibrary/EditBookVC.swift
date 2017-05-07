@@ -46,9 +46,8 @@ class EditBookVC: UIViewController {
     
     // MARK: - Error Method
     
-    func errorUpdatingBook() {
-        let message = AlertMessage(title: "", message: "Had trouble updating book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
+    func error(_ type: ErrorType) {
+        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
     }
     
     // MARK: - API Method
@@ -57,7 +56,7 @@ class EditBookVC: UIViewController {
         client.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
             if !success {
                 DispatchQueue.main.async {
-                    self.errorUpdatingBook()
+                    self.error(.updatingBook)
                 }
             } else {
                 NotificationCenter.default.post(name: .update, object: nil)
