@@ -276,7 +276,6 @@ extension LibraryVC: AlertDelegate {
         })
         alert.addAction(cancel)
         alert.addAction(confirm)
-        let yes = UIAlertAction()
         self.present(alert, animated: true, completion: nil)
     }
 }

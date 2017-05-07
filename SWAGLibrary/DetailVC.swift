@@ -51,21 +51,21 @@ class DetailVC: UIViewController {
         // TODO: - Create validator for unwrapping values ie: function that unwraps and returns a proper book for labels , book = book , then add didSet
         // TODO: - Format date label
         
-        var checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
-        var checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
+        let checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
+        let checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
         
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
         } else {
             
             // TODO: - Work on formatting date and create a function for it
-            var dateformatter = DateFormatter()
+            let dateformatter = DateFormatter()
             dateformatter.dateFormat = "MM-dd-yyyy"
             let date = dateformatter.date(from: checkedOut)
             
-            print("This is the date \(date)")
+            print("This is the date \(String(describing: date))")
             print(checkedOut)
-            print(dateformatter.date(from: checkedOut)) // yyyy-MM-dd HH:mm:ss zzz
+            print(dateformatter.date(from: checkedOut) ?? "No date value") // yyyy-MM-dd HH:mm:ss zzz
             
             // Include @ sign?
             checkedOutLabel.text = checkOutBy + " at " + "\(checkedOut)"
