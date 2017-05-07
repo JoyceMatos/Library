@@ -14,6 +14,7 @@ import UIKit
 // TODO: - Change alpha when removing an item
 // TODO: - Add instructions: Swipe to delete or edit
 // TODO: - Look over client property - check to see if this should be singleton or not
+// TODO: - Work on keyboard!!
 
 
 class LibraryVC: UIViewController {
@@ -62,7 +63,6 @@ class LibraryVC: UIViewController {
         } else {
             tableView.addSubview(refresher)
         }
-        
         refresher.addTarget(self, action: #selector(refreshView), for: .valueChanged)
     }
     
@@ -80,21 +80,6 @@ class LibraryVC: UIViewController {
     
     func reloadVC(notification: NSNotification) {
         fetch()
-    }
-    
-    // MARK: - Data Store Method
-    
-    func fetch() {
-        self.store.getBooks { (success) in
-            if !success {
-                let message = AlertMessage(title: "", message: "Had trouble retrieving books. Please try again later.")
-                
-                self.errorHandler?.displayErrorAlert(message: message)
-            }
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
     }
     
     // MARK: - View Methods
@@ -139,44 +124,82 @@ class LibraryVC: UIViewController {
     
     
     @IBAction func deleteLibraryTapped(_ sender: Any) {
-        // TODO: - Ask user: Are you sure you want to delete?
-        
-        deleteLibrary()
+        deleteLibraryAlert()
     }
     
-    func alertAction(_ book: Int) {
+    func deleteLibraryAlert() {
+        let alert = UIAlertController(title: "", message: "Are you sure you want to delete this library?", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
+            self.deleteLibrary()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        alert.addAction(cancelAction)
+        alert.addAction(confirmAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func deleteBookAlertAction(for book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
         self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
-            
-            // Abstract this function even further?
-            self.client.delete(book: book, completion: { (success) in
-                if !success {
-                    let message = AlertMessage(title: "", message: "Had trouble deleting book. Please try again later.")
-                    self.errorHandler?.displayErrorAlert(message: message)
-                }
-                DispatchQueue.global(qos: .userInitiated).async {
-                    self.fetch()
-                }
-            })
+                self.deleteBook(book)
         })
     }
     
-    // MARK: - API Method
+    // MARK: - Error Method
+    // TODO: - Create one function that takes in different messages
+    
+    func errorRetrievingBooks() {
+        let message = AlertMessage(title: "", message: "Had trouble retrieving books. Please try again later.")
+        self.errorHandler?.displayErrorAlert(message: message)
+    }
+    
+    func errorDeletingBook() {
+        let message = AlertMessage(title: "", message: "Had trouble deleting book. Please try again later.")
+        self.errorHandler?.displayErrorAlert(message: message)
+    }
+    
+    func errorDeletingLibrary() {
+        let message = AlertMessage(title: "", message: "Had trouble deleting library. Please try again later.")
+        self.errorHandler?.displayErrorAlert(message: message)
+    }
+    
+    // MARK: - API Methods
     
     func deleteLibrary() {
         client.delete { (success) in
             if !success {
-                let message = AlertMessage(title: "", message: "Had trouble deleting library. Please try again later.")
-                self.errorHandler?.displayErrorAlert(message: message)
+               errorDeletingLibrary()
             }
             self.fetch()
+        }
+    }
+    
+    func deleteBook(_ book: Int) {
+        self.client.delete(book: book, completion: { (success) in
+            if !success {
+                errorDeletingBook()
+            }
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.fetch()
+            }
+        })
+    }
+    
+    func fetch() {
+        self.store.getBooks { (success) in
+            if !success {
+                errorRetrievingBooks()
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
     // MARK: - Segue Method
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Switch on segue identifier
         guard let identifier = segue.identifier else {
             return
         }
@@ -230,7 +253,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         
         // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.alertAction(bookID)
+            self.deleteBookAlertAction(for: bookID)
         }
         
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in

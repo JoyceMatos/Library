@@ -41,9 +41,12 @@ extension TestAlert {
     
     func displayAlert(message type: AlertMessage, for alert: AlertType, performing action: UIAlertAction, with handler: @escaping (Any?) -> Void) {
         
-//        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-//        
-//        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+        
+        
+//
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })        
+        
 //        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
 //            
 //            
