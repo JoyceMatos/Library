@@ -108,17 +108,16 @@ final class LibraryAPIClient {
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(String(describing: error?.localizedDescription))") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))")
+                completion(nil)
+            } else {
+                guard let data = data,
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
+                        completion(nil)
+                        return
+                }
+                completion(responseJSON)
             }
-            
-            // NOTE: - Perhaps change to if let
-            guard let data = data,
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
-                    completion(nil)
-                    return
-            }
-            
-            completion(responseJSON)
         }
         task.resume()
         

@@ -25,14 +25,12 @@ class EditBookVC: UIViewController {
         super.viewDidLoad()
         
         errorHandler = self
-        
         configureFields()
     }
     
     // MARK: - View Method
     
     func configureFields() {
-        
         guard let book = book else {
             return
         }
@@ -44,7 +42,6 @@ class EditBookVC: UIViewController {
         authorField.text = book.author
         publisherField.text = book.publisher ?? ""
         categoriesField.text = book.categories ?? ""
-        
     }
     
     // MARK: - Error Method
@@ -63,7 +60,7 @@ class EditBookVC: UIViewController {
                     self.errorUpdatingBook()
                 }
             } else {
-            NotificationCenter.default.post(name: .update, object: nil)
+                NotificationCenter.default.post(name: .update, object: nil)
                 handler(true)
             }
         }
@@ -71,19 +68,7 @@ class EditBookVC: UIViewController {
     // MARK: - Action Methods
     
     @IBAction func saveTapped(_ sender: Any) {
-        
-        // TODO: - Perform validators for text
-        // Title and Author MUST exist
-        
-        guard let title = bookField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text, let id = book?.id as? Int else {
-            return
-        }
-        
-        update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+     validateFields()
     }
     
     
@@ -91,7 +76,29 @@ class EditBookVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Helper Method
     
+    // TODO: - Perhaps add this function while user is typing
+    func validateFields() {
+        let title = bookField.text?.characters.count
+        let author = authorField.text?.characters.count
+        if title == 0 || author == 0 {
+            // TODO: - Perform a warning alert/message
+        } else {
+            guard let title = bookField.text,
+                let author = authorField.text,
+                let publisher = publisherField.text,
+                let categories = categoriesField.text,
+                let id = book?.id as? Int else {
+                return
+            }
+            update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
+                if success {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Error Handling Method
