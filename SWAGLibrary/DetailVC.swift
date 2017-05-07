@@ -139,7 +139,7 @@ class DetailVC: UIViewController {
     func shareOnFacebook(_ title: String, by author: String) {
         if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook) {
             let fbShare = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
-            fbShare?.setInitialText("Hey, check out \(title) by \(author).")
+           // No prefilled texts for facebook, only links, images, and videos
             if let share = fbShare {
                 self.present(share, animated: true, completion: nil)
             }

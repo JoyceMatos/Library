@@ -7,11 +7,21 @@
 //
 
 import Foundation
+import UIKit
 
 extension Notification.Name {
     
     static let update = Notification.Name("update")
 
+}
+
+extension UINavigationBar {
+    
+    func setToWhite() {
+        
+        barTintColor = UIColor.darkGray
+    }
+    
 }
 
 
