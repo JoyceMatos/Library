@@ -19,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         IQKeyboardManager.sharedManager().enable = true
         
+        // Customize Nav Bar
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
         return true
     }
 

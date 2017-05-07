@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - Look through all files and seperate view & model functionality from VC
 // TODO: - Create an empty state for data
 // TODO: - Update delete message: "Are you sure you want to delete "book" by "author"?
 // TODO: - Consider using delegation as opposed to NotificationCenter
@@ -52,6 +53,10 @@ class LibraryVC: UIViewController {
         observe()
         refresh()
         hideMenuButtons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        configureEmptyState()
     }
     
     
@@ -109,6 +114,21 @@ class LibraryVC: UIViewController {
             showMenuButtons()
         case true:
             hideMenuButtons()
+        }
+    }
+    
+    // Create custom struct view for this to seperate view logic
+    func configureEmptyState() {
+        if tableView(tableView, numberOfRowsInSection: 1) == 0 {
+            // Constrain
+            let emptyStateLabel = UILabel(frame: tableView.frame)
+            emptyStateLabel.text = "Click '+' to add a book"
+            emptyStateLabel.textAlignment = .center
+            emptyStateLabel.textColor = UIColor.darkGray
+            emptyStateLabel.font = UIFont(name: "Avenir", size: 20)
+            tableView.backgroundView = emptyStateLabel
+        } else {
+            tableView.backgroundView = nil
         }
     }
     
@@ -264,6 +284,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
 
 // MARK: - Alert Delegate
 
