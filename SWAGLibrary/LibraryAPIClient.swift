@@ -223,6 +223,7 @@ final class LibraryAPIClient {
             
             if error != nil {
                 print("ERROR 1: \(String(describing: error?.localizedDescription))")
+                completion(false)
             }
                 if let data = data  {
                     DispatchQueue.global(qos: .userInitiated).async {
@@ -231,7 +232,6 @@ final class LibraryAPIClient {
                     }
                 }
             }
-        
         task.resume()
     }
     

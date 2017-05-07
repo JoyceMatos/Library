@@ -14,7 +14,7 @@ import UIKit
 // TODO: - Change alpha when removing an item
 // TODO: - Add instructions: Swipe to delete or edit
 // TODO: - Look over client property - check to see if this should be singleton or not
-// TODO: - Work on keyboard!!
+// TODO: - If there is nothing to delete, tell user 
 
 
 class LibraryVC: UIViewController {
@@ -178,9 +178,10 @@ class LibraryVC: UIViewController {
         self.client.delete(book: book, completion: { (success) in
             if !success {
                 self.errorDeletingBook()
-            }
+            } else {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.fetch()
+                }
             }
         })
     }
@@ -189,10 +190,10 @@ class LibraryVC: UIViewController {
         self.store.getBooks { (success) in
             if !success {
                 self.errorRetrievingBooks()
-            }
-            
+            } else {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
             }
         }
     }
