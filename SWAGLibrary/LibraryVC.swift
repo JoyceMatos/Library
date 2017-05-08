@@ -251,6 +251,10 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.deleteBookAlertAction(for: bookID)
         }
+        
+       // delete.backgroundColor = UIColor(patternImage: UIImage(named: "whiteX")!)
+
+        
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             self.performSegue(withIdentifier: SegueIdentifier.showEditVC, sender: tableView.cellForRow(at: indexPath))
         }
