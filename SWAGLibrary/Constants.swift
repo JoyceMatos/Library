@@ -8,15 +8,18 @@
 
 import Foundation
 
-struct API {
-    
-    static let baseURL = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d"
-    
-}
-
 struct Request {
+    
     static let value = "application/json"
     static let key = "Content-Type"
+}
+
+enum HTTPMethod: String {
+    
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
     
 }
 

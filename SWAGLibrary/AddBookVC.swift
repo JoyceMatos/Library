@@ -8,9 +8,6 @@
 
 import UIKit
 
-// TODO: - Add  Done button to close screen. If there is text fields, confirm that user wants to leave with unsaved changes
-// TODO: - Capitalize each letter for textfield
-
 class AddBookVC: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
@@ -22,7 +19,6 @@ class AddBookVC: UIViewController {
     var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     
-    
     // MARK - View Lifecyle
     
     override func viewDidLoad() {
@@ -32,87 +28,84 @@ class AddBookVC: UIViewController {
         errorHandler = self
     }
     
-    // MARK: - Error Method
+    // MARK: - Alert Methods
+    // TODO: - Work on these alerts, they're excessive
     
-    func errorAddingBook() {
-        let message = AlertMessage(title: "", message: "Having trouble adding book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
-    }
-    
-    // MARK: - Action Methods
-    
-    func missingFieldAction() {
-        let missingFieldMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
-        alertDelegate?.displayAlert(message: missingFieldMessage, with: { (noValue) in
+    func unsavedChangesAlert() {
+        let unsavedMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
+        alertDelegate?.displayAlert(message: unsavedMessage, with: { (noValue) in
         })
     }
     
     @IBAction func submitTapped(_ sender: Any) {
-        
-        // NOTE: - To consider: If you can create a book with just a title and author, find out what values you will have for publisher and categories and guard against them if they are nil
-        // TODO: - Create Validator
-        
-        if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
-            
-            let alert = UIAlertController(title: "Missing fields", message: "Please type in the title and/or author", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (action) -> Void in })
-            alert.addAction(okAction)
-            self.present(alert, animated: true, completion: nil)
-            
-        } else {
-            
-            // NOTE: - Guard vs if lets
-            if let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text {
-                
-                addBook(by: author, title: title, publisher: publisher, categories: categories, handler: { (success) in
-                    if success {
-                        self.dismiss(animated: true, completion: nil)
-                    }
-                })
-            }
-
-        }
-        
+        validateSubmission()
     }
     
+    
     @IBAction func doneTapped(_ sender: Any) {
-        validateFields()
+        validateMissingFields()
     }
     
     // MARK: - API Method
     
-    func addBook(by author: String, title: String, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
-        client.post(author, categories: categories, title: title, publisher: publisher, completion: { (success) in
-            if !success {
+    func add(_ book: Book, handler: @escaping (Bool) -> Void) {
+        client.add(book, in: .getLibrary) { (success) in
+            switch success {
+            case false:
                 DispatchQueue.main.async {
-                    self.errorAddingBook()
+                    self.errorHandler?.displayErrorAlert(for: .addingBook)
                 }
-            } else {
-            NotificationCenter.default.post(name: .update, object: nil)
-            handler(true)
+            case true:
+                NotificationCenter.default.post(name: .update, object: nil)
+                handler(true)
             }
-            
-        })
+        }
     }
     
     // MARK: - Helper Method
     
-    func validateFields() {
-        
-        guard let title = titleField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text else {
-            return
+    func validateMissingFields() {
+        guard let title = titleField.text,
+            let author = authorField.text,
+            let publisher = publisherField.text,
+            let categories = categoriesField.text else {
+                return
         }
         
-        // Perhaps switch instead
         if title.characters.count > 0 || author.characters.count > 0 || publisher.characters.count > 0 || categories.characters.count > 0 {
-            missingFieldAction()
+            unsavedChangesAlert()
         } else {
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
     
+    // NOTE: - To consider: If you can create a book with just a title and author, find out what values you will have for publisher and categories and guard against them if they are nil
     
+    func validateSubmission() {
+        if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
+            self.errorHandler?.displayErrorAlert(for: .missingFields)
+        } else {
+            guard let title = titleField.text,
+                let author = authorField.text,
+                let publisher = publisherField.text,
+                let categories = categoriesField.text else {
+                    return
+            }
+            let bookInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
+            let book = Book(dictionary: bookInfo)
+            // TODO: - Find a way to clean these trailing brackets and unwrapping
+            
+            guard let newBook = book else {
+                return
+            }
+            
+            add(newBook, handler: { (success) in
+                if success {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            })
+        }
+    }
 }
 
 // TODO: - Figure out how to add 2 alert controllers with this protocol ; Perhaps make a UIAlertAction factory (Function that takes in array of UIAlertActions) ie: AlertActions can be enums
@@ -133,8 +126,8 @@ extension AddBookVC: AlertDelegate {
 
 extension AddBookVC: ErrorHandling {
     
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

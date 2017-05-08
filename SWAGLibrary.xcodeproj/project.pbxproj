@@ -17,7 +17,6 @@
 		250819121EBB92D1005740FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819111EBB92D1005740FE /* Constants.swift */; };
 		250819141EBBBCAB005740FE /* SampleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819131EBBBCAB005740FE /* SampleBook.swift */; };
 		250819171EBBBE09005740FE /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 250819161EBBBE09005740FE /* Book.m */; };
-		2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191A1EBBC0C0005740FE /* HTTPMethod.swift */; };
 		2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */; };
 		250819291EBBE353005740FE /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819281EBBE353005740FE /* BookCell.swift */; };
 		2564A01C1EBE89AB00AB034A /* CheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */; };
@@ -47,7 +46,6 @@
 		250819151EBBBE09005740FE /* SWAGLibrary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SWAGLibrary-Bridging-Header.h"; sourceTree = "<group>"; };
 		250819161EBBBE09005740FE /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
 		250819181EBBBE26005740FE /* Book.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
-		2508191A1EBBC0C0005740FE /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryDataStore.swift; sourceTree = "<group>"; };
 		250819281EBBE353005740FE /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 		2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutVC.swift; sourceTree = "<group>"; };
@@ -176,7 +174,6 @@
 				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
 				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
 				25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */,
-				2508191A1EBBC0C0005740FE /* HTTPMethod.swift */,
 				25FB7CEE1EBE6C74005B22EE /* Error.swift */,
 			);
 			name = API;
@@ -328,7 +325,6 @@
 				250818FD1EBB7FD8005740FE /* LibraryVC.swift in Sources */,
 				25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */,
 				25FEBE0B1EBC1B3200B02001 /* Endpoint.swift in Sources */,
-				2508191B1EBBC0C0005740FE /* HTTPMethod.swift in Sources */,
 				25FB7CEB1EBD4CFA005B22EE /* EditBookVC.swift in Sources */,
 				2564A0561EBFB19000AB034A /* SocialMedia.swift in Sources */,
 				250819291EBBE353005740FE /* BookCell.swift in Sources */,

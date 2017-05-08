@@ -20,7 +20,7 @@ final class LibraryDataStore {
     
     func getBooks(completion: @escaping (Bool) -> Void) {
         books.removeAll()
-        libraryAPI.get { (library) in
+        libraryAPI.get(.getLibrary) { (library) in
             let libraryQueue = DispatchQueue(label: "library", qos: .userInitiated)
             libraryQueue.async {
                 guard let library = library else {

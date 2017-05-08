@@ -10,10 +10,10 @@ import Foundation
 
 typealias JSON = [String: Any]
 
-// TODO: - Create more abstraction with url paths
 // TODO: - Check status ie: 200, 204
 // TODO: - GCD for all functions - create custom queues (be wary of too many global queues)
-// TODO: - Error handle for connection, etc (Create enum instead of using bools)
+// TODO: - Consider Alamofire for networking
+// TODO: - Work on arguement labels for endpoints, etc
 
 // NOTE: - Books have url. Perhaps you could use this in your endpoints
 
@@ -22,12 +22,12 @@ final class LibraryAPIClient {
     // Is this necessary?
     static let sharedInstance = LibraryAPIClient()
     
+    private init() { }
+    
     // MARK: - GET method for retrieving all books
     // NOTE: - This function is a GET by default
-    func get(_ completion: @escaping ([JSON]?) -> Void) {
-        
-        let urlString = API.baseURL + Endpoint.getLibrary.path
-        guard let url = URL(string: urlString) else {
+    func get(_ request: Endpoint, completion: @escaping ([JSON]?) -> Void) {
+        guard let url = request.url else {
             completion(nil)
             return
         }
@@ -51,82 +51,81 @@ final class LibraryAPIClient {
     // TODO: - Perhaps call in a Book object instead of individual arguements
     // TODO: - Call in an HTTP method
     
-    func post(_ author: String, categories: String, title: String, publisher: String, completion: @escaping (Bool) -> Void) {
-        
-        let urlString = API.baseURL + Endpoint.getLibrary.path
-        guard let url = URL(string: urlString) else {
+    func add(_ book: Book, in request: Endpoint, completion: @escaping (Bool) -> Void) {
+        guard let title = book.title,
+            let author = book.author,
+            let publisher = book.publisher,
+            let categories = book.categories else {
+                completion(false)
+                return
+        }
+        // NOTE: - combine guard lets?
+        guard let url = request.url else {
             completion(false)
             return
         }
         
-        let book = ["author": author, "categories": categories, "title": title, "publisher": publisher]
-        var request = URLRequest(url: url)
+        let newBook = ["author": author, "categories": categories, "title": title, "publisher": publisher]
         
-        if let jsonData = try? JSONSerialization.data(withJSONObject: book, options: []) {
-            
+        if let jsonData = try? JSONSerialization.data(withJSONObject: newBook, options: []) {
+            var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.post.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key )
             request.httpBody = jsonData
             
             let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-                
                 guard let data = data else {
                     print(error?.localizedDescription ?? "Error adding book")
                     completion(false)
                     return
                 }
-                
                 completion(true)
-                
             })
             task.resume()
         }
-        
     }
     
     // MARK - PUT method for checking out a book
     
     // TODO: - Merge checkout & update function to avoid code repition (return book & JSON)
-    func checkout(by name: String, for id: Int, completion: @escaping (JSON?) -> Void) {
-        let urlString = API.baseURL + Endpoint.getBook(id).path
-        guard let url = URL(string: urlString) else {
+    func checkout(by name: String, for id: Int, with request: Endpoint, completion: @escaping (JSON?) -> Void) {
+        
+        guard let url = request.url else {
             completion(nil)
             return
         }
         
-        let session = URLSession.shared
-        var request = URLRequest(url:url)
-        request.httpMethod = HTTPMethod.put.rawValue
-        
         let updatedInfo = ["lastCheckedOutBy": name]
+        var request = URLRequest(url: url)
         
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
+            request.httpMethod = HTTPMethod.put.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key)
             request.httpBody = data
         }
         
+        // let property may not be necessary
+        let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(String(describing: error?.localizedDescription))") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))")
+                completion(nil)
+            } else {
+                guard let data = data,
+                    let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
+                        completion(nil)
+                        return
+                }
+                completion(responseJSON)
             }
-            
-            // NOTE: - Perhaps change to if let
-            guard let data = data,
-                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: []) as? JSON else {
-                    completion(nil)
-                    return
-            }
-            
-            completion(responseJSON)
         }
         task.resume()
-        
     }
     
-    // PUT method for updating a book
+    // MARK: - PUT method for updating a book
     
-    func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, completion: @escaping (Bool) -> Void) {
+    func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, with request: Endpoint, completion: @escaping (Bool) -> Void) {
         
         guard let title = title,
             let author = author,
@@ -136,28 +135,26 @@ final class LibraryAPIClient {
                 return
         }
         
-        let urlString = API.baseURL + Endpoint.getBook(id).path
-        guard let url = URL(string: urlString) else {
+        guard let url = request.url else {
             completion(false)
             return
         }
         
-        let session = URLSession.shared
-        var request = URLRequest(url:url)
-        request.httpMethod = HTTPMethod.put.rawValue
-        
         // TODO: - Remember to guard against nil values
         let updatedInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
-        
+        var request = URLRequest(url:url)
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
+            request.httpMethod = HTTPMethod.put.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key)
             request.httpBody = data
         }
         
+        let session = URLSession.shared
         let task = session.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
-                print("ERROR 1: \(String(describing: error?.localizedDescription))") // ?? ErrorMessage.deletingError.rawValue)
+                print("ERROR 1: \(String(describing: error?.localizedDescription))")
+                completion(false)
             }
             
             // NOTE: - Perhaps change to if let
@@ -179,9 +176,8 @@ final class LibraryAPIClient {
     // MARK: - DELETE method for deleting a book
     
     // TODO: - Return JSON in completion
-    func delete(book id: Int, completion: @escaping (Bool) -> Void) {
-        let urlString = API.baseURL + Endpoint.getBook(id).path
-        guard let url = URL(string: urlString) else {
+    func delete(from request: Endpoint, book id: Int, completion: @escaping (Bool) -> Void) {
+        guard let url = request.url else {
             completion(false)
             return
         }
@@ -209,9 +205,8 @@ final class LibraryAPIClient {
     // MARK: - Delete method for deleting all books
     
     // TODO: - Check to see if you are handling error correctly with completion
-    func delete(library completion: @escaping (Bool) -> Void) {
-        let urlString = API.baseURL + Endpoint.deleteLibrary.path
-        guard let url = URL(string: urlString) else {
+    func delete(from request: Endpoint, library completion: @escaping (Bool) -> Void) {
+        guard let url = request.url else {
             completion(false)
             return
         }
@@ -221,21 +216,21 @@ final class LibraryAPIClient {
         
         let task = session.dataTask(with: request) { (data, response, error) in
             
+            // TODO: - Change this, see prolific's style guide
             if error != nil {
                 print("ERROR 1: \(String(describing: error?.localizedDescription))")
                 completion(false)
             }
-                if let data = data  {
-                    DispatchQueue.global(qos: .userInitiated).async {
-                        completion(true)
-                        
-                    }
+            
+            if let data = data  {
+                DispatchQueue.global(qos: .userInitiated).async {
+                    completion(true)
+                    
                 }
             }
+        }
         task.resume()
     }
-    
-    
     
     
 }

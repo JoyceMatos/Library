@@ -9,13 +9,13 @@
 import UIKit
 
 // TODO: - Look through all files and seperate view & model functionality from VC
-// TODO: - Customize Library title to follow suit
-// TODO: - Update delete message: "Are you sure you want to delete "book" by "author"?
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
 // TODO: - Add instructions: Swipe to delete or edit
-// TODO: - Look over client property - check to see if this should be singleton or not
 // TODO: - If there is nothing to delete, tell user 
+// TODO: - Look over file organization ie: Error, Alert, etc
+// TODO: - Should VC's be final?
+// TODO: - Fix Alert titles ie: Had trouble adding book
 
 
 class LibraryVC: UIViewController {
@@ -42,13 +42,8 @@ class LibraryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Attach these in storyboard?
-        tableView.delegate = self
-        tableView.dataSource = self
-        
         alertDelegate = self
         errorHandler = self
-        
         fetch()
         observe()
         refresh()
@@ -91,19 +86,15 @@ class LibraryVC: UIViewController {
     
     func showMenuButtons() {
         didDisplayOptions = true
-        
         deleteLibraryButton.isHidden = false
         addBookButton.isHidden = false
-        
         // TODO: - Animate menu button state
     }
     
     func hideMenuButtons() {
         didDisplayOptions = false
-        
         deleteLibraryButton.isHidden = true
         addBookButton.isHidden = true
-        
         // TODO: - Animate menu button state
         
     }
@@ -120,7 +111,7 @@ class LibraryVC: UIViewController {
     // Create custom struct view for this to seperate view logic
     func configureEmptyState() {
         if tableView(tableView, numberOfRowsInSection: 1) == 0 {
-            // Constrain
+            // TODO: - Do this in storyboard
             let emptyStateLabel = UILabel(frame: tableView.frame)
             emptyStateLabel.text = "Click '+' to add a book"
             emptyStateLabel.textAlignment = .center
@@ -147,6 +138,8 @@ class LibraryVC: UIViewController {
         deleteLibraryAlert()
     }
     
+    // MARK: - Alert Methods
+    
     func deleteLibraryAlert() {
         let alert = UIAlertController(title: "", message: "Are you sure you want to delete this library?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
@@ -158,7 +151,6 @@ class LibraryVC: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // TODO: - Find out if this is being called
     func deleteBookAlertAction(for book: Int) {
         let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
         self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
@@ -166,51 +158,33 @@ class LibraryVC: UIViewController {
         })
     }
     
-    // MARK: - Error Method
-    // TODO: - Create one function that takes in different messages
-    
-    func errorRetrievingBooks() {
-        let message = AlertMessage(title: "", message: "Had trouble retrieving books. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
-    }
-    
-    func errorDeletingBook() {
-        let message = AlertMessage(title: "", message: "Had trouble deleting book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
-    }
-    
-    func errorDeletingLibrary() {
-        let message = AlertMessage(title: "", message: "Had trouble deleting library. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
-    }
-    
     // MARK: - API Methods
     
     func deleteLibrary() {
-        client.delete { (success) in
+        client.delete(from: .getLibrary) { (success) in
             if !success {
-               self.errorDeletingLibrary()
+                self.errorHandler?.displayErrorAlert(for: .deletingLibrary)
             }
             self.fetch()
         }
     }
     
     func deleteBook(_ book: Int) {
-        self.client.delete(book: book, completion: { (success) in
+        self.client.delete(from: .getBook(book), book: book) { (success) in
             if !success {
-                self.errorDeletingBook()
+                self.errorHandler?.displayErrorAlert(for: .deletingBook)
             } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.fetch()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self.fetch()
                 }
             }
-        })
+        }
     }
     
     func fetch() {
         self.store.getBooks { (success) in
             if !success {
-                self.errorRetrievingBooks()
+                self.errorHandler?.displayErrorAlert(for: .retrievingBooks)
             } else {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -271,23 +245,17 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
         // Is force casting necessary?
         let bookID = self.store.books[indexPath.row].id as! Int
-        let title = self.store.books[indexPath.row].title as! String
-        let author = self.store.books[indexPath.row].author as! Int
         
-        // Refactor?
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            self.deleteBook(bookID)
+            self.deleteBookAlertAction(for: bookID)
         }
-        
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             self.performSegue(withIdentifier: SegueIdentifier.showEditVC, sender: tableView.cellForRow(at: indexPath))
         }
         return [delete, edit]
     }
-    
 }
 
 
@@ -309,8 +277,8 @@ extension LibraryVC: AlertDelegate {
 
 extension LibraryVC: ErrorHandling {
     
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

@@ -14,14 +14,12 @@ protocol AlertDelegate: class {
     
 }
 
-
 struct AlertMessage {
     
     let title: String
     let message: String
     
     // TODO: - Custom Init: init(for type: ErrorType)
-    
 }
 
 enum AlertType {

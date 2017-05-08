@@ -25,14 +25,12 @@ class EditBookVC: UIViewController {
         super.viewDidLoad()
         
         errorHandler = self
-        
         configureFields()
     }
     
     // MARK: - View Method
     
     func configureFields() {
-        
         guard let book = book else {
             return
         }
@@ -44,26 +42,19 @@ class EditBookVC: UIViewController {
         authorField.text = book.author
         publisherField.text = book.publisher ?? ""
         categoriesField.text = book.categories ?? ""
-        
     }
     
-    // MARK: - Error Method
-    
-    func errorUpdatingBook() {
-        let message = AlertMessage(title: "", message: "Had trouble updating book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
-    }
     
     // MARK: - API Method
     
     func update(book title: String, by author: String, for id: Int, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
-        client.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
+        client.update(book: title, by: author, id: id, publisher: publisher, categories: categories, with: .getBook(id)) { (success) in
             if !success {
                 DispatchQueue.main.async {
-                    self.errorUpdatingBook()
+                    self.errorHandler?.displayErrorAlert(for: .updatingBook)
                 }
             } else {
-            NotificationCenter.default.post(name: .update, object: nil)
+                NotificationCenter.default.post(name: .update, object: nil)
                 handler(true)
             }
         }
@@ -71,19 +62,7 @@ class EditBookVC: UIViewController {
     // MARK: - Action Methods
     
     @IBAction func saveTapped(_ sender: Any) {
-        
-        // TODO: - Perform validators for text
-        // Title and Author MUST exist
-        
-        guard let title = bookField.text, let author = authorField.text, let publisher = publisherField.text, let categories = categoriesField.text, let id = book?.id as? Int else {
-            return
-        }
-        
-        update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
-            if success {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
+     validateFields()
     }
     
     
@@ -91,16 +70,38 @@ class EditBookVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Helper Method
     
+    // TODO: - Perhaps add this function while user is typing
+    func validateFields() {
+        let title = bookField.text?.characters.count
+        let author = authorField.text?.characters.count
+        if title == 0 || author == 0 {
+            // TODO: - Perform a warning alert/message
+        } else {
+            guard let title = bookField.text,
+                let author = authorField.text,
+                let publisher = publisherField.text,
+                let categories = categoriesField.text,
+                let id = book?.id as? Int else {
+                return
+            }
+            update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
+                if success {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
+        }
+    }
 }
 
 // MARK: - Error Handling Method
 
 extension EditBookVC: ErrorHandling {
-    
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
     }

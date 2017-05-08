@@ -1,12 +1,15 @@
 PODS:
   - IQKeyboardManagerSwift (4.0.8)
+  - SwiftDate (4.0.13)
 
 DEPENDENCIES:
   - IQKeyboardManagerSwift
+  - SwiftDate (~> 4.0)
 
 SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  SwiftDate: 8ec416bb1b5129d1f35e8efaed720421f41d42df
 
-PODFILE CHECKSUM: 28ce6d80c43e5ca088a59a0b156a7e49d2f7b9a2
+PODFILE CHECKSUM: ebae6562c5359ddc8bdd0b7e6fc2be62920af603
 
 COCOAPODS: 1.2.0

@@ -10,7 +10,7 @@ import Foundation
 import Social
 
 
-protocol ShareDetails {
+protocol GetPlatformDetails {
     
     var type: String { get }
     var typeName: String { get }
@@ -24,7 +24,7 @@ enum SocialMedia {
     
 }
 
-extension SocialMedia: ShareDetails {
+extension SocialMedia: GetPlatformDetails {
     
     var type: String {
         switch self {

@@ -21,6 +21,7 @@ class CheckoutVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        errorHandler = self
     }
     
     // MARK: - Action Methods
@@ -33,42 +34,36 @@ class CheckoutVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Error Method
-    
-    func errorCheckingOutBook() {
-        let message = AlertMessage(title: "", message: "Had trouble checking out book. Please try again later.")
-        self.errorHandler?.displayErrorAlert(message: message)
-    }
-    
     
     // MARK: - API Method
     func checkoutBook() {
         guard let name = nameField.text, let bookID = book?.id as? Int else {
-            //handle
             return
         }
-        
-        client.checkout(by: name, for: bookID, completion: { (JSON) in
+        // TODO: - Do something about these trailing brackets
+        client.checkout(by: name, for: bookID, with: .getBook(bookID), completion: { (JSON) in
             if JSON == nil {
-                self.errorCheckingOutBook()
-            }
-            
-            self.book = Book(dictionary: JSON)
-            
-            DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .update, object: nil)                
-                self.performSegue(withIdentifier: "unwindToDetailVC", sender: self)
+                DispatchQueue.main.async {
+                    self.errorHandler?.displayErrorAlert(for: .checkingOut)
+                }
+            } else {
+                self.book = Book(dictionary: JSON)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .update, object: nil)
+                    self.performSegue(withIdentifier: "unwindToDetailVC", sender: self)
+                }
             }
         })
     }
 }
 
+
 // MARK: - Error Handling Method
 
 extension CheckoutVC: ErrorHandling {
     
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
