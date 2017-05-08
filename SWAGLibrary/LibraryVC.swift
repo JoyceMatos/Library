@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MGSwipeTableCell
 
 // TODO: - Look through all files and seperate view & model functionality from VC
 // TODO: - Consider using delegation as opposed to NotificationCenter
@@ -241,7 +242,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.titleLabel.text = book.title
         cell.authorLabel.text = book.author
-        
+
         return cell
     }
     

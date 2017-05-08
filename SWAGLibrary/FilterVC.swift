@@ -12,6 +12,8 @@ import UIKit
 // TODO: - Add functionality to buttons
 
 class FilterVC: UIViewController {
+    
+    var didFilterTitle = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,13 @@ class FilterVC: UIViewController {
     }
     
     @IBAction func titleTapped(_ sender: Any) {
+        
+        if didFilterTitle {
+            didFilterTitle = false
+        }
+        else {
+            didFilterTitle = true
+        }
     }
     
     @IBAction func authorTapped(_ sender: Any) {
@@ -47,9 +56,9 @@ class FilterVC: UIViewController {
     }
     
     @IBAction func applyAllTapped(_ sender: Any) {
+        
+        
     }
-    
-    
     
   
 

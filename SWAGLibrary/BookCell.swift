@@ -7,18 +7,21 @@
 //
 
 import UIKit
+import MGSwipeTableCell
+
 
 class BookCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
-//    var book: Book? {
+   // var book: Book?
 //        didSet {
 //            titleLabel.text = book?.title
 //            authorLabel.text = book?.author
+//        
 //        }
-//    }
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
