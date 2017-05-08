@@ -47,7 +47,7 @@ class CheckoutVC: UIViewController {
             return
         }
         // TODO: - Do something about these trailing brackets
-        client.checkout(by: name, for: bookID, completion: { (JSON) in
+        client.checkout(by: name, for: bookID, with: .getBook(bookID), completion: { (JSON) in
             if JSON == nil {
                 DispatchQueue.main.async {
                     self.error(.checkingOut)

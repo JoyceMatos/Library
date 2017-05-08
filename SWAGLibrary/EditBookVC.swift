@@ -53,7 +53,7 @@ class EditBookVC: UIViewController {
     // MARK: - API Method
     
     func update(book title: String, by author: String, for id: Int, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
-        client.update(book: title, by: author, id: id, publisher: publisher, categories: categories) { (success) in
+        client.update(book: title, by: author, id: id, publisher: publisher, categories: categories, with: .getBook(id)) { (success) in
             if !success {
                 DispatchQueue.main.async {
                     self.error(.updatingBook)

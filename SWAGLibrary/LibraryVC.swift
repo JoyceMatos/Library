@@ -16,6 +16,7 @@ import UIKit
 // TODO: - Look over client property - check to see if this should be singleton or not
 // TODO: - If there is nothing to delete, tell user 
 // TODO: - Look over file organization ie: Error, Alert, etc
+// TODO: - Should VC's be final?
 
 
 class LibraryVC: UIViewController {
@@ -170,7 +171,7 @@ class LibraryVC: UIViewController {
     // MARK: - API Methods
     
     func deleteLibrary() {
-        client.delete { (success) in
+        client.delete(from: .getLibrary) { (success) in
             if !success {
                self.error(.deletingLibrary)
             }
@@ -179,15 +180,15 @@ class LibraryVC: UIViewController {
     }
     
     func deleteBook(_ book: Int) {
-        self.client.delete(book: book, completion: { (success) in
+        self.client.delete(from: .getBook(book), book: book) { (success) in
             if !success {
                 self.error(.deletingBook)
             } else {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.fetch()
+                DispatchQueue.global(qos: .userInitiated).async {
+                    self.fetch()
                 }
             }
-        })
+        }
     }
     
     func fetch() {

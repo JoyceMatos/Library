@@ -55,7 +55,7 @@ class AddBookVC: UIViewController {
     // MARK: - API Method
     
     func addBook(by author: String, title: String, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
-        client.post(author, categories: categories, title: title, publisher: publisher, completion: { (success) in
+        client.post(author, categories: categories, title: title, publisher: publisher, for: .getLibrary, completion: { (success) in
             switch success {
             case false:
                 DispatchQueue.main.async {

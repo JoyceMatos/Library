@@ -8,12 +8,7 @@
 
 import Foundation
 
-// NOTE: - Decide whether or not to use Library protocol
-
-//protocol Library: Path {
-//
-//    var baseURL: URL? { get }
-//}
+// Change Endpoint and case names to something that makes more sense
 
 protocol Path {
     
@@ -21,7 +16,10 @@ protocol Path {
     
 }
 
+
 enum Endpoint {
+    
+    static let baseURL = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d"
     
     case getLibrary
     case getBook(Int)
@@ -44,17 +42,26 @@ extension Endpoint: Path {
     
 }
 
-//extension Endpoint: Library {
-//    
-//    var baseURL: URL? {
-//        return URL(string: "https://api.github.com")
-//    }
-//
-//}
+extension Endpoint {
+    
+    var url: URL? {
+        switch self {
+        case .getLibrary:
+            return generateURL(with: self.path)
+        case .getBook(let id):
+            return generateURL(with: self.path)
+        case .deleteLibrary:
+            return generateURL(with: self.path)
+        }
+    }
+    
+}
 
-//func url(for route: Library) -> URL {
-//    
-//    if let baseURL = route.baseURL {
-//        return baseURL.appendingPathComponent(route.path)
-//    }
-//}
+extension Endpoint {
+    
+    func generateURL(with parameter: String) -> URL? {
+        let string = Endpoint.baseURL + parameter
+        return URL(string: string)
+    }
+
+}
