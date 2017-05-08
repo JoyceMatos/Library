@@ -352,9 +352,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrC-ed-yad">
-                                <rect key="frame" x="29" y="444" width="316" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrC-ed-yad">
+                                <rect key="frame" x="27.5" y="444" width="319" height="60"/>
                                 <color key="backgroundColor" red="0.14192884059999999" green="0.55723893879999997" blue="0.62632935209999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Checkout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -384,6 +383,9 @@
                             <constraint firstItem="oMs-af-4l6" firstAttribute="width" secondItem="X9w-qH-cLx" secondAttribute="width" id="8do-c0-PiU"/>
                             <constraint firstItem="2JC-RG-2MM" firstAttribute="top" secondItem="JHR-yR-O0z" secondAttribute="bottom" constant="-5" id="9ag-uN-LAJ"/>
                             <constraint firstItem="2JC-RG-2MM" firstAttribute="width" secondItem="JHR-yR-O0z" secondAttribute="width" id="9gQ-pO-8zt"/>
+                            <constraint firstItem="mrC-ed-yad" firstAttribute="height" secondItem="R8u-JZ-owL" secondAttribute="height" multiplier="0.09" id="Do8-TR-LVK"/>
+                            <constraint firstItem="mrC-ed-yad" firstAttribute="width" secondItem="R8u-JZ-owL" secondAttribute="width" multiplier="0.85" id="Gbm-Tb-oHd"/>
+                            <constraint firstItem="mrC-ed-yad" firstAttribute="centerX" secondItem="R8u-JZ-owL" secondAttribute="centerX" id="HD3-JA-Hx4"/>
                             <constraint firstItem="WMw-n3-DA8" firstAttribute="top" secondItem="kHh-ze-DPp" secondAttribute="bottom" constant="36" id="OjD-J9-hil"/>
                             <constraint firstItem="JHR-yR-O0z" firstAttribute="height" secondItem="oMs-af-4l6" secondAttribute="height" id="ULq-MF-xhQ"/>
                             <constraint firstItem="2JC-RG-2MM" firstAttribute="leading" secondItem="JHR-yR-O0z" secondAttribute="leading" id="WLE-oQ-jR1"/>
@@ -399,6 +401,7 @@
                             <constraint firstItem="JHR-yR-O0z" firstAttribute="top" secondItem="oMs-af-4l6" secondAttribute="bottom" constant="7" id="qIp-hb-x1G"/>
                             <constraint firstItem="2JC-RG-2MM" firstAttribute="height" secondItem="JHR-yR-O0z" secondAttribute="height" id="t61-vt-pRM"/>
                             <constraint firstItem="X9w-qH-cLx" firstAttribute="width" secondItem="R8u-JZ-owL" secondAttribute="width" multiplier="0.85" id="wkF-UG-fjq"/>
+                            <constraint firstItem="mrC-ed-yad" firstAttribute="top" secondItem="2JC-RG-2MM" secondAttribute="bottom" constant="61" id="xAs-MR-olk"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

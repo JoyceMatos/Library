@@ -7,17 +7,17 @@
 //
 
 import UIKit
-import MGSwipeTableCell
 
 // TODO: - Look through all files and seperate view & model functionality from VC
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
-// TODO: - Add instructions: Swipe to delete or edit
-// TODO: - If there is nothing to delete, tell user 
+// TODO: - If there is nothing to delete, tell user
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
 // TODO: - Fix Alert titles ie: Had trouble adding book
 // TODO: - Guard against null values ie: Mysterious Hurray object
+// TODO: - Make sure all naming conventions are appropriate!
+// TODO: - Look over bottom constraints for all views
 
 
 class LibraryVC: UIViewController {
@@ -247,16 +247,10 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        // Is force casting necessary?
         let bookID = self.store.books[indexPath.row].id as! Int
-        
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.deleteBookAlertAction(for: bookID)
         }
-        
-       // delete.backgroundColor = UIColor(patternImage: UIImage(named: "whiteX")!)
-
-        
         let edit = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             self.performSegue(withIdentifier: SegueIdentifier.showEditVC, sender: tableView.cellForRow(at: indexPath))
         }
