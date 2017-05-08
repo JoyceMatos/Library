@@ -15,6 +15,7 @@ import UIKit
 // TODO: - If there is nothing to delete, tell user 
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
+// TODO: - Fix Alert titles ie: Had trouble adding book
 
 
 class LibraryVC: UIViewController {
@@ -41,12 +42,8 @@ class LibraryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Attach these in storyboard?
-        tableView.delegate = self
-        tableView.dataSource = self
         alertDelegate = self
         errorHandler = self
-        
         fetch()
         observe()
         refresh()
@@ -114,7 +111,7 @@ class LibraryVC: UIViewController {
     // Create custom struct view for this to seperate view logic
     func configureEmptyState() {
         if tableView(tableView, numberOfRowsInSection: 1) == 0 {
-            // Constrain
+            // TODO: - Do this in storyboard
             let emptyStateLabel = UILabel(frame: tableView.frame)
             emptyStateLabel.text = "Click '+' to add a book"
             emptyStateLabel.textAlignment = .center
@@ -141,6 +138,8 @@ class LibraryVC: UIViewController {
         deleteLibraryAlert()
     }
     
+    // MARK: - Alert Methods
+    
     func deleteLibraryAlert() {
         let alert = UIAlertController(title: "", message: "Are you sure you want to delete this library?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
@@ -159,19 +158,12 @@ class LibraryVC: UIViewController {
         })
     }
     
-    // MARK: - Error Method 
-    // TODO: - Create error protocol
-    
-    func error(_ type: ErrorType) {
-        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
-    }
-    
     // MARK: - API Methods
     
     func deleteLibrary() {
         client.delete(from: .getLibrary) { (success) in
             if !success {
-               self.error(.deletingLibrary)
+                self.errorHandler?.displayErrorAlert(for: .deletingLibrary)
             }
             self.fetch()
         }
@@ -180,7 +172,7 @@ class LibraryVC: UIViewController {
     func deleteBook(_ book: Int) {
         self.client.delete(from: .getBook(book), book: book) { (success) in
             if !success {
-                self.error(.deletingBook)
+                self.errorHandler?.displayErrorAlert(for: .deletingBook)
             } else {
                 DispatchQueue.global(qos: .userInitiated).async {
                     self.fetch()
@@ -192,7 +184,7 @@ class LibraryVC: UIViewController {
     func fetch() {
         self.store.getBooks { (success) in
             if !success {
-                self.error(.retrievingBooks)
+                self.errorHandler?.displayErrorAlert(for: .retrievingBooks)
             } else {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -285,8 +277,8 @@ extension LibraryVC: AlertDelegate {
 
 extension LibraryVC: ErrorHandling {
     
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

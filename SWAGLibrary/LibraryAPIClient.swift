@@ -10,7 +10,6 @@ import Foundation
 
 typealias JSON = [String: Any]
 
-// TODO: - Create more abstraction with url paths
 // TODO: - Check status ie: 200, 204
 // TODO: - GCD for all functions - create custom queues (be wary of too many global queues)
 // TODO: - Consider Alamofire for networking
@@ -52,16 +51,23 @@ final class LibraryAPIClient {
     // TODO: - Perhaps call in a Book object instead of individual arguements
     // TODO: - Call in an HTTP method
     
-    func post(_ author: String, categories: String, title: String, publisher: String, for request: Endpoint, completion: @escaping (Bool) -> Void) {
-        
+    func add(_ book: Book, in request: Endpoint, completion: @escaping (Bool) -> Void) {
+        guard let title = book.title,
+            let author = book.author,
+            let publisher = book.publisher,
+            let categories = book.categories else {
+                completion(false)
+                return
+        }
+        // NOTE: - combine guard lets?
         guard let url = request.url else {
             completion(false)
             return
         }
         
-        let book = ["author": author, "categories": categories, "title": title, "publisher": publisher]
+        let newBook = ["author": author, "categories": categories, "title": title, "publisher": publisher]
         
-        if let jsonData = try? JSONSerialization.data(withJSONObject: book, options: []) {
+        if let jsonData = try? JSONSerialization.data(withJSONObject: newBook, options: []) {
             var request = URLRequest(url: url)
             request.httpMethod = HTTPMethod.post.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key )
@@ -83,7 +89,7 @@ final class LibraryAPIClient {
     
     // TODO: - Merge checkout & update function to avoid code repition (return book & JSON)
     func checkout(by name: String, for id: Int, with request: Endpoint, completion: @escaping (JSON?) -> Void) {
-
+        
         guard let url = request.url else {
             completion(nil)
             return
@@ -91,7 +97,7 @@ final class LibraryAPIClient {
         
         let updatedInfo = ["lastCheckedOutBy": name]
         var request = URLRequest(url: url)
-
+        
         if let data = try? JSONSerialization.data(withJSONObject: updatedInfo, options: []) {
             request.httpMethod = HTTPMethod.put.rawValue
             request.addValue(Request.value, forHTTPHeaderField: Request.key)
@@ -215,6 +221,7 @@ final class LibraryAPIClient {
                 print("ERROR 1: \(String(describing: error?.localizedDescription))")
                 completion(false)
             }
+            
             if let data = data  {
                 DispatchQueue.global(qos: .userInitiated).async {
                     completion(true)

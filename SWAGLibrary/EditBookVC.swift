@@ -44,11 +44,6 @@ class EditBookVC: UIViewController {
         categoriesField.text = book.categories ?? ""
     }
     
-    // MARK: - Error Method
-    
-    func error(_ type: ErrorType) {
-        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
-    }
     
     // MARK: - API Method
     
@@ -56,7 +51,7 @@ class EditBookVC: UIViewController {
         client.update(book: title, by: author, id: id, publisher: publisher, categories: categories, with: .getBook(id)) { (success) in
             if !success {
                 DispatchQueue.main.async {
-                    self.error(.updatingBook)
+                    self.errorHandler?.displayErrorAlert(for: .updatingBook)
                 }
             } else {
                 NotificationCenter.default.post(name: .update, object: nil)
@@ -103,10 +98,10 @@ class EditBookVC: UIViewController {
 // MARK: - Error Handling Method
 
 extension EditBookVC: ErrorHandling {
-    
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let okayAction = UIAlertAction(title: "OK", style: .destructive, handler: { (action) -> Void in })
+
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
+        let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
     }

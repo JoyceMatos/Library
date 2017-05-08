@@ -26,5 +26,6 @@
 
 -(id)initWithDictionary: (NSDictionary *)JSON;
 
+
 @end
 

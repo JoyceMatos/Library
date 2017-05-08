@@ -28,14 +28,8 @@ class AddBookVC: UIViewController {
         errorHandler = self
     }
     
-    // MARK: - Error Method
-    
-    func error(_ type: ErrorType) {
-        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
-    }
-    
     // MARK: - Alert Methods
-    // TODO: - Work on these alerts, they're excessive a
+    // TODO: - Work on these alerts, they're excessive
     
     func unsavedChangesAlert() {
         let unsavedMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
@@ -54,18 +48,18 @@ class AddBookVC: UIViewController {
     
     // MARK: - API Method
     
-    func addBook(by author: String, title: String, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {
-        client.post(author, categories: categories, title: title, publisher: publisher, for: .getLibrary, completion: { (success) in
+    func add(_ book: Book, handler: @escaping (Bool) -> Void) {
+        client.add(book, in: .getLibrary) { (success) in
             switch success {
             case false:
                 DispatchQueue.main.async {
-                    self.error(.addingBook)
+                    self.errorHandler?.displayErrorAlert(for: .addingBook)
                 }
             case true:
                 NotificationCenter.default.post(name: .update, object: nil)
                 handler(true)
             }
-        })
+        }
     }
     
     // MARK: - Helper Method
@@ -89,18 +83,23 @@ class AddBookVC: UIViewController {
     
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
-            error(.missingFields)
+            self.errorHandler?.displayErrorAlert(for: .missingFields)
         } else {
-            
             guard let title = titleField.text,
                 let author = authorField.text,
                 let publisher = publisherField.text,
                 let categories = categoriesField.text else {
                     return
             }
-            // TODO: - Find a way to clean these trailing brackets
+            let bookInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
+            let book = Book(dictionary: bookInfo)
+            // TODO: - Find a way to clean these trailing brackets and unwrapping
             
-            addBook(by: author, title: title, publisher: publisher, categories: categories, handler: { (success) in
+            guard let newBook = book else {
+                return
+            }
+            
+            add(newBook, handler: { (success) in
                 if success {
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -127,8 +126,8 @@ extension AddBookVC: AlertDelegate {
 
 extension AddBookVC: ErrorHandling {
     
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

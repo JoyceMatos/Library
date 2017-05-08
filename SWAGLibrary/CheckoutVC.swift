@@ -34,12 +34,6 @@ class CheckoutVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Error Method
-    
-    func error(_ type: ErrorType) {
-        self.errorHandler?.displayErrorAlert(message: type.errorMessage)
-    }
-    
     
     // MARK: - API Method
     func checkoutBook() {
@@ -50,7 +44,7 @@ class CheckoutVC: UIViewController {
         client.checkout(by: name, for: bookID, with: .getBook(bookID), completion: { (JSON) in
             if JSON == nil {
                 DispatchQueue.main.async {
-                    self.error(.checkingOut)
+                    self.errorHandler?.displayErrorAlert(for: .checkingOut)
                 }
             } else {
                 self.book = Book(dictionary: JSON)
@@ -63,12 +57,13 @@ class CheckoutVC: UIViewController {
     }
 }
 
+
 // MARK: - Error Handling Method
 
 extension CheckoutVC: ErrorHandling {
     
-    func displayErrorAlert(message type: AlertMessage) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
+    func displayErrorAlert(for type: ErrorType) {
+        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

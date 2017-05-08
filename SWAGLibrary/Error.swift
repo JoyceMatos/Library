@@ -12,7 +12,7 @@ import UIKit
 
 // TODO: - Check if this is proper naming convention for protocol
 protocol ErrorHandling: class {
-    func displayErrorAlert(message type: AlertMessage)
+    func displayErrorAlert(for type: ErrorType)
 }
 
 
@@ -50,8 +50,4 @@ enum ErrorType {
     case updatingBook
     
 }
-
-
-// TODO: - display error based on type
-// TODO: - Create Alert Message constants
 
