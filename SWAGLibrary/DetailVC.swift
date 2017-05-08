@@ -38,7 +38,9 @@ class DetailVC: UIViewController {
         // TODO: - Create function that unwraps values, returns book, sets new book to current book didset
         let checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
         let checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
-        let publisher = nullToNil(book.publisher) as? String ?? "N/A"
+        let publisher = nullToNil(book.publisher) as? String ?? "Publisher: N/A"
+        
+        print("Publisher: \(publisher)")
         
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
@@ -50,9 +52,16 @@ class DetailVC: UIViewController {
             checkedOutLabel.text = checkOutBy + " @ " + "\(formattedDate)"
         }
         
+        if publisher == "" {
+            print("No publisher")
+            publisherLabel.text = "Publisher: N/A"
+        } else {
+            print("We've got a publisher")
+            publisherLabel.text = publisher
+        }
+        
         titleLabel.text = book.title
         authorLabel.text = book.author
-        publisherLabel.text = publisher
     }
     
     // MARK: - Helper Methods

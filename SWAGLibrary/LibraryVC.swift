@@ -16,6 +16,7 @@ import UIKit
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
 // TODO: - Fix Alert titles ie: Had trouble adding book
+// TODO: - Guard against null values ie: Mysterious Hurray object
 
 
 class LibraryVC: UIViewController {
