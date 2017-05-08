@@ -9,11 +9,9 @@
 import UIKit
 
 // TODO: - Look through all files and seperate view & model functionality from VC
-// TODO: - Customize Library title to follow suit
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
 // TODO: - Add instructions: Swipe to delete or edit
-// TODO: - Look over client property - check to see if this should be singleton or not
 // TODO: - If there is nothing to delete, tell user 
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?

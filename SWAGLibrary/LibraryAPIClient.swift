@@ -129,7 +129,6 @@ final class LibraryAPIClient {
                 return
         }
         
-        let urlString = API.baseURL + Endpoint.getBook(id).path
         guard let url = request.url else {
             completion(false)
             return

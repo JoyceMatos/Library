@@ -6,7 +6,7 @@ target 'SWAGLibrary' do
   use_frameworks!
 
   pod 'IQKeyboardManagerSwift'
-
+  pod 'SwiftDate', '~> 4.0'
   # Pods for SWAGLibrary
 
 end

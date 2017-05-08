@@ -8,6 +8,7 @@
 
 import UIKit
 import Social
+import SwiftDate
 
 class DetailVC: UIViewController {
     
@@ -42,10 +43,11 @@ class DetailVC: UIViewController {
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
         } else {
-            let formattedDate = format(checkedOut)
-            
-            // Include @ sign?
-            checkedOutLabel.text = checkOutBy + " at " + "\(formattedDate)"
+            guard let formattedDate = format(checkedOut) else {
+                // handle this nil
+                return
+            }
+            checkedOutLabel.text = checkOutBy + " @ " + "\(formattedDate)"
         }
         
         titleLabel.text = book.title
@@ -64,16 +66,12 @@ class DetailVC: UIViewController {
         }
     }
     
-    // TODO: - Work on formatting date
-    func format(_ date: String) -> String {
-        let date = date
+    func format(_ date: String) -> DateInRegion? {
         
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "MM-dd-yyyy"
-        let formattedDate = dateformatter.date(from: date)
-        print(dateformatter.date(from: date) ?? "No date value")
+        let formattedDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"))
+        // Handle this optional
         
-        return date
+        return formattedDate
     }
     
     // MARK: - Action Methods

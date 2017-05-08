@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "288790C413C0ABA8B18F3719754E466E"
+               BlueprintIdentifier = "5871C33F5DB9E12C105B3A9DBC3DED85"
                BuildableName = "Pods_SWAGLibrary.framework"
                BlueprintName = "Pods-SWAGLibrary"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288790C413C0ABA8B18F3719754E466E"
+            BlueprintIdentifier = "5871C33F5DB9E12C105B3A9DBC3DED85"
             BuildableName = "Pods_SWAGLibrary.framework"
             BlueprintName = "Pods-SWAGLibrary"
             ReferencedContainer = "container:Pods.xcodeproj">
