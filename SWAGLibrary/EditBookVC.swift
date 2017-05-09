@@ -77,7 +77,7 @@ class EditBookVC: UIViewController {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count
         if title == 0 || author == 0 {
-            // TODO: - Perform a warning alert/message
+            // TODO: - Perform a warning alert/message/animation
         } else {
             guard let title = bookField.text,
                 let author = authorField.text,
@@ -100,7 +100,7 @@ class EditBookVC: UIViewController {
 extension EditBookVC: ErrorHandling {
 
     func displayErrorAlert(for type: ErrorType) {
-        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
+        let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

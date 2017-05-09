@@ -64,7 +64,7 @@ class CheckoutVC: UIViewController {
 extension CheckoutVC: ErrorHandling {
     
     func displayErrorAlert(for type: ErrorType) {
-        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
+        let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

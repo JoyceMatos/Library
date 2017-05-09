@@ -11,12 +11,9 @@ import Foundation
 typealias JSON = [String: Any]
 
 // TODO: - Check status ie: 200, 204
-// TODO: - GCD for all functions - create custom queues (be wary of too many global queues)
-// TODO: - Consider Alamofire for networking
 // TODO: - Work on arguement labels for endpoints, etc
 // TODO: - Go over prolific style guide
-// TODO: - Two singletons, api client and datastore. 
-// NOTE: - Books have url. Perhaps you could use this in your endpoints
+// NOTE:  Two singletons -> api client and datastore. 
 
 final class LibraryAPIClient {
     

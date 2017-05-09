@@ -130,7 +130,7 @@ class DetailVC: UIViewController {
                 self.present(shareBook, animated: true, completion: nil)
             }
         } else {
-            let alert = UIAlertController(title: "Accounts", message: "Please login to a \(platform.typeName) account.", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Login Required", message: "Please login to a \(platform.typeName) account.", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }

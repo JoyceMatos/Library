@@ -14,9 +14,7 @@ import UIKit
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
 // TODO: - Fix Alert titles ie: Had trouble adding book
-// TODO: - Guard against null values ie: Mysterious Hurray object
 // TODO: - Make sure all naming conventions are appropriate!
-// TODO: - Look over bottom constraints for all views
 // TODO: - Remove all unwanted images from assets
 
 
@@ -43,7 +41,6 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         alertDelegate = self
         errorHandler = self
         fetch()
@@ -204,7 +201,6 @@ class LibraryVC: UIViewController {
         
         switch identifier {
         case SegueIdentifier.showDetailVC:
-            
             let destVC = segue.destination as! DetailVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
@@ -278,7 +274,7 @@ extension LibraryVC: AlertDelegate {
 extension LibraryVC: ErrorHandling {
     
     func displayErrorAlert(for type: ErrorType) {
-        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
+        let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)
