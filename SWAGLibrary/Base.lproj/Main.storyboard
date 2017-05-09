@@ -564,6 +564,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="checkoutView" destination="5c6-RU-cu6" id="EIT-X0-5qS"/>
                         <outlet property="nameField" destination="Uu2-6K-pHt" id="VX0-XS-q0M"/>
                         <segue destination="xZW-mk-Yqd" kind="unwind" identifier="unwindToDetailVC" unwindAction="unwindToDetailVCWithSender:" id="CDx-Vb-ZIT"/>
                     </connections>
