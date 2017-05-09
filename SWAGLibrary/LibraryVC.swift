@@ -13,9 +13,9 @@ import UIKit
 // TODO: - Change alpha when removing an item
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
-// TODO: - Fix Alert titles ie: Had trouble adding book
 // TODO: - Make sure all naming conventions are appropriate!
 // TODO: - Remove all unwanted images from assets
+// TODO: - Figure out where to put delete all button
 
 
 class LibraryVC: UIViewController {
@@ -72,7 +72,6 @@ class LibraryVC: UIViewController {
     
     // MARK: - Observe Methods
     
-    // TODO: - Protocol for observing/reloading/refreshing
     func observe() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .update, object: nil)
     }
@@ -241,6 +240,20 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        
+//        // Set initial sate
+//      //  cell.alpha = 0
+//        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+//        cell.layer.transform = transform
+//        // Animate cell
+//        UIView.animate(withDuration: 1) {
+//           // cell.alpha = 1.0
+//            cell.layer.transform = CATransform3DIdentity
+//        
+//    }
+//    }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let bookID = self.store.books[indexPath.row].id as! Int

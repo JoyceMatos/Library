@@ -21,12 +21,6 @@ struct AlertMessage {
     
 }
 
-enum AlertType {
-    
-    case missingFields
-    case checkout
-    case deleteBook
-    
-}
+
 
 

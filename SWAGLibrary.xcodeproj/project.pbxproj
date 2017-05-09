@@ -104,7 +104,6 @@
 		250818F91EBB7FD8005740FE /* SWAGLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				250818FA1EBB7FD8005740FE /* AppDelegate.swift */,
 				250287E01EBD486500E659D5 /* Helpers */,
 				25FEBE0C1EBC24EB00B02001 /* API */,
 				2508190C1EBB9223005740FE /* Model */,
@@ -161,6 +160,7 @@
 		2564A0281EBEDA7700AB034A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				250818FA1EBB7FD8005740FE /* AppDelegate.swift */,
 				250819031EBB7FD8005740FE /* LaunchScreen.storyboard */,
 				250819061EBB7FD8005740FE /* Info.plist */,
 				250819011EBB7FD8005740FE /* Assets.xcassets */,

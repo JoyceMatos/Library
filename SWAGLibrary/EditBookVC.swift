@@ -8,12 +8,16 @@
 
 import UIKit
 
+// TODO: - Clean validator function
+
 class EditBookVC: UIViewController {
     
     @IBOutlet weak var bookField: UITextField!
     @IBOutlet weak var authorField: UITextField!
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
+    @IBOutlet weak var addTitleLabel: UILabel!
+    @IBOutlet weak var addAuthorLabel: UILabel!
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
@@ -28,20 +32,36 @@ class EditBookVC: UIViewController {
         configureFields()
     }
     
-    // MARK: - View Method
+    // MARK: - View Methods
     
     func configureFields() {
         guard let book = book else {
             return
         }
         
-        // TODO: - Add instructions: Tap field to edit text
-        
         // Title and Author ALWAYS exist
         bookField.text = book.title
         authorField.text = book.author
         publisherField.text = book.publisher ?? ""
         categoriesField.text = book.categories ?? ""
+        
+        addTitleLabel.isHidden = true
+        addAuthorLabel.isHidden = true
+    }
+    
+    func higlightTitle() {
+        bookField.borderStyle = .line
+        bookField.layer.borderColor = UIColor.red.cgColor
+        bookField.layer.borderWidth = 1
+        addTitleLabel.isHidden = false
+    }
+    
+    func highlightAuthor() {
+        authorField.borderStyle = .line
+        authorField.layer.borderColor = UIColor.red.cgColor
+        authorField.layer.borderWidth = 1
+        authorField.layer.cornerRadius = 2
+        addAuthorLabel.isHidden = false
     }
     
     
@@ -62,7 +82,7 @@ class EditBookVC: UIViewController {
     // MARK: - Action Methods
     
     @IBAction func saveTapped(_ sender: Any) {
-     validateFields()
+     validate()
     }
     
     
@@ -73,11 +93,17 @@ class EditBookVC: UIViewController {
     // MARK: - Helper Method
     
     // TODO: - Perhaps add this function while user is typing
-    func validateFields() {
+    func validate() {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count
-        if title == 0 || author == 0 {
-            // TODO: - Perform a warning alert/message/animation
+        
+        if title == 0 {
+            higlightTitle()
+            highlightAuthor()
+            
+        } else if author == 0 {
+            highlightAuthor()
+            
         } else {
             guard let title = bookField.text,
                 let author = authorField.text,
@@ -86,6 +112,7 @@ class EditBookVC: UIViewController {
                 let id = book?.id as? Int else {
                 return
             }
+            
             update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
                 if success {
                     self.dismiss(animated: true, completion: nil)
@@ -93,7 +120,11 @@ class EditBookVC: UIViewController {
             }
         }
     }
+    
+    
 }
+
+
 
 // MARK: - Error Handling Method
 

@@ -11,17 +11,18 @@ import Social
 import SwiftDate
 
 // TODO: - Add Categories
+// TODO: - didSets
+// TODO: - Unwrap value function
 
 class DetailVC: UIViewController {
     
-    // TODO : - didSet properties for labels so you don't have to configure views
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var checkedOutLabel: UILabel!
     
     let client = LibraryAPIClient.sharedInstance
-    var book: Book?  // TODO: - didSet/willSet?
+    var book: Book?
     
     // MARK: - View Lifecycle
     

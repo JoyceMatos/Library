@@ -8,6 +8,9 @@
 
 import UIKit
 
+// TODO: - Alert controller protocol
+// TODO: - Clean trailing brackets
+
 class AddBookVC: UIViewController {
     
     @IBOutlet weak var titleField: UITextField!
@@ -29,7 +32,6 @@ class AddBookVC: UIViewController {
     }
     
     // MARK: - Alert Methods
-    // TODO: - Work on these alerts, they're excessive
     
     func unsavedChangesAlert() {
         let unsavedMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
@@ -78,9 +80,7 @@ class AddBookVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-    // NOTE: - To consider: If you can create a book with just a title and author, find out what values you will have for publisher and categories and guard against them if they are nil
-    
+
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             self.errorHandler?.displayErrorAlert(for: .missingFields)
