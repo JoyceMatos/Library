@@ -23,6 +23,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var lastCheckedOutLabel: UILabel!
     @IBOutlet weak var checkedOutLabel: UILabel!
+    @IBOutlet weak var checkOutButton: UIButton!
     
     
     let client = LibraryAPIClient.sharedInstance
@@ -45,12 +46,14 @@ class DetailVC: UIViewController {
     // MARK: - View Methods
     
     func animateViews() {
-        let views = [titleLabel, authorLabel, publisherLabel, categoriesLabel, lastCheckedOutLabel,checkedOutLabel]
-        let height = view.bounds.size.height * 0.22
+        let height = view.bounds.size.height
         var delayCounter = 0
         
+        // NOTE: - This animates the label
+        let views = [titleLabel, authorLabel, publisherLabel, categoriesLabel, lastCheckedOutLabel,checkedOutLabel]
+        
         for item in views {
-            item?.transform = CGAffineTransform(translationX: 0, y: height)
+            item?.transform = CGAffineTransform(translationX: 0, y: height * 0.22)
         }
         
         for item in views {
@@ -60,9 +63,13 @@ class DetailVC: UIViewController {
             delayCounter += 1
         }
         
-
-        // TODO: - Consider animating checkout button (if you do, change height)
-
+        // NOTE: - This animates the checkout button
+        checkOutButton.transform = CGAffineTransform(translationX: 0, y: height * 0.55)
+        
+        UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.checkOutButton.transform = CGAffineTransform.identity
+        }, completion: nil)
+        
     }
     
     func configureViews() {
@@ -108,7 +115,7 @@ class DetailVC: UIViewController {
         publisherLabel.sizeToFit()
         checkedOutLabel.sizeToFit()
         
-        }
+    }
     
     // MARK: - Helper Methods
     
@@ -119,8 +126,8 @@ class DetailVC: UIViewController {
         default:
             return value
         }
-
-    // value is NSNull ? return nil : return value
+        
+        // value is NSNull ? return nil : return value
         
     }
     

@@ -131,6 +131,11 @@
                                     <segue destination="BlV-SZ-UiO" kind="presentation" identifier="showFilterVC" id="eeD-fH-6ix"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9zo-SZ-SS1">
+                                <rect key="frame" x="0.0" y="128" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe to delete or edit your book" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEf-BG-F5g">
                                 <rect key="frame" x="48" y="140" width="278" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -167,6 +172,7 @@
                         <outlet property="addBookButton" destination="k4M-hL-WTX" id="WRA-QY-E0S"/>
                         <outlet property="deleteLibraryButton" destination="GxZ-V5-WL1" id="3iA-qe-FVU"/>
                         <outlet property="menuButton" destination="sI9-ib-Ssr" id="ysY-9N-C59"/>
+                        <outlet property="searchBar" destination="9zo-SZ-SS1" id="Dgj-wI-vIJ"/>
                         <outlet property="searchDisplayController" destination="O5X-b8-4pl" id="6ch-jb-IgL"/>
                         <outlet property="tableView" destination="f0H-fU-rgz" id="WsA-5L-LjV"/>
                         <segue destination="IP6-Aj-cuQ" kind="presentation" identifier="showEditVC" id="prb-8o-MNi"/>
@@ -369,6 +375,33 @@
             </objects>
             <point key="canvasLocation" x="1620" y="-362.06896551724139"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="9Nm-eV-WRF">
+            <objects>
+                <viewController id="lxO-uM-hgb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mke-ZY-bCu"/>
+                        <viewControllerLayoutGuide type="bottom" id="dOl-hU-ulG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="T8m-Sf-dy7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Search" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="eOS-r5-Rga">
+                                <rect key="frame" x="16" y="28" width="128" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="27"/>
+                                <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lL3-3a-s0d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2312.8000000000002" y="-362.06896551724139"/>
+        </scene>
         <!--Details-->
         <scene sceneID="1ir-s3-w0W">
             <objects>
@@ -466,6 +499,7 @@
                     <connections>
                         <outlet property="authorLabel" destination="X9w-qH-cLx" id="Evd-be-K5B"/>
                         <outlet property="categoriesLabel" destination="Iq5-UZ-Xf2" id="N3i-tg-me9"/>
+                        <outlet property="checkOutButton" destination="mrC-ed-yad" id="R8R-iD-Khr"/>
                         <outlet property="checkedOutLabel" destination="2JC-RG-2MM" id="qv9-t1-7La"/>
                         <outlet property="lastCheckedOutLabel" destination="JHR-yR-O0z" id="DxZ-fV-qZQ"/>
                         <outlet property="publisherLabel" destination="oMs-af-4l6" id="up0-BA-HAx"/>

@@ -35,7 +35,6 @@ class CheckoutVC: UIViewController {
     func animateView() {
         let height = view.bounds.size.height * 0.9
         checkoutView?.transform = CGAffineTransform(translationX: 0, y: height)
-        
         UIView.animate(withDuration: 0.75, delay: 0.0 * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.checkoutView.transform = CGAffineTransform.identity
         }, completion: nil)

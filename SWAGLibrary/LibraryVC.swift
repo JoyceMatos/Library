@@ -18,10 +18,14 @@ import UIKit
 // TODO: - Figure out where to put delete all button
 // TODO: - Create extension dedication to alerts only 
 // TODO: - Work on background colors
+// TODO: - Add notes for Linn
 
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
@@ -40,6 +44,7 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         errorHandler = self
         fetch()
         observe()
@@ -296,7 +301,12 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 extension LibraryVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        let searchString = searchController.searchBar.text
+        
+//        if searchText.isEmpty {
+//        tableView.reloadData()
+//            animateTable()
+//        } else {
+//        
 //        var searchedBooks = [Book]()
 //        
 //        // Search by ascending
@@ -304,7 +314,7 @@ extension LibraryVC: UISearchBarDelegate {
 //        for book in store.books {
 //            
 //            // Carefully unwrap
-//            if book.title.contains(searchString!) {
+//            if book.title.contains(searchText) {
 //                searchedBooks.append(book)
 //            }
 //        }
@@ -313,21 +323,55 @@ extension LibraryVC: UISearchBarDelegate {
 //        
 //        tableView.reloadData()
 //        animateTable()
-//        
-//    
+//}
+        
 
     }
     
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        tableView.reloadData()
-    }
+        self.searchBar.showsCancelButton = true
+        }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        tableView.reloadData()
         
     }
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let keywords = searchBar.text else {
+            fetch()
+            animateTable()
+            return
+        }
+            var searchedBooks = [Book]()
+            
+            // Search by ascending
+            
+            for book in store.books {
+                
+                // Carefully unwrap
+                if book.title.contains(keywords) {
+                    searchedBooks.append(book)
+                }
+            }
+            
+            store.books = searchedBooks
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.animateTable()
+            }
+        
+        
+        
+        self.view.endEditing(true)
+    }
    
 
 }

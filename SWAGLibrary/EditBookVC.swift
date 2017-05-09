@@ -122,11 +122,8 @@ class EditBookVC: UIViewController {
         
         if title == 0 {
             higlightTitle()
-            highlightAuthor()
-            
         } else if author == 0 {
             highlightAuthor()
-            
         } else {
             guard let title = bookField.text,
                 let author = authorField.text,
@@ -135,7 +132,6 @@ class EditBookVC: UIViewController {
                 let id = book?.id as? Int else {
                 return
             }
-            
             update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
                 if success {
                     self.dismiss(animated: true, completion: nil)
