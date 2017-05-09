@@ -9,6 +9,8 @@
 import UIKit
 
 // TODO: - Clean validator function
+// TODO: - Check all viewdidappears
+// TODO: - Work on animations
 
 class EditBookVC: UIViewController {
     
@@ -32,7 +34,29 @@ class EditBookVC: UIViewController {
         configureFields()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateViews()
+    }
+    
     // MARK: - View Methods
+    
+    func animateViews() {
+        let views = [bookField, authorField, publisherField, categoriesField]
+        let height = view.bounds.size.height * 0.6
+        var delayCounter = 0
+
+        for item in views {
+            item?.transform = CGAffineTransform(translationX: 0, y: height)
+        }
+        
+        for item in views {
+        UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            item?.transform = CGAffineTransform.identity
+        }, completion: nil)
+        delayCounter += 1
+        }
+    }
     
     func configureFields() {
         guard let book = book else {
