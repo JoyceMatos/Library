@@ -9,7 +9,6 @@
 import Foundation
 
 // TODO: - Refactor DataStore
-// TODO: - Sort books?
 
 final class LibraryDataStore {
     
@@ -25,7 +24,6 @@ final class LibraryDataStore {
             libraryQueue.async {
                 guard let library = library else {
                     completion(false)
-                    // Handle nil value
                     return
                 }
                 
@@ -34,13 +32,9 @@ final class LibraryDataStore {
                     if let book = Book(dictionary: element) {
                         self.books.insert(book, at: 0)
                     }
-                    
                 }
-                
                 completion(true)
             }
-            
         }
-        
     }
 }

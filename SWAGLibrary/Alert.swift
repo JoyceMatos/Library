@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+
+// NOTE: - Not in use 
 protocol AlertDelegate: class {
     func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void)
     

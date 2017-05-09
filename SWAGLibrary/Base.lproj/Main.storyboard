@@ -418,6 +418,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="authorLabel" destination="X9w-qH-cLx" id="Evd-be-K5B"/>
+                        <outlet property="categoriesLabel" destination="Iq5-UZ-Xf2" id="N3i-tg-me9"/>
                         <outlet property="checkedOutLabel" destination="2JC-RG-2MM" id="qv9-t1-7La"/>
                         <outlet property="publisherLabel" destination="oMs-af-4l6" id="up0-BA-HAx"/>
                         <outlet property="titleLabel" destination="WMw-n3-DA8" id="5sl-hk-uDy"/>
@@ -474,8 +475,8 @@
                                             <action selector="saveTapped:" destination="FSB-mG-jzr" eventType="touchUpInside" id="hgg-BZ-xIJ"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3D-4X-mNi">
-                                        <rect key="frame" x="68.5" y="61" width="204.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3D-4X-mNi">
+                                        <rect key="frame" x="26" y="61" width="289.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -494,7 +495,7 @@
                                     <constraint firstItem="7eG-PV-eKd" firstAttribute="height" secondItem="5c6-RU-cu6" secondAttribute="height" multiplier="0.15" id="Ia5-we-sPd"/>
                                     <constraint firstItem="7eG-PV-eKd" firstAttribute="top" secondItem="5c6-RU-cu6" secondAttribute="top" constant="26" id="JTg-7S-mq8"/>
                                     <constraint firstItem="Uu2-6K-pHt" firstAttribute="width" secondItem="5c6-RU-cu6" secondAttribute="width" multiplier="0.86" id="O4T-Kr-rFr"/>
-                                    <constraint firstItem="b3D-4X-mNi" firstAttribute="width" secondItem="5c6-RU-cu6" secondAttribute="width" multiplier="0.6" id="OnH-7y-Qlw"/>
+                                    <constraint firstItem="b3D-4X-mNi" firstAttribute="width" secondItem="5c6-RU-cu6" secondAttribute="width" multiplier="0.85" id="OnH-7y-Qlw"/>
                                     <constraint firstAttribute="trailing" secondItem="OoA-cX-W9V" secondAttribute="trailing" constant="26" id="PJy-mm-Tw3"/>
                                     <constraint firstItem="Uu2-6K-pHt" firstAttribute="top" secondItem="b3D-4X-mNi" secondAttribute="bottom" constant="8" id="PLb-MS-64P"/>
                                     <constraint firstItem="b3D-4X-mNi" firstAttribute="height" secondItem="5c6-RU-cu6" secondAttribute="height" multiplier="0.13" id="YOa-cQ-Rwf"/>

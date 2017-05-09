@@ -10,7 +10,6 @@ import UIKit
 import Social
 import SwiftDate
 
-// TODO: - Add Categories
 // TODO: - didSets
 // TODO: - Unwrap value function
 
@@ -19,7 +18,9 @@ class DetailVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
+    @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var checkedOutLabel: UILabel!
+    
     
     let client = LibraryAPIClient.sharedInstance
     var book: Book?
@@ -38,10 +39,14 @@ class DetailVC: UIViewController {
         guard let book = book else {
             return
         }
+        
         // TODO: - Create function that unwraps values, returns book, sets new book to current book didset
+        
+        let publisher = nullToNil(book.publisher) as? String ?? "Publisher: N/A"
+        let categories = nullToNil(book.categories) as? String ?? "Categories: N/A"
         let checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
         let checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
-        let publisher = nullToNil(book.publisher) as? String ?? "Publisher: N/A"
+        
         
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
@@ -60,6 +65,12 @@ class DetailVC: UIViewController {
             publisherLabel.text = "Publisher: \(publisher)"
         }
         
+        if categories == "" {
+            categoriesLabel.text = "Categories: N/A"
+        } else {
+            categoriesLabel.text = "Categories: \(categories)"
+        }
+        
         titleLabel.text = book.title
         authorLabel.text = book.author
         
@@ -67,6 +78,7 @@ class DetailVC: UIViewController {
         authorLabel.sizeToFit()
         publisherLabel.sizeToFit()
         checkedOutLabel.sizeToFit()
+        
         }
     
     // MARK: - Helper Methods

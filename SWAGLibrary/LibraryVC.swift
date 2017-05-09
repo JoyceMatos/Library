@@ -16,7 +16,7 @@ import UIKit
 // TODO: - Make sure all naming conventions are appropriate!
 // TODO: - Remove all unwanted images from assets
 // TODO: - Figure out where to put delete all button
-
+// TODO: - Create extension dedication to alerts only 
 
 class LibraryVC: UIViewController {
     
@@ -29,7 +29,6 @@ class LibraryVC: UIViewController {
     
     let client = LibraryAPIClient.sharedInstance
     let store = LibraryDataStore.sharedInstance
-    var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     var didDisplayOptions = false
     
@@ -41,7 +40,6 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        alertDelegate = self
         errorHandler = self
         fetch()
         observe()
@@ -150,10 +148,14 @@ class LibraryVC: UIViewController {
     }
     
     func deleteBookAlertAction(for book: Int) {
-        let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
-        self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
-                self.deleteBook(book)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to delete this book?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
+            self.deleteBook(book)
         })
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - API Methods
@@ -241,20 +243,6 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        
-//        // Set initial sate
-//      //  cell.alpha = 0
-//        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-//        cell.layer.transform = transform
-//        // Animate cell
-//        UIView.animate(withDuration: 1) {
-//           // cell.alpha = 1.0
-//            cell.layer.transform = CATransform3DIdentity
-//        
-//    }
-//    }
-    
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let bookID = self.store.books[indexPath.row].id as! Int
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
@@ -268,21 +256,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-// MARK: - Alert Delegate
-
-extension LibraryVC: AlertDelegate {
-    
-    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
-            handler(nil)
-        })
-        alert.addAction(cancel)
-        alert.addAction(confirm)
-        self.present(alert, animated: true, completion: nil)
-    }
-}
+// MARK: - Error Delegate 
 
 extension LibraryVC: ErrorHandling {
     
