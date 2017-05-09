@@ -16,12 +16,14 @@ import UIKit
 // TODO: - Make sure all naming conventions are appropriate!
 // TODO: - Remove all unwanted images from assets
 // TODO: - Figure out where to put delete all button
-// TODO: - Create extension dedication to alerts only 
+// TODO: - Create extension dedication to alerts only
 // TODO: - Work on background colors
 
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
@@ -32,6 +34,7 @@ class LibraryVC: UIViewController {
     let store = LibraryDataStore.sharedInstance
     var errorHandler: ErrorHandling?
     var didDisplayOptions = false
+    var filteredBooks = [Book]()
     
     // MARK: - View Lifecyle
     
@@ -190,9 +193,10 @@ class LibraryVC: UIViewController {
             if !success {
                 self.errorHandler?.displayErrorAlert(for: .retrievingBooks)
             } else {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+                DispatchQueue.main.async {
+                    self.filteredBooks = self.store.books
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -210,13 +214,13 @@ class LibraryVC: UIViewController {
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
-            destVC.book = store.books[indexPath.row]
+            destVC.book = filteredBooks[indexPath.row]
         case SegueIdentifier.showEditVC:
             let destVC = segue.destination as! EditBookVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
-            destVC.book = store.books[indexPath.row]
+            destVC.book = filteredBooks[indexPath.row]
         default:
             print("Could not segue")
             // Handle
@@ -234,12 +238,12 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return store.books.count
+        return filteredBooks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.bookCell, for: indexPath) as! BookCell
-        let book = store.books[indexPath.row]
+        let book = filteredBooks[indexPath.row]
         
         cell.titleLabel.text = book.title
         cell.authorLabel.text = book.author
@@ -250,13 +254,13 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         cell.bookView.layer.shadowOpacity = 0.09
         cell.bookView.layer.shadowRadius = 20
         cell.bookView.layer.cornerRadius = 7
-//
-
+        //
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let bookID = self.store.books[indexPath.row].id as! Int
+        let bookID = self.filteredBooks[indexPath.row].id as! Int
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.deleteBookAlertAction(for: bookID)
         }
@@ -287,8 +291,42 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+extension LibraryVC: UISearchBarDelegate {
+    
+        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+           titleAscending(for: searchBar.text)
+            view.endEditing(true)
+        }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        titleAscending(for: searchBar.text)
+        view.endEditing(true)
+    }
+    
+    func titleAscending(for text: String?) {
+        guard let keywords = text else {
+            return
+        }
+        
+        var searchedBooks = [Book]()
+        for book in store.books {
+            if book.title.contains(keywords) {
+                searchedBooks.append(book)
+            }
+            
+            filteredBooks = searchedBooks
+            tableView.reloadData()
+        }
+    }
+    
+    
+    
+    
+    
+}
 
-// MARK: - Error Delegate 
+
+// MARK: - Error Delegate
 
 extension LibraryVC: ErrorHandling {
     
