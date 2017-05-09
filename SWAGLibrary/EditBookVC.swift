@@ -64,7 +64,6 @@ class EditBookVC: UIViewController {
         addAuthorLabel.isHidden = false
     }
     
-    
     // MARK: - API Method
     
     func update(book title: String, by author: String, for id: Int, publisher: String, categories: String, handler: @escaping (Bool) -> Void) {

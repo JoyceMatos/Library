@@ -8,7 +8,6 @@
 
 import UIKit
 
-// TODO: - Alert controller protocol
 // TODO: - Clean trailing brackets
 
 class AddBookVC: UIViewController {
@@ -19,24 +18,26 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var categoriesField: UITextField!
     
     let client = LibraryAPIClient.sharedInstance
-    var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     
     // MARK - View Lifecyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        alertDelegate = self
         errorHandler = self
     }
     
     // MARK: - Alert Methods
     
     func unsavedChangesAlert() {
-        let unsavedMessage = AlertMessage(title: "", message: "Your changes will not be saved. Are you sure you want to leave?")
-        alertDelegate?.displayAlert(message: unsavedMessage, with: { (noValue) in
+        let alert = UIAlertController(title: "", message: "Your changes will not be saved. Are you sure you want to leave?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
+            self.dismiss(animated: true, completion: nil)
         })
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func submitTapped(_ sender: Any) {
@@ -108,21 +109,7 @@ class AddBookVC: UIViewController {
     }
 }
 
-// TODO: - Figure out how to add 2 alert controllers with this protocol ; Perhaps make a UIAlertAction factory (Function that takes in array of UIAlertActions) ie: AlertActions can be enums
-extension AddBookVC: AlertDelegate {
-    
-    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
-            self.dismiss(animated: true, completion: nil)
-            handler(nil)
-        })
-        alert.addAction(cancel)
-        alert.addAction(confirm)
-        self.present(alert, animated: true, completion: nil)
-    }
-}
+// MARK: - Error Method
 
 extension AddBookVC: ErrorHandling {
     

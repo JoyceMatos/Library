@@ -20,7 +20,6 @@ class CheckoutVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         errorHandler = self
     }
     
