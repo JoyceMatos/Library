@@ -9,6 +9,7 @@
 import UIKit
 
 // TODO: - Clean trailing brackets
+// TODO: - Work on animation
 
 class AddBookVC: UIViewController {
     
@@ -16,6 +17,8 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var authorField: UITextField!
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackViewVerticalConstraint: NSLayoutConstraint!
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
@@ -25,6 +28,26 @@ class AddBookVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorHandler = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateLabels()
+    }
+    
+    // MARK: - View Method
+    
+    func animateLabels() {
+        let stackViewHeight = stackView.bounds.size.height
+        stackView.transform = CGAffineTransform(translationX: 0, y: stackViewHeight)
+        
+        var delayCounter = 0 // Not necessary now, but will it be in the future?
+        
+        // TODO: - Try creating stackview an add this animation for each
+        UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.stackView.transform = CGAffineTransform.identity
+        }, completion: nil)
+        delayCounter += 1
     }
     
     // MARK: - Alert Methods
@@ -81,7 +104,7 @@ class AddBookVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-
+    
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             self.errorHandler?.displayErrorAlert(for: .missingFields)

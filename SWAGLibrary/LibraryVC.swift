@@ -249,8 +249,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         cell.bookView.layer.shadowOffset = CGSize(width: 0, height: 10)
         cell.bookView.layer.shadowOpacity = 0.09
         cell.bookView.layer.shadowRadius = 20
-        cell.bookView.layer.cornerRadius = 7
-//
+        cell.bookView.layer.cornerRadius = 6
 
         return cell
     }

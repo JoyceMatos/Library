@@ -629,6 +629,8 @@
                         <outlet property="authorField" destination="DTM-OC-LcK" id="3Te-Lc-BNc"/>
                         <outlet property="categoriesField" destination="7Yg-6d-5yy" id="gIk-oU-bbO"/>
                         <outlet property="publisherField" destination="1Wk-t1-cFK" id="PkO-93-XyA"/>
+                        <outlet property="stackView" destination="0xq-SJ-LYG" id="Mmq-4U-BqE"/>
+                        <outlet property="stackViewVerticalConstraint" destination="fxm-Hy-wjZ" id="DSf-fH-Xnk"/>
                         <outlet property="titleField" destination="Lx8-Vu-XbD" id="lwn-cm-Wkt"/>
                     </connections>
                 </viewController>
