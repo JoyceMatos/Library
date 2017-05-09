@@ -23,9 +23,6 @@ import UIKit
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
@@ -44,7 +41,6 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
         errorHandler = self
         fetch()
         observe()
@@ -295,86 +291,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
-// MARK: - Search Bar Delegate
-// TODO: - Seperate functionality to a new view
 
-extension LibraryVC: UISearchBarDelegate {
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-//        if searchText.isEmpty {
-//        tableView.reloadData()
-//            animateTable()
-//        } else {
-//        
-//        var searchedBooks = [Book]()
-//        
-//        // Search by ascending
-//        
-//        for book in store.books {
-//            
-//            // Carefully unwrap
-//            if book.title.contains(searchText) {
-//                searchedBooks.append(book)
-//            }
-//        }
-//        
-//        store.books = searchedBooks
-//        
-//        tableView.reloadData()
-//        animateTable()
-//}
-        
-
-    }
-    
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        self.searchBar.showsCancelButton = true
-        }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = false
-        searchBar.text = ""
-        searchBar.resignFirstResponder()
-
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let keywords = searchBar.text else {
-            fetch()
-            animateTable()
-            return
-        }
-            var searchedBooks = [Book]()
-            
-            // Search by ascending
-            
-            for book in store.books {
-                
-                // Carefully unwrap
-                if book.title.contains(keywords) {
-                    searchedBooks.append(book)
-                }
-            }
-            
-            store.books = searchedBooks
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.animateTable()
-            }
-        
-        
-        
-        self.view.endEditing(true)
-    }
-   
-
-}
 
 
 // MARK: - Error Delegate
