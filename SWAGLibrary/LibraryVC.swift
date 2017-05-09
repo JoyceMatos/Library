@@ -22,11 +22,9 @@ import UIKit
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
-    
     let refresher = UIRefreshControl()
     
     let client = LibraryAPIClient.sharedInstance
@@ -42,7 +40,6 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
         errorHandler = self
         fetch()
         observe()
@@ -139,6 +136,11 @@ class LibraryVC: UIViewController {
     @IBAction func deleteLibraryTapped(_ sender: Any) {
         deleteLibraryAlert()
     }
+    
+    @IBAction func searchPressed(_ sender: UISearchBar) {
+
+    }
+    
     
     // MARK: - Alert Methods
     
@@ -289,38 +291,49 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - Search Bar Delegate
+// TODO: - Seperate functionality to a new view
 
 extension LibraryVC: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let keywords = searchBar.text else {
-            print("leaving searchbar")
-            return
-        }
-        
-        var searchedBooks = [Book]()
-        
-        // Search by ascending
-        
-        for book in store.books {
-            
-            if book.title.contains(keywords) {
-                searchedBooks.append(book)
-            }
-        }
-        
-        store.books = searchedBooks
-        
-        tableView.reloadData()
-        self.view.endEditing(true)
-        
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        let searchString = searchController.searchBar.text
+//        var searchedBooks = [Book]()
+//        
+//        // Search by ascending
+//        
+//        for book in store.books {
+//            
+//            // Carefully unwrap
+//            if book.title.contains(searchString!) {
+//                searchedBooks.append(book)
+//            }
+//        }
+//        
+//        store.books = searchedBooks
+//        
+//        tableView.reloadData()
+//        animateTable()
+//        
+//    
+
     }
     
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        tableView.reloadData()
+        
+    }
+    
+   
+
 }
 
 
-// MARK: - Error Delegate 
+// MARK: - Error Delegate
 
 extension LibraryVC: ErrorHandling {
     
