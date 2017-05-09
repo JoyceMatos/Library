@@ -10,6 +10,8 @@ import UIKit
 import Social
 import SwiftDate
 
+// TODO: - Add Categories
+
 class DetailVC: UIViewController {
     
     // TODO : - didSet properties for labels so you don't have to configure views
@@ -40,8 +42,6 @@ class DetailVC: UIViewController {
         let checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
         let publisher = nullToNil(book.publisher) as? String ?? "Publisher: N/A"
         
-        print("Publisher: \(publisher)")
-        
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
         } else {
@@ -53,16 +53,20 @@ class DetailVC: UIViewController {
         }
         
         if publisher == "" {
-            print("No publisher")
             publisherLabel.text = "Publisher: N/A"
         } else {
             print("We've got a publisher")
-            publisherLabel.text = publisher
+            publisherLabel.text = "Publisher: \(publisher)"
         }
         
         titleLabel.text = book.title
         authorLabel.text = book.author
-    }
+        
+        titleLabel.sizeToFit()
+        authorLabel.sizeToFit()
+        publisherLabel.sizeToFit()
+        checkedOutLabel.sizeToFit()
+        }
     
     // MARK: - Helper Methods
     
@@ -73,13 +77,13 @@ class DetailVC: UIViewController {
         default:
             return value
         }
+
+    // value is NSNull ? return nil : return value
+        
     }
     
     func format(_ date: String) -> DateInRegion? {
-        
         let formattedDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"))
-        // Handle this optional
-        
         return formattedDate
     }
     

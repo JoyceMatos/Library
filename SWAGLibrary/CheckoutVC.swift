@@ -37,7 +37,8 @@ class CheckoutVC: UIViewController {
     
     // MARK: - API Method
     func checkoutBook() {
-        guard let name = nameField.text, let bookID = book?.id as? Int else {
+        guard let name = nameField.text,
+            let bookID = book?.id as? Int else {
             return
         }
         // TODO: - Do something about these trailing brackets

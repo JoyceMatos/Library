@@ -48,7 +48,7 @@ extension Endpoint {
         switch self {
         case .getLibrary:
             return generateURL(with: self.path)
-        case .getBook(let id):
+        case .getBook:
             return generateURL(with: self.path)
         case .deleteLibrary:
             return generateURL(with: self.path)

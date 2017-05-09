@@ -11,13 +11,13 @@ import UIKit
 // TODO: - Look through all files and seperate view & model functionality from VC
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
-// TODO: - If there is nothing to delete, tell user
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
 // TODO: - Fix Alert titles ie: Had trouble adding book
 // TODO: - Guard against null values ie: Mysterious Hurray object
 // TODO: - Make sure all naming conventions are appropriate!
 // TODO: - Look over bottom constraints for all views
+// TODO: - Remove all unwanted images from assets
 
 
 class LibraryVC: UIViewController {

@@ -14,12 +14,12 @@ typealias JSON = [String: Any]
 // TODO: - GCD for all functions - create custom queues (be wary of too many global queues)
 // TODO: - Consider Alamofire for networking
 // TODO: - Work on arguement labels for endpoints, etc
-
+// TODO: - Go over prolific style guide
+// TODO: - Two singletons, api client and datastore. 
 // NOTE: - Books have url. Perhaps you could use this in your endpoints
 
 final class LibraryAPIClient {
     
-    // Is this necessary?
     static let sharedInstance = LibraryAPIClient()
     
     private init() { }
@@ -38,7 +38,6 @@ final class LibraryAPIClient {
                     completion(nil)
                     return
             }
-            
             DispatchQueue.global(qos: .userInitiated).async {
                 completion(responseJSON)
             }
@@ -47,9 +46,6 @@ final class LibraryAPIClient {
     }
     
     // MARK: - POST method for adding a book
-    
-    // TODO: - Perhaps call in a Book object instead of individual arguements
-    // TODO: - Call in an HTTP method
     
     func add(_ book: Book, in request: Endpoint, completion: @escaping (Bool) -> Void) {
         guard let title = book.title,
