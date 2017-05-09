@@ -22,6 +22,7 @@ import UIKit
 class LibraryVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
@@ -41,6 +42,7 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         errorHandler = self
         fetch()
         observe()
@@ -281,6 +283,37 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
             }, completion: nil)
             delayCounter += 1
         }
+    }
+    
+    
+}
+
+// MARK: - Search Bar Delegate
+
+extension LibraryVC: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let keywords = searchBar.text else {
+            print("leaving searchbar")
+            return
+        }
+        
+        var searchedBooks = [Book]()
+        
+        // Search by ascending
+        
+        for book in store.books {
+            
+            if book.title.contains(keywords) {
+                searchedBooks.append(book)
+            }
+        }
+        
+        store.books = searchedBooks
+        
+        tableView.reloadData()
+        self.view.endEditing(true)
+        
     }
     
     
