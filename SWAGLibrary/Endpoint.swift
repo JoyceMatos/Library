@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Change Endpoint and case names to something that makes more sense
+// TODO: - Change Endpoint and case names to something that makes more sense
 
 protocol Path {
     

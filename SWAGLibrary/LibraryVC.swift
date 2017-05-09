@@ -13,12 +13,10 @@ import UIKit
 // TODO: - Change alpha when removing an item
 // TODO: - Look over file organization ie: Error, Alert, etc
 // TODO: - Should VC's be final?
-// TODO: - Fix Alert titles ie: Had trouble adding book
-// TODO: - Guard against null values ie: Mysterious Hurray object
 // TODO: - Make sure all naming conventions are appropriate!
-// TODO: - Look over bottom constraints for all views
 // TODO: - Remove all unwanted images from assets
-
+// TODO: - Figure out where to put delete all button
+// TODO: - Create extension dedication to alerts only 
 
 class LibraryVC: UIViewController {
     
@@ -31,7 +29,6 @@ class LibraryVC: UIViewController {
     
     let client = LibraryAPIClient.sharedInstance
     let store = LibraryDataStore.sharedInstance
-    var alertDelegate: AlertDelegate?
     var errorHandler: ErrorHandling?
     var didDisplayOptions = false
     
@@ -43,8 +40,6 @@ class LibraryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        alertDelegate = self
         errorHandler = self
         fetch()
         observe()
@@ -75,7 +70,6 @@ class LibraryVC: UIViewController {
     
     // MARK: - Observe Methods
     
-    // TODO: - Protocol for observing/reloading/refreshing
     func observe() {
         NotificationCenter.default.addObserver(self, selector: #selector(reloadVC(notification:)), name: .update, object: nil)
     }
@@ -154,10 +148,14 @@ class LibraryVC: UIViewController {
     }
     
     func deleteBookAlertAction(for book: Int) {
-        let deleteMessage = AlertMessage(title: "Delete", message: "Are you sure you want to delete this book?")
-        self.alertDelegate?.displayAlert(message: deleteMessage, with: { _ in
-                self.deleteBook(book)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to delete this book?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
+            self.deleteBook(book)
         })
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - API Methods
@@ -204,7 +202,6 @@ class LibraryVC: UIViewController {
         
         switch identifier {
         case SegueIdentifier.showDetailVC:
-            
             let destVC = segue.destination as! DetailVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
@@ -259,26 +256,12 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 
-// MARK: - Alert Delegate
-
-extension LibraryVC: AlertDelegate {
-    
-    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void) {
-        let alert = UIAlertController(title: type.title, message: type.message, preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
-        let confirm = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
-            handler(nil)
-        })
-        alert.addAction(cancel)
-        alert.addAction(confirm)
-        self.present(alert, animated: true, completion: nil)
-    }
-}
+// MARK: - Error Delegate 
 
 extension LibraryVC: ErrorHandling {
     
     func displayErrorAlert(for type: ErrorType) {
-        let alert = UIAlertController(title: type.errorMessage.message, message: type.errorMessage.message, preferredStyle: .alert)
+        let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)
         let okayAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in })
         alert.addAction(okayAction)
         present(alert, animated: true, completion: nil)

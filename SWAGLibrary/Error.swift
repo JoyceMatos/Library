@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 // TODO: - Check if this is proper naming convention for protocol
 protocol ErrorHandling: class {
     func displayErrorAlert(for type: ErrorType)
@@ -17,6 +16,15 @@ protocol ErrorHandling: class {
 
 
 enum ErrorType {
+    
+    case retrievingBooks
+    case deletingBook
+    case deletingLibrary
+    case edittingBook
+    case addingBook
+    case checkingOut
+    case missingFields
+    case updatingBook
     
     var errorMessage: AlertMessage {
         switch self {
@@ -39,15 +47,6 @@ enum ErrorType {
 
         }
     }
-    
-    case retrievingBooks
-    case deletingBook
-    case deletingLibrary
-    case edittingBook
-    case addingBook
-    case checkingOut
-    case missingFields
-    case updatingBook
     
 }
 
