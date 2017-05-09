@@ -431,6 +431,7 @@
                         <outlet property="authorLabel" destination="X9w-qH-cLx" id="Evd-be-K5B"/>
                         <outlet property="categoriesLabel" destination="Iq5-UZ-Xf2" id="N3i-tg-me9"/>
                         <outlet property="checkedOutLabel" destination="2JC-RG-2MM" id="qv9-t1-7La"/>
+                        <outlet property="lastCheckedOutLabel" destination="JHR-yR-O0z" id="DxZ-fV-qZQ"/>
                         <outlet property="publisherLabel" destination="oMs-af-4l6" id="up0-BA-HAx"/>
                         <outlet property="titleLabel" destination="WMw-n3-DA8" id="5sl-hk-uDy"/>
                     </connections>

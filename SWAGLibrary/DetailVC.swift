@@ -12,6 +12,7 @@ import SwiftDate
 
 // TODO: - didSets
 // TODO: - Unwrap value function
+// TODO: - Create protocol for animation
 
 class DetailVC: UIViewController {
     
@@ -19,6 +20,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
+    @IBOutlet weak var lastCheckedOutLabel: UILabel!
     @IBOutlet weak var checkedOutLabel: UILabel!
     
     
@@ -33,7 +35,34 @@ class DetailVC: UIViewController {
         configureViews()
     }
     
-    // MARK: - View Method
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateViews()
+    }
+    
+    
+    // MARK: - View Methods
+    
+    func animateViews() {
+        let views = [titleLabel, authorLabel, publisherLabel, categoriesLabel, lastCheckedOutLabel,checkedOutLabel]
+        let height = view.bounds.size.height * 0.22
+        var delayCounter = 0
+        
+        for item in views {
+            item?.transform = CGAffineTransform(translationX: 0, y: height)
+        }
+        
+        for item in views {
+            UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+                item?.transform = CGAffineTransform.identity
+            }, completion: nil)
+            delayCounter += 1
+        }
+        
+
+        // TODO: - Consider animating checkout button (if you do, change height)
+
+    }
     
     func configureViews() {
         guard let book = book else {
@@ -61,7 +90,6 @@ class DetailVC: UIViewController {
         if publisher == "" {
             publisherLabel.text = "Publisher: N/A"
         } else {
-            print("We've got a publisher")
             publisherLabel.text = "Publisher: \(publisher)"
         }
         
