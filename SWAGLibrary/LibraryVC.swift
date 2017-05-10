@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - Check for string literals
 // TODO: - Get rid of warnings
 // TODO: - Look through all files and seperate view & model functionality from VC
 // TODO: - Consider using delegation as opposed to NotificationCenter
@@ -52,9 +53,6 @@ class LibraryVC: UIViewController {
         observe()
         refresh()
         hideMenuButtons()
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 150
         
     }
     
@@ -256,6 +254,8 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
         return 115
     }
     
