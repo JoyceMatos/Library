@@ -26,8 +26,8 @@ class BookCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        titleLabel.text = nil
-        authorLabel.text = nil
+//        titleLabel.text = nil
+//        authorLabel.text = nil
     }
     
     

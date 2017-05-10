@@ -17,10 +17,9 @@ import UIKit
 // TODO: - Remove all unwanted images from assets
 // TODO: - Figure out where to put delete all button
 // TODO: - Create extension dedication to alerts only 
-// TODO: - Work on background colors
 // TODO: - Add notes for Linn
-// TODO: - Labels must be sizetofit
 // TODO: - Make cell dynamic - test for all possible outcomes!!
+// TODO: - Fix labels (texts are overlapping)
 
 class LibraryVC: UIViewController {
     
@@ -241,6 +240,9 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.titleLabel.text = book.title
         cell.authorLabel.text = book.author
+        
+        cell.authorLabel.sizeToFit()
+        cell.titleLabel.sizeToFit()
         
         // Make background off color instead
         cell.bookView.layer.shadowColor = UIColor.lightGray.cgColor

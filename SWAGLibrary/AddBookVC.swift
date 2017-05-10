@@ -40,14 +40,9 @@ class AddBookVC: UIViewController {
     func animateLabels() {
         let stackViewHeight = stackView.bounds.size.height
         stackView.transform = CGAffineTransform(translationX: 0, y: stackViewHeight)
-        
-        var delayCounter = 0 // Not necessary now, but will it be in the future?
-        
-        // TODO: - Try creating stackview an add this animation for each
-        UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.stackView.transform = CGAffineTransform.identity
         }, completion: nil)
-        delayCounter += 1
     }
     
     // MARK: - Alert Methods

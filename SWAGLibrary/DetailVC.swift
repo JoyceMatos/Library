@@ -12,8 +12,6 @@ import SwiftDate
 
 // TODO: - didSets
 // TODO: - Unwrap value function
-// TODO: - Create protocol for animation
-// TODO: - Animate cancel button
 
 class DetailVC: UIViewController {
     

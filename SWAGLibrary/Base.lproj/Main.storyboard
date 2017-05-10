@@ -39,14 +39,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nE1-gE-mBB">
                                                     <rect key="frame" x="18.5" y="11.5" width="337.5" height="92"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Slouching Towards Bethlehem" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-GI-EMJ">
-                                                            <rect key="frame" x="18" y="15" width="251" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slouching Towards Bethlehem" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-GI-EMJ">
+                                                            <rect key="frame" x="18" y="15" width="304" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joan Didion" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="i3D-a7-Idm">
-                                                            <rect key="frame" x="18" y="41" width="304" height="23"/>
+                                                            <rect key="frame" x="18" y="44.5" width="304" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -54,13 +54,13 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="1Bg-GI-EMJ" firstAttribute="height" secondItem="nE1-gE-mBB" secondAttribute="height" multiplier="0.27" id="BHZ-oh-zkj"/>
+                                                        <constraint firstItem="1Bg-GI-EMJ" firstAttribute="height" secondItem="nE1-gE-mBB" secondAttribute="height" multiplier="0.3" id="BHZ-oh-zkj"/>
                                                         <constraint firstItem="i3D-a7-Idm" firstAttribute="width" secondItem="nE1-gE-mBB" secondAttribute="width" multiplier="0.9" id="Vei-jw-o9V"/>
                                                         <constraint firstItem="i3D-a7-Idm" firstAttribute="leading" secondItem="1Bg-GI-EMJ" secondAttribute="leading" id="WIp-7Y-849"/>
                                                         <constraint firstItem="1Bg-GI-EMJ" firstAttribute="width" secondItem="nE1-gE-mBB" secondAttribute="width" multiplier="0.9" id="fap-Th-aNi"/>
                                                         <constraint firstItem="1Bg-GI-EMJ" firstAttribute="top" secondItem="nE1-gE-mBB" secondAttribute="top" constant="15" id="hE9-v6-9W4"/>
                                                         <constraint firstItem="1Bg-GI-EMJ" firstAttribute="leading" secondItem="nE1-gE-mBB" secondAttribute="leading" constant="18" id="t3s-8x-ONF"/>
-                                                        <constraint firstItem="i3D-a7-Idm" firstAttribute="height" secondItem="nE1-gE-mBB" secondAttribute="height" multiplier="0.25" id="vaS-J2-i6Y"/>
+                                                        <constraint firstItem="i3D-a7-Idm" firstAttribute="height" secondItem="nE1-gE-mBB" secondAttribute="height" multiplier="0.3" id="vaS-J2-i6Y"/>
                                                         <constraint firstItem="i3D-a7-Idm" firstAttribute="top" secondItem="1Bg-GI-EMJ" secondAttribute="bottom" constant="2" id="w6T-My-O0Q"/>
                                                     </constraints>
                                                 </view>
@@ -115,7 +115,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Library" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBg-78-Aba">
-                                <rect key="frame" x="16" y="72" width="94" height="46.5"/>
+                                <rect key="frame" x="16" y="72" width="262.5" height="46.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="28"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -135,7 +135,7 @@
                         <constraints>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="07b-eV-aHs"/>
                             <constraint firstItem="qEf-BG-F5g" firstAttribute="centerX" secondItem="f0H-fU-rgz" secondAttribute="centerX" id="AR9-iz-55u"/>
-                            <constraint firstItem="UBg-78-Aba" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="Ag3-eX-kFj"/>
+                            <constraint firstItem="UBg-78-Aba" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="Ag3-eX-kFj"/>
                             <constraint firstItem="qEf-BG-F5g" firstAttribute="height" secondItem="f0H-fU-rgz" secondAttribute="height" multiplier="0.04" id="EPP-ab-VXz"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Hbx-Xi-qm4"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="top" secondItem="qEf-BG-F5g" secondAttribute="bottom" constant="-37" id="LHl-W6-Plf"/>
