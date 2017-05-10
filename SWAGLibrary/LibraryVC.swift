@@ -16,10 +16,8 @@ import UIKit
 // TODO: - Make sure all naming conventions are appropriate!
 // TODO: - Remove all unwanted images from assets
 // TODO: - Figure out where to put delete all button
-// TODO: - Create extension dedication to alerts only 
 // TODO: - Add notes for Linn
 // TODO: - Make cell dynamic - test for all possible outcomes!!
-// TODO: - Fix labels (texts are overlapping)
 
 class LibraryVC: UIViewController {
     
@@ -161,6 +159,18 @@ class LibraryVC: UIViewController {
     
     // MARK: - API Methods
     
+    func fetch() {
+        self.store.getBooks { (success) in
+            if !success {
+                self.errorHandler?.displayErrorAlert(for: .retrievingBooks)
+            } else {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
     func deleteLibrary() {
         client.delete(from: .getLibrary) { (success) in
             if !success {
@@ -182,17 +192,6 @@ class LibraryVC: UIViewController {
         }
     }
     
-    func fetch() {
-        self.store.getBooks { (success) in
-            if !success {
-                self.errorHandler?.displayErrorAlert(for: .retrievingBooks)
-            } else {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            }
-        }
-    }
     
     // MARK: - Segue Method
     
@@ -236,22 +235,14 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.bookCell, for: indexPath) as! BookCell
-        let book = store.books[indexPath.row]
-        
-        cell.titleLabel.text = book.title
-        cell.authorLabel.text = book.author
-        
-        cell.authorLabel.sizeToFit()
-        cell.titleLabel.sizeToFit()
-        
-        // Make background off color instead
-        cell.bookView.layer.shadowColor = UIColor.lightGray.cgColor
-        cell.bookView.layer.shadowOffset = CGSize(width: 0, height: 10)
-        cell.bookView.layer.shadowOpacity = 0.09
-        cell.bookView.layer.shadowRadius = 20
-        cell.bookView.layer.cornerRadius = 6
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let currentCell = cell as! BookCell
+        let book = store.books[indexPath.row]
+        currentCell.book = book
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -285,8 +276,6 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
     
 }
-
-
 
 
 // MARK: - Error Delegate
