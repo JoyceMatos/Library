@@ -65,8 +65,20 @@ class FilterVC: UIViewController {
     
             
             
+            
             let filteredItems = LibraryDataStore.sharedInstance.books
-            let filter = filteredItems.sorted(by: {$0.title > $1.title})
+            
+//            for item in filteredItems {
+//                
+//                if let book = item {
+//                    
+//                }
+//            }
+//            
+            
+            let filter = filteredItems.sorted(by: {$0.title! > $1.title!})
+            
+                
             
             for item in filter {
                 print("1: \(item.title)")
