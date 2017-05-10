@@ -8,10 +8,16 @@
 
 import UIKit
 
+// TODO: - Trailing brackets
+
 class CheckoutVC: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var checkoutView: UIView!
     @IBOutlet weak var nameField: UITextField!
+    
+    // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
@@ -52,12 +58,13 @@ class CheckoutVC: UIViewController {
     
     
     // MARK: - API Method
+    
     func checkoutBook() {
         guard let name = nameField.text,
             let bookID = book?.id as? Int else {
                 return
         }
-        // TODO: - Do something about these trailing brackets
+
         client.checkout(by: name, for: bookID, with: .getBook(bookID), completion: { (JSON) in
             if JSON == nil {
                 DispatchQueue.main.async {

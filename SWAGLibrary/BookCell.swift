@@ -10,6 +10,8 @@ import UIKit
 
 
 class BookCell: UITableViewCell {
+    
+    // MARK: - Outlets
 
     @IBOutlet weak var titleLabel: UILabel! 
     @IBOutlet weak var authorLabel: UILabel!
@@ -19,11 +21,15 @@ class BookCell: UITableViewCell {
         }
     }
     
+    // MARK: - Property
+    
     weak var book: Book? {
         didSet {
             configureLabels()
         }
     }
+    
+    // MARK:- View Methods
     
     func configureLabels() {
         titleLabel.text = book?.title
@@ -42,6 +48,7 @@ class BookCell: UITableViewCell {
         bookView.layer.cornerRadius = 6
     }
     
+    // MARK: - View Lifecyle
     
     override func prepareForReuse() {
         super.prepareForReuse()

@@ -18,15 +18,20 @@ import UIKit
 // TODO: - Figure out where to put delete all button
 // TODO: - Add notes for Linn
 // TODO: - Make cell dynamic - test for all possible outcomes!!
+// TODO: - If you are keeping the menu botton, fix the background and constrain it
+
 
 class LibraryVC: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var deleteLibraryButton: UIButton!
-    @IBOutlet weak var addBookButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
-    let refresher = UIRefreshControl()
     
+    // MARK: - Properties
+    
+    let refresher = UIRefreshControl()
     let client = LibraryAPIClient.sharedInstance
     let store = LibraryDataStore.sharedInstance
     var errorHandler: ErrorHandling?
@@ -86,14 +91,12 @@ class LibraryVC: UIViewController {
     func showMenuButtons() {
         didDisplayOptions = true
         deleteLibraryButton.isHidden = false
-        addBookButton.isHidden = false
         // TODO: - Animate menu button state
     }
     
     func hideMenuButtons() {
         didDisplayOptions = false
         deleteLibraryButton.isHidden = true
-        addBookButton.isHidden = true
         // TODO: - Animate menu button state
         
     }
@@ -136,7 +139,7 @@ class LibraryVC: UIViewController {
     // MARK: - Alert Methods
     
     func deleteLibraryAlert() {
-        let alert = UIAlertController(title: "", message: "Are you sure you want to delete this library?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "", message: "Are you sure you want to delete all the books in your library?", preferredStyle: .alert)
         let confirmAction = UIAlertAction(title: "Confirm", style: .default, handler: { (action) -> Void in
             self.deleteLibrary()
         })
@@ -172,11 +175,14 @@ class LibraryVC: UIViewController {
     }
     
     func deleteLibrary() {
-        client.delete(from: .getLibrary) { (success) in
+        client.delete(from: .deleteLibrary) { (success) in
             if !success {
                 self.errorHandler?.displayErrorAlert(for: .deletingLibrary)
+            } else {
+                DispatchQueue.main.async {
+                    self.fetch()
+                }
             }
-            self.fetch()
         }
     }
     

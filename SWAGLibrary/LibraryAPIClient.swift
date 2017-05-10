@@ -80,7 +80,6 @@ final class LibraryAPIClient {
     
     // MARK - PUT method for checking out a book
     
-    // TODO: - Merge checkout & update function to avoid code repition (return book & JSON)
     func checkout(by name: String, for id: Int, with request: Endpoint, completion: @escaping (JSON?) -> Void) {
         
         guard let url = request.url else {
@@ -168,7 +167,6 @@ final class LibraryAPIClient {
     
     // MARK: - DELETE method for deleting a book
     
-    // TODO: - Return JSON in completion
     func delete(from request: Endpoint, book id: Int, completion: @escaping (Bool) -> Void) {
         guard let url = request.url else {
             completion(false)
@@ -181,6 +179,7 @@ final class LibraryAPIClient {
         
         let task = session.dataTask(with: request) { (data, response, error) in
             
+            // TODO: - Fix this
             if error != nil {
                 completion(false)
                 print("ERROR 1: \(String(describing: error?.localizedDescription))")
@@ -195,7 +194,7 @@ final class LibraryAPIClient {
         task.resume()
     }
     
-    // MARK: - Delete method for deleting all books
+    // MARK: - DELETE method for deleting all books
     
     // TODO: - Check to see if you are handling error correctly with completion
     func delete(from request: Endpoint, library completion: @escaping (Bool) -> Void) {

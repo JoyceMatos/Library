@@ -9,8 +9,6 @@
 import UIKit
 
 // TODO: - Clean validator function
-// TODO: - Check all viewdidappears
-// TODO: - Work on animations
 
 class EditBookVC: UIViewController {
     

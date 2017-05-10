@@ -9,9 +9,11 @@
 import UIKit
 
 // TODO: - Clean trailing brackets
-// TODO: - Work on animation
+// TODO: - Work on animation (stackview)
 
 class AddBookVC: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var authorField: UITextField!
@@ -19,6 +21,8 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var categoriesField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewVerticalConstraint: NSLayoutConstraint!
+    
+    // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
@@ -83,7 +87,7 @@ class AddBookVC: UIViewController {
         }
     }
     
-    // MARK: - Helper Method
+    // MARK: - Helper Methods
     
     func validateMissingFields() {
         guard let title = titleField.text,
@@ -112,7 +116,6 @@ class AddBookVC: UIViewController {
             }
             let bookInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
             let book = Book(dictionary: bookInfo)
-            // TODO: - Find a way to clean these trailing brackets and unwrapping
             
             guard let newBook = book else {
                 return

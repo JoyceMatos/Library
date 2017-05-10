@@ -97,23 +97,6 @@
                                     <action selector="menuPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="shn-pG-hMc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k4M-hL-WTX">
-                                <rect key="frame" x="272" y="528" width="87" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="AddBook">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxZ-V5-WL1">
-                                <rect key="frame" x="198" y="591" width="89" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="DeleteLibrary">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteLibraryTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IFh-Mn-odX"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Library" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UBg-78-Aba">
                                 <rect key="frame" x="16" y="72" width="262.5" height="46.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="28"/>
@@ -125,11 +108,21 @@
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to delete or edit your book" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEf-BG-F5g">
-                                <rect key="frame" x="18.5" y="139" width="337.5" height="21"/>
+                                <rect key="frame" x="18.5" y="138.5" width="337.5" height="21.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxZ-V5-WL1">
+                                <rect key="frame" x="286" y="531" width="89" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="DeleteLibrary">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteLibraryTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IFh-Mn-odX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -160,7 +153,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addBookButton" destination="k4M-hL-WTX" id="WRA-QY-E0S"/>
                         <outlet property="deleteLibraryButton" destination="GxZ-V5-WL1" id="3iA-qe-FVU"/>
                         <outlet property="menuButton" destination="sI9-ib-Ssr" id="ysY-9N-C59"/>
                         <outlet property="searchDisplayController" destination="O5X-b8-4pl" id="6ch-jb-IgL"/>
@@ -871,7 +863,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AddBook" width="54" height="41"/>
         <image name="DeleteLibrary" width="76" height="41"/>
         <image name="MenuButton" width="56" height="56"/>
     </resources>

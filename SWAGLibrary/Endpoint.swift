@@ -11,9 +11,7 @@ import Foundation
 // TODO: - Change Endpoint and case names to something that makes more sense
 
 protocol Path {
-    
     var path: String { get }
-    
 }
 
 

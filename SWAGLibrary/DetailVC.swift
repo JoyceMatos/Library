@@ -15,6 +15,8 @@ import SwiftDate
 
 class DetailVC: UIViewController {
     
+    // MARK: - Outlets
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
@@ -23,6 +25,7 @@ class DetailVC: UIViewController {
     @IBOutlet weak var checkedOutLabel: UILabel!
     @IBOutlet weak var checkOutButton: UIButton!
     
+    // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var book: Book?
