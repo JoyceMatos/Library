@@ -293,15 +293,29 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 
 extension LibraryVC: UISearchBarDelegate {
     
-        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-           titleAscending(for: searchBar.text)
-            view.endEditing(true)
-        }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        titleAscending(for: searchBar.text)
-        view.endEditing(true)
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        titleAscending(for: searchText)
     }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        view.endEditing(false)
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        view.endEditing(false)
+
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(false)
+
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        view.endEditing(false)
+
+    }
+
     
     func titleAscending(for text: String?) {
         guard let keywords = text else {
@@ -322,6 +336,7 @@ extension LibraryVC: UISearchBarDelegate {
     
     
     
+  
     
 }
 
