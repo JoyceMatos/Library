@@ -33,7 +33,6 @@ class CheckoutVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         animateView()
-
     }
     
     // MARK: - View Method

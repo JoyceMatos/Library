@@ -113,7 +113,7 @@ class EditBookVC: UIViewController {
     
     // MARK: - Helper Method
     
-    // TODO: - Perhaps add this function while user is typing
+    // TODO: - Clean this function 
     func validate() {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count

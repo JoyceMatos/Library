@@ -12,6 +12,7 @@ import SwiftDate
 
 // TODO: - didSets
 // TODO: - Unwrap value function
+// TODO: - Stackview does not allow labels to adjust; fix this!!
 
 class DetailVC: UIViewController {
     
@@ -103,9 +104,9 @@ class DetailVC: UIViewController {
         }
         
         if categories == "" {
-            categoriesLabel.text = "Categories: N/A"
+            categoriesLabel.text = "Tags: N/A"
         } else {
-            categoriesLabel.text = "Categories: \(categories)"
+            categoriesLabel.text = "Tags: \(categories)"
         }
         
         titleLabel.text = book.title
@@ -114,7 +115,9 @@ class DetailVC: UIViewController {
         titleLabel.sizeToFit()
         authorLabel.sizeToFit()
         publisherLabel.sizeToFit()
+        lastCheckedOutLabel.sizeToFit()
         checkedOutLabel.sizeToFit()
+    
         
     }
     
