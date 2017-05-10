@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: - Get rid of warnings
 // TODO: - Look through all files and seperate view & model functionality from VC
 // TODO: - Consider using delegation as opposed to NotificationCenter
 // TODO: - Change alpha when removing an item
@@ -19,6 +20,7 @@ import UIKit
 // TODO: - Add notes for Linn
 // TODO: - Make cell dynamic - test for all possible outcomes!!
 // TODO: - If you are keeping the menu botton, fix the background and constrain it
+// TODO: - Remove empty state because its not being called
 
 
 class LibraryVC: UIViewController {
@@ -51,11 +53,13 @@ class LibraryVC: UIViewController {
         refresh()
         hideMenuButtons()
         
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureEmptyState()
         animateTable()
     }
     
@@ -249,6 +253,10 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
         let currentCell = cell as! BookCell
         let book = store.books[indexPath.row]
         currentCell.book = book
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 115
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
