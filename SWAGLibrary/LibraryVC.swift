@@ -19,6 +19,8 @@ import UIKit
 // TODO: - Create extension dedication to alerts only 
 // TODO: - Work on background colors
 // TODO: - Add notes for Linn
+// TODO: - Labels must be sizetofit
+// TODO: - Make cell dynamic - test for all possible outcomes!!
 
 class LibraryVC: UIViewController {
     
@@ -129,17 +131,8 @@ class LibraryVC: UIViewController {
         validateButtonStatus()
     }
     
-    @IBAction func filterTapped(_ sender: Any) {
-        performSegue(withIdentifier: "showFilterVC", sender: self)
-    }
-    
-    
     @IBAction func deleteLibraryTapped(_ sender: Any) {
         deleteLibraryAlert()
-    }
-    
-    @IBAction func searchPressed(_ sender: UISearchBar) {
-
     }
     
     
