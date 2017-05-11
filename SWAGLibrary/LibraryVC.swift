@@ -8,8 +8,6 @@
 
 import UIKit
 
-// TODO: - Get rid of warnings
-
 class LibraryVC: UIViewController {
     
     // MARK: - Outlets

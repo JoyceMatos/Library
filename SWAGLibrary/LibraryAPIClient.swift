@@ -40,7 +40,7 @@ final class LibraryAPIClient {
     
     // MARK: - POST method for adding a book
     
-    // TODO: - Error checking and guard lets could be better
+    // TODO: - Error checking and guard lets could be better; remove warnings and follow prolific guide
     func add(_ book: Book, in request: Endpoint, completion: @escaping (Bool) -> Void) {
         guard let title = book.title,
             let author = book.author,
@@ -78,7 +78,7 @@ final class LibraryAPIClient {
     
     // MARK - PUT method for checking out a book
     
-    // TODO:- Error checking could be better
+    // TODO: - Error checking could be better; remove warnings and follow prolific guide
     func checkout(by name: String, for id: Int, with request: Endpoint, completion: @escaping (JSON?) -> Void) {
         
         guard let url = request.url else {
@@ -114,7 +114,7 @@ final class LibraryAPIClient {
     
     // MARK: - PUT method for updating a book
     
-    // TODO: - Error checking and guard let could be better
+    // TODO: - Error checking and guard lets could be better; remove warnings and follow prolific guide
     func update(book title: String?, by author: String?, id: Int, publisher: String?, categories: String?, with request: Endpoint, completion: @escaping (Bool) -> Void) {
         
         guard let title = title,
@@ -161,7 +161,7 @@ final class LibraryAPIClient {
     
     // MARK: - DELETE method for deleting a book
     
-    // TODO: - Error checking could be better
+    // TODO: - Error checking could be better; remove warnings and follow prolific guide
     func delete(from request: Endpoint, completion: @escaping (Bool) -> Void) {
         guard let url = request.url else {
             completion(false)
@@ -190,7 +190,7 @@ final class LibraryAPIClient {
     
     // MARK: - DELETE method for deleting all books
     
-    // TODO: - Error checking could be better
+    // TODO: - Error checking could be better; remove warnings and follow prolific guide
     func delete(from request: Endpoint, library completion: @escaping (Bool) -> Void) {
         guard let url = request.url else {
             completion(false)
