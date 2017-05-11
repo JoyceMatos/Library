@@ -8,14 +8,7 @@
 
 import UIKit
 
-// TODO: - Check for string literals
 // TODO: - Get rid of warnings
-// TODO: - Remove all unwanted images from assets
-// TODO: - Figure out where to put delete all button
-// TODO: - Add notes for Linn
-// TODO: - If you are keeping the menu botton, fix the background and constrain it
-// TODO:  - Any method that hits internet use completion handlers
-
 
 class LibraryVC: UIViewController {
     
@@ -82,7 +75,7 @@ class LibraryVC: UIViewController {
     }
     
     // MARK: - View Methods
-    // TODO: - Perhaps have their own view
+    // TODO: - Perhaps these should have their own view
     func showMenuButtons() {
         didDisplayOptions = true
         deleteLibraryButton.isHidden = false

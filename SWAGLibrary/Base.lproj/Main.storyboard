@@ -87,9 +87,8 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="8d8-HJ-0FC"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sI9-ib-Ssr">
-                                <rect key="frame" x="295" y="591" width="72" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sI9-ib-Ssr">
+                                <rect key="frame" x="305" y="591" width="60" height="56"/>
                                 <state key="normal" image="MenuButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -107,9 +106,8 @@
                                 <rect key="frame" x="16" y="121.5" width="94" height="1.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxZ-V5-WL1">
-                                <rect key="frame" x="286" y="531" width="89" height="41"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxZ-V5-WL1">
+                                <rect key="frame" x="283" y="532" width="90" height="40"/>
                                 <state key="normal" image="DeleteLibrary">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -121,17 +119,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="07b-eV-aHs"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="trailing" secondItem="f0H-fU-rgz" secondAttribute="trailing" constant="-10" id="4Cc-2A-zZU"/>
                             <constraint firstItem="UBg-78-Aba" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="Ag3-eX-kFj"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Hbx-Xi-qm4"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" id="QAI-1U-hob"/>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="leading" secondItem="UBg-78-Aba" secondAttribute="leading" id="SOv-O5-kAy"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="top" secondItem="41j-8i-bSe" secondAttribute="bottom" id="Ta6-Nf-X5o"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="width" secondItem="f0H-fU-rgz" secondAttribute="width" multiplier="0.16" id="Xh0-c2-pMj"/>
                             <constraint firstItem="UBg-78-Aba" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.07" id="YNT-P7-Yeo"/>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="height" secondItem="UBg-78-Aba" secondAttribute="height" multiplier="0.05" id="Z7w-SY-CyN"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UBg-78-Aba" secondAttribute="leading" id="c8L-5E-g3G"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="GxZ-V5-WL1" secondAttribute="trailing" constant="-14" id="d5m-Bq-1ot"/>
                             <constraint firstItem="UBg-78-Aba" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="dSw-KM-Gih"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="height" secondItem="f0H-fU-rgz" secondAttribute="height" multiplier="0.105" id="dhc-l8-BWd"/>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="top" secondItem="UBg-78-Aba" secondAttribute="bottom" constant="3" id="gaE-3d-AWL"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m6g-je-M3d"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="top" secondItem="GxZ-V5-WL1" secondAttribute="bottom" constant="19" id="xPK-Aj-jhg"/>
+                            <constraint firstItem="GxZ-V5-WL1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.06" id="xaC-c2-fgF"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="top" secondItem="f0H-fU-rgz" secondAttribute="bottom" constant="-65.5" id="yi6-C3-HIq"/>
+                            <constraint firstItem="GxZ-V5-WL1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.24" id="zDZ-w7-Fat"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Rl-5k-0yd">

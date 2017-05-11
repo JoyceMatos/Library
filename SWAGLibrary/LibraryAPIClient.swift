@@ -10,8 +10,6 @@ import Foundation
 
 typealias JSON = [String: Any]
 
-// TODO: - Add TODO's where they belong if you keep them in the project
-
 final class LibraryAPIClient {
     
     static let sharedInstance = LibraryAPIClient()
