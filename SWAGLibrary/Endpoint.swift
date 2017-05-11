@@ -10,20 +10,27 @@ import Foundation
 
 // TODO: - Change Endpoint and case names to something that makes more sense
 
+
+// NOTE: - This protocol will get the string value for any url endpoint
+
 protocol Path {
     var path: String { get }
 }
 
 
+// NOTE: - This enum is used to determine what endpoint to retrieve
+
 enum Endpoint {
     
-    static let baseURL = "http://prolific-interview.herokuapp.com/58ee814c433358000aae035d"
+    static let baseURL = "http://prolific-interview.herokuapp.com/"
     
     case getLibrary
     case getBook(Int)
     case deleteLibrary
     
 }
+
+// NOTE: - This returns the appropriate endpoint string for any given enum
 
 extension Endpoint: Path {
     
@@ -40,6 +47,8 @@ extension Endpoint: Path {
     
 }
 
+// NOTE: - This returns the url for each enum case based on it's value
+
 extension Endpoint {
     
     var url: URL? {
@@ -55,10 +64,12 @@ extension Endpoint {
     
 }
 
+// NOTE: - This generates a url from a string
+
 extension Endpoint {
     
     func generateURL(with parameter: String) -> URL? {
-        let string = Endpoint.baseURL + parameter
+        let string = Endpoint.baseURL + Secret.clientID + parameter
         return URL(string: string)
     }
 

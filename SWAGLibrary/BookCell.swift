@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class BookCell: UITableViewCell {
     
     // MARK: - Outlets
@@ -34,10 +33,6 @@ class BookCell: UITableViewCell {
     func configureLabels() {
         titleLabel.text = book?.title
         authorLabel.text = book?.author
-        
-        // Something about these lines make my text overlap
-//        titleLabel.sizeToFit()
-//        authorLabel.sizeToFit()
     }
     
     func configureView() {
@@ -54,7 +49,6 @@ class BookCell: UITableViewCell {
         super.prepareForReuse()
         titleLabel.text = nil
         authorLabel.text = nil
-      //  bookView = nil
     }
     
     

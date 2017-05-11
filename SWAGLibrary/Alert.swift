@@ -9,12 +9,7 @@
 import Foundation
 import UIKit
 
-
-// TODO: - This protocol is not in use, figure out a way to make it work
-protocol AlertDelegate: class {
-    func displayAlert(message type: AlertMessage, with handler: @escaping (Any?) -> Void)
-    
-}
+// NOTE: - Model for alert messages
 
 struct AlertMessage {
     

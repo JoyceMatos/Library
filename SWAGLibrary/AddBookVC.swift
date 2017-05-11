@@ -8,9 +8,6 @@
 
 import UIKit
 
-// TODO: - Clean trailing brackets
-// TODO: - Work on animation (stackview)
-
 class AddBookVC: UIViewController {
     
     // MARK: - Outlets
@@ -41,6 +38,7 @@ class AddBookVC: UIViewController {
     
     // MARK: - View Method
     
+    // NOTE: - This animates the view
     func animateLabels() {
         let stackViewHeight = stackView.bounds.size.height
         stackView.transform = CGAffineTransform(translationX: 0, y: stackViewHeight)
@@ -61,6 +59,8 @@ class AddBookVC: UIViewController {
         alert.addAction(confirm)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - Action Methods
     
     @IBAction func submitTapped(_ sender: Any) {
         validateSubmission()
@@ -89,6 +89,7 @@ class AddBookVC: UIViewController {
     
     // MARK: - Helper Methods
     
+    // NOTE: - This checks to see if there are any unsaved changes b
     func validateMissingFields() {
         guard let title = titleField.text,
             let author = authorField.text,
@@ -104,6 +105,7 @@ class AddBookVC: UIViewController {
         }
     }
     
+    // NOTE
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             self.errorHandler?.displayErrorAlert(for: .missingFields)

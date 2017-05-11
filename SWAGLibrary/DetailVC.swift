@@ -10,8 +10,6 @@ import UIKit
 import Social
 import SwiftDate
 
-// TODO: - didSets
-// TODO: - Unwrap value function
 // TODO: - Stackview does not allow labels to adjust; fix this!!
 
 class DetailVC: UIViewController {
@@ -35,7 +33,6 @@ class DetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureViews()
     }
     
@@ -74,24 +71,29 @@ class DetailVC: UIViewController {
         
     }
     
+    
+    // TODO: - This could be done better
     func configureViews() {
         guard let book = book else {
             return
         }
         
-        // TODO: - Create function that unwraps values, returns book, sets new book to current book didset
+        // NOTE: - Creates properties from Book's attributes and give them default values if they are nil
         
-        let publisher = nullToNil(book.publisher) as? String ?? "Publisher: N/A"
-        let categories = nullToNil(book.categories) as? String ?? "Categories: N/A"
-        let checkOutBy = nullToNil(book.lastCheckedOutBy) as? String ?? ""
-        let checkedOut = nullToNil(book.lastCheckedOut) as? String ?? "Not checked out"
+        let publisher = retrieveSwiftValue(book.publisher) as? String
+        let categories = retrieveSwiftValue(book.categories) as? String
+        let checkOutBy = retrieveSwiftValue(book.lastCheckedOutBy) as? String ?? ""
+        let checkedOut = retrieveSwiftValue(book.lastCheckedOut) as? String ?? "Not checked out"
+
+        publisherLabel.text = publisher ?? "Publisher: N/A"
+        categoriesLabel.text = categories ?? "Tags: N/A"
         
+        // NOTE: - Assigns text to labels
         
         if checkOutBy == "" && checkedOut == "Not checked out" {
             checkedOutLabel.text = checkedOut
         } else {
             guard let formattedDate = format(checkedOut) else {
-                // handle this nil
                 return
             }
             checkedOutLabel.text = checkOutBy + " @ " + "\(formattedDate)"
@@ -117,24 +119,21 @@ class DetailVC: UIViewController {
         publisherLabel.sizeToFit()
         lastCheckedOutLabel.sizeToFit()
         checkedOutLabel.sizeToFit()
-    
-        
     }
     
     // MARK: - Helper Methods
     
-    func nullToNil(_ value: Any?) -> Any? {
+    // NOTE: - This retrieves values that can be used in Swift
+    func retrieveSwiftValue(_ value: Any?) -> Any? {
         switch value {
         case is NSNull:
             return nil
         default:
             return value
         }
-        
-        // value is NSNull ? return nil : return value
-        
     }
     
+    // NOTE: - This formats the date based on a given string
     func format(_ date: String) -> DateInRegion? {
         let formattedDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"))
         return formattedDate
@@ -155,6 +154,7 @@ class DetailVC: UIViewController {
     
     // MARK: - Sharing Capabilities
     
+    // NOTE: - This presents an actionSheet
     func presentSharing(for book: String, by author: String) {
         let alertController = UIAlertController(title: "Share on social media", message: "", preferredStyle: .actionSheet)
         
@@ -175,10 +175,11 @@ class DetailVC: UIViewController {
         self.navigationController!.present(alertController, animated: true, completion: nil)
     }
     
+    // NOTE: - This shares book information on the designated platform. Facebook does not allow sharing of text, only images, links and video
     func share(_ title: String, by author: String, on platform: SocialMedia) {
         if SLComposeViewController.isAvailable(forServiceType: platform.type) {
             let share = SLComposeViewController(forServiceType: platform.type)
-            share?.setInitialText("Hey, check out \(title) by \(author).")
+            share?.setInitialText("Hey, check out \(title) by \(author).") // Does not apply to Facebook
             if let shareBook = share {
                 self.present(shareBook, animated: true, completion: nil)
             }

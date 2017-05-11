@@ -9,12 +9,16 @@
 import Foundation
 import UIKit
 
-// TODO: - Check if this is proper naming convention for protocol
+
+// NOTE: - This protocol displays an error alert based on the type of error it is
+
+// TODO: - Change protocol name to something more appropriate
 protocol ErrorHandling: class {
     func displayErrorAlert(for type: ErrorType)
 }
 
 
+// NOTE: - This enum create an alert message for a particular error case
 enum ErrorType {
     
     case retrievingBooks

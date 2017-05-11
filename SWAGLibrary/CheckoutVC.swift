@@ -37,6 +37,7 @@ class CheckoutVC: UIViewController {
     
     // MARK: - View Method
     
+    // NOTE: - This animates the view 
     func animateView() {
         let height = view.bounds.size.height * 0.9
         checkoutView?.transform = CGAffineTransform(translationX: 0, y: height)
@@ -63,7 +64,7 @@ class CheckoutVC: UIViewController {
             let bookID = book?.id as? Int else {
                 return
         }
-
+        
         client.checkout(by: name, for: bookID, with: .getBook(bookID), completion: { (JSON) in
             if JSON == nil {
                 DispatchQueue.main.async {

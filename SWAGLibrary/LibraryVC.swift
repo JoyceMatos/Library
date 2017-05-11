@@ -22,6 +22,7 @@ import UIKit
 // TODO: - Make cell dynamic - test for all possible outcomes!!
 // TODO: - If you are keeping the menu botton, fix the background and constrain it
 // TODO: - Remove empty state because its not being called
+// TODO:  - Any method that hits internet use completion handlers
 
 
 class LibraryVC: UIViewController {
@@ -89,7 +90,7 @@ class LibraryVC: UIViewController {
     }
     
     // MARK: - View Methods
-    
+    // TODO: - Perhaps have their own view
     func showMenuButtons() {
         didDisplayOptions = true
         deleteLibraryButton.isHidden = false
@@ -109,21 +110,6 @@ class LibraryVC: UIViewController {
             showMenuButtons()
         case true:
             hideMenuButtons()
-        }
-    }
-    
-    // Create custom struct view for this to seperate view logic
-    func configureEmptyState() {
-        if tableView(tableView, numberOfRowsInSection: 1) == 0 {
-            // TODO: - Do this in storyboard
-            let emptyStateLabel = UILabel(frame: tableView.frame)
-            emptyStateLabel.text = "Click '+' to add a book"
-            emptyStateLabel.textAlignment = .center
-            emptyStateLabel.textColor = UIColor.darkGray
-            emptyStateLabel.font = UIFont(name: "Avenir", size: 20)
-            tableView.backgroundView = emptyStateLabel
-        } else {
-            tableView.backgroundView = nil
         }
     }
     
@@ -163,6 +149,7 @@ class LibraryVC: UIViewController {
     }
     
     // MARK: - API Methods
+    // TODO: - Add completion handler to all API functions
     
     func fetch() {
         self.store.getBooks { (success) in
@@ -189,7 +176,7 @@ class LibraryVC: UIViewController {
     }
     
     func deleteBook(_ book: Int) {
-        self.client.delete(from: .getBook(book), book: book) { (success) in
+        self.client.delete(from: .getBook(book)) { (success) in
             if !success {
                 self.errorHandler?.displayErrorAlert(for: .deletingBook)
             } else {
@@ -243,7 +230,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.bookCell, for: indexPath) as! BookCell
-
+        
         return cell
     }
     

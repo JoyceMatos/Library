@@ -113,7 +113,7 @@ class EditBookVC: UIViewController {
     
     // MARK: - Helper Method
     
-    // TODO: - Clean this function 
+    // TODO: - Clean this function and go guard statements first
     func validate() {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count

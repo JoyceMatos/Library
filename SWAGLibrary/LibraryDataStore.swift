@@ -8,8 +8,6 @@
 
 import Foundation
 
-// TODO: - Refactor DataStore
-
 final class LibraryDataStore {
     
     static let sharedInstance = LibraryDataStore()
@@ -17,17 +15,20 @@ final class LibraryDataStore {
     var books = [Book]()
     private init() { }
     
+    // NOTE: - This is where I populate the data store
+    
     func getBooks(completion: @escaping (Bool) -> Void) {
         books.removeAll()
+        
         libraryAPI.get(.getLibrary) { (library) in
             let libraryQueue = DispatchQueue(label: "library", qos: .userInitiated)
+            
             libraryQueue.async {
                 guard let library = library else {
                     completion(false)
                     return
                 }
                 
-                // Map instead?
                 for element in library {
                     if let book = Book(dictionary: element) {
                         self.books.insert(book, at: 0)
