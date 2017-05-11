@@ -1,9 +1,7 @@
 ## Prolific Library
-![alt tag](http://i67.tinypic.com/hrgffr.png)
+![alt tag](http://i67.tinypic.com/hrgffr.png)![alt tag](http://i63.tinypic.com/1zxo7jm.png)
 
-![alt tag](http://i63.tinypic.com/1zxo7jm.png)
-
-![alt tag](http://i67.tinypic.com/2prej9j.png)
+![alt tag](http://i67.tinypic.com/2prej9j.png
 
 ![alt tag](http://i64.tinypic.com/idtc9d.png)
 
