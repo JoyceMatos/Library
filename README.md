@@ -1,16 +1,21 @@
 ## Prolific Library
 
-Prolific Library is an app that makes various HTTP requests to the server: http://prolific-interview.herokuapp.com/590b44550679b5000a4a56be/. In this app you have the ability to manage your library and track the status of each book. As a part of the SWAG library committee, you have the ability to add, delete, edit, checkout a book, and clear all the books from the library. All changes will be reflected on the server and in the app instantly.
+Prolific Library is an app that makes various HTTP requests to the server: 
+http://prolific-interview.herokuapp.com/590b44550679b5000a4a56be/
+
+In this app you have the ability to manage your library and track the status of each book. As a part of the SWAG library committee, you have the ability to add, delete, edit, checkout a book, and clear all the books from the library. All changes will be reflected on the server and in the app instantly.
 
 Prolific Library was made in Swift 3.0 and Objective-C, runs on iOS 9+, is compatible with iPhone 4+ and uses Auto Layout.
 
 Inside the actual code you will find comments that explain what each method functionality is. I have also included ‘TODO’ comments in the areas where the code can be further improve.
 
 ## Tools and 3rd Party Libraries
-SwiftDate
-IQKeyboardManager
+
+- SwiftDate
+- IQKeyboardManager
 
 ## The Library
+
 To use and test Prolific Library open the SWAGLibrary.xcworkspace file on Xcode, and run the project.
 
 ## Instructions (View By View)
