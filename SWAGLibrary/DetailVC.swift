@@ -80,13 +80,10 @@ class DetailVC: UIViewController {
         
         // NOTE: - Creates properties from Book's attributes and give them default values if they are nil
         
-        let publisher = retrieveSwiftValue(book.publisher) as? String
-        let categories = retrieveSwiftValue(book.categories) as? String
+        let publisher = retrieveSwiftValue(book.publisher) as? String ?? "Publisher: N/A"
+        let categories = retrieveSwiftValue(book.categories) as? String ?? "Tags: N/A"
         let checkOutBy = retrieveSwiftValue(book.lastCheckedOutBy) as? String ?? ""
         let checkedOut = retrieveSwiftValue(book.lastCheckedOut) as? String ?? "Not checked out"
-
-        publisherLabel.text = publisher ?? "Publisher: N/A"
-        categoriesLabel.text = categories ?? "Tags: N/A"
         
         // NOTE: - Assigns text to labels
         

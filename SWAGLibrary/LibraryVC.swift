@@ -164,7 +164,7 @@ class LibraryVC: UIViewController {
     }
     
     func deleteLibrary() {
-        client.delete(from: .deleteLibrary) { (success) in
+        client.delete(from: .deleteLibrary, completion: { (success) in
             if !success {
                 self.errorHandler?.displayErrorAlert(for: .deletingLibrary)
             } else {
@@ -172,11 +172,11 @@ class LibraryVC: UIViewController {
                     self.fetch()
                 }
             }
-        }
+        })
     }
     
     func deleteBook(_ book: Int) {
-        self.client.delete(from: .getBook(book)) { (success) in
+        self.client.delete(from: .getBook(book), completion: { (success) in
             if !success {
                 self.errorHandler?.displayErrorAlert(for: .deletingBook)
             } else {
@@ -184,7 +184,7 @@ class LibraryVC: UIViewController {
                     self.fetch()
                 }
             }
-        }
+        })
     }
     
     
