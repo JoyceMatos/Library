@@ -10,8 +10,6 @@ import UIKit
 import Social
 import SwiftDate
 
-// TODO: - Stackview does not allow labels to adjust; fix this!!
-
 class DetailVC: UIViewController {
     
     // MARK: - Outlets
@@ -85,6 +83,8 @@ class DetailVC: UIViewController {
         let checkOutBy = retrieveSwiftValue(book.lastCheckedOutBy) as? String ?? ""
         let checkedOut = retrieveSwiftValue(book.lastCheckedOut) as? String ?? "Not checked out"
         
+        print(checkedOut)
+        
         // NOTE: - Assigns text to labels
         
         if checkOutBy == "" && checkedOut == "Not checked out" {
@@ -130,9 +130,12 @@ class DetailVC: UIViewController {
         }
     }
     
-    // NOTE: - This formats the date based on a given string
+    // NOTE: - This formats the date based on a given string and works only for new york
+    // TODO: - This should display device's Time zone, ie: EST
     func format(_ date: String) -> DateInRegion? {
-        let formattedDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"))
+        let region = Region(tz: TimeZoneName.currentAutoUpdating.timeZone, cal: CalendarName.current.calendar, loc: LocaleName.currentAutoUpdating.locale)
+       let formattedDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"), fromRegion: region)
+
         return formattedDate
     }
     

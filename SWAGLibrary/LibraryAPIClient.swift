@@ -11,10 +11,6 @@ import Foundation
 typealias JSON = [String: Any]
 
 // TODO: - Add TODO's where they belong if you keep them in the project
-// TODO: - Check status ie: 200, 204
-// TODO: - Work on arguement labels for endpoints, etc
-// TODO: - Go over prolific style guide
-// NOTE:  Two singletons -> api client and datastore. 
 
 final class LibraryAPIClient {
     

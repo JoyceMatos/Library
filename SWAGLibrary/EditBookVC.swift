@@ -8,8 +8,6 @@
 
 import UIKit
 
-// TODO: - Clean validator function
-
 class EditBookVC: UIViewController {
     
     @IBOutlet weak var bookField: UITextField!

@@ -10,18 +10,10 @@ import UIKit
 
 // TODO: - Check for string literals
 // TODO: - Get rid of warnings
-// TODO: - Look through all files and seperate view & model functionality from VC
-// TODO: - Consider using delegation as opposed to NotificationCenter
-// TODO: - Change alpha when removing an item
-// TODO: - Look over file organization ie: Error, Alert, etc
-// TODO: - Should VC's be final?
-// TODO: - Make sure all naming conventions are appropriate!
 // TODO: - Remove all unwanted images from assets
 // TODO: - Figure out where to put delete all button
 // TODO: - Add notes for Linn
-// TODO: - Make cell dynamic - test for all possible outcomes!!
 // TODO: - If you are keeping the menu botton, fix the background and constrain it
-// TODO: - Remove empty state because its not being called
 // TODO:  - Any method that hits internet use completion handlers
 
 
