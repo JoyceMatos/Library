@@ -64,6 +64,3 @@ In the edit view you will see a number of editable fields with information about
 
 - **SwiftDate** and **IQKeyboard** is used to easily format dates and dismiss the keyboard.
 
-## Bugs
-
-- Time label displays EDT. This should be changed to represent the device's time zone.
