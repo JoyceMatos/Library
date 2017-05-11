@@ -8,10 +8,6 @@
 
 import UIKit
 
-// TODO: - Clean validator function
-// TODO: - Check all viewdidappears
-// TODO: - Work on animations
-
 class EditBookVC: UIViewController {
     
     @IBOutlet weak var bookField: UITextField!
@@ -115,7 +111,7 @@ class EditBookVC: UIViewController {
     
     // MARK: - Helper Method
     
-    // TODO: - Perhaps add this function while user is typing
+    // TODO: - Clean this function and go guard statements first
     func validate() {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count

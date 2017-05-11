@@ -8,10 +8,9 @@
 
 import UIKit
 
-// TODO: - Clean trailing brackets
-// TODO: - Work on animation
-
 class AddBookVC: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var authorField: UITextField!
@@ -19,6 +18,8 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var categoriesField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewVerticalConstraint: NSLayoutConstraint!
+    
+    // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
@@ -37,17 +38,13 @@ class AddBookVC: UIViewController {
     
     // MARK: - View Method
     
+    // NOTE: - This animates the view
     func animateLabels() {
         let stackViewHeight = stackView.bounds.size.height
         stackView.transform = CGAffineTransform(translationX: 0, y: stackViewHeight)
-        
-        var delayCounter = 0 // Not necessary now, but will it be in the future?
-        
-        // TODO: - Try creating stackview an add this animation for each
-        UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.stackView.transform = CGAffineTransform.identity
         }, completion: nil)
-        delayCounter += 1
     }
     
     // MARK: - Alert Methods
@@ -62,6 +59,8 @@ class AddBookVC: UIViewController {
         alert.addAction(confirm)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - Action Methods
     
     @IBAction func submitTapped(_ sender: Any) {
         validateSubmission()
@@ -88,8 +87,9 @@ class AddBookVC: UIViewController {
         }
     }
     
-    // MARK: - Helper Method
+    // MARK: - Helper Methods
     
+    // NOTE: - This checks to see if there are any unsaved changes b
     func validateMissingFields() {
         guard let title = titleField.text,
             let author = authorField.text,
@@ -105,6 +105,7 @@ class AddBookVC: UIViewController {
         }
     }
     
+    // NOTE
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             self.errorHandler?.displayErrorAlert(for: .missingFields)
@@ -117,7 +118,6 @@ class AddBookVC: UIViewController {
             }
             let bookInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
             let book = Book(dictionary: bookInfo)
-            // TODO: - Find a way to clean these trailing brackets and unwrapping
             
             guard let newBook = book else {
                 return

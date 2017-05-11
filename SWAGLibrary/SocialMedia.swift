@@ -9,6 +9,7 @@
 import Foundation
 import Social
 
+// NOTE: - This retrieves the type of service and platform for any designated account, ie: Facebook, Twitter
 
 protocol GetPlatformDetails {
     
@@ -17,12 +18,16 @@ protocol GetPlatformDetails {
     
 }
 
+// NOTE: - These are the types of platforms available for sharing capabilities
+
 enum SocialMedia {
     
     case twitter
     case fb
     
 }
+
+// NOTE: - This retrieves the type of service and name of each platorm
 
 extension SocialMedia: GetPlatformDetails {
     

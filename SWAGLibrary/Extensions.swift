@@ -15,13 +15,5 @@ extension Notification.Name {
 
 }
 
-extension UINavigationBar {
-    
-    func setToWhite() {
-        
-        barTintColor = UIColor.darkGray
-    }
-    
-}
 
 
