@@ -1,5 +1,12 @@
 ## Prolific Library
 
+<img
+src="http://i67.tinypic.com/hrgffr.png" width = "170"> <img
+src="http://i63.tinypic.com/1zxo7jm.png" width = "170"> <img
+src="http://i67.tinypic.com/2prej9j.png" width = "170"> <img
+src="http://i64.tinypic.com/idtc9d.png" width = "170"> <img
+src="http://i66.tinypic.com/o01lix.png" width = "170">
+
 Prolific Library is an app that makes various HTTP requests to the server: 
 
 http://prolific-interview.herokuapp.com/590b44550679b5000a4a56be/
@@ -57,6 +64,3 @@ In the edit view you will see a number of editable fields with information about
 
 - **SwiftDate** and **IQKeyboard** is used to easily format dates and dismiss the keyboard.
 
-## Bugs
-
-- Time label displays EDT. This should be changed to represent the device's time zone.
