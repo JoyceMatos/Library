@@ -25,7 +25,6 @@ class EditBookVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         errorHandler = self
         configureFields()
     }
@@ -37,6 +36,7 @@ class EditBookVC: UIViewController {
     
     // MARK: - View Methods
     
+    // NOTE: - This animates the fields
     func animateViews() {
         let views = [bookField, authorField, publisherField, categoriesField]
         let height = view.bounds.size.height * 0.6
@@ -54,6 +54,7 @@ class EditBookVC: UIViewController {
         }
     }
     
+    // NOTE: - This sets the text for the fields
     func configureFields() {
         guard let book = book else {
             return
@@ -69,6 +70,7 @@ class EditBookVC: UIViewController {
         addAuthorLabel.isHidden = true
     }
     
+    // NOTE: - This highlights the title field
     func higlightTitle() {
         bookField.borderStyle = .line
         bookField.layer.borderColor = UIColor.red.cgColor
@@ -76,6 +78,7 @@ class EditBookVC: UIViewController {
         addTitleLabel.isHidden = false
     }
     
+    // NOTE: - This highlights the author field
     func highlightAuthor() {
         authorField.borderStyle = .line
         authorField.layer.borderColor = UIColor.red.cgColor
@@ -98,6 +101,7 @@ class EditBookVC: UIViewController {
             }
         }
     }
+    
     // MARK: - Action Methods
     
     @IBAction func saveTapped(_ sender: Any) {
@@ -111,7 +115,7 @@ class EditBookVC: UIViewController {
     
     // MARK: - Helper Method
     
-    // TODO: - Clean this function and go guard statements first
+    // TODO: - This can be done better
     func validate() {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count

@@ -46,7 +46,7 @@ class DetailVC: UIViewController {
         let height = view.bounds.size.height
         var delayCounter = 0
         
-        // NOTE: - This animates the label
+        // NOTE: - This animates the labels
         let views = [titleLabel, authorLabel, publisherLabel, categoriesLabel, lastCheckedOutLabel,checkedOutLabel]
         
         for item in views {

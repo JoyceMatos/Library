@@ -105,7 +105,7 @@ class AddBookVC: UIViewController {
         }
     }
     
-    // NOTE
+    // NOTE: - This evaluates for missing fields before adding a book
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             self.errorHandler?.displayErrorAlert(for: .missingFields)
