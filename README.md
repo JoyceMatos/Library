@@ -58,9 +58,13 @@ In the edit view you will see a number of editable fields with information about
 
 - The object used to model the book and encapsulate data from the server is called `Book` and is written in Objective-C. In doing so, the `Book` object is always unwrapped and checked for NSNull values. 
 
-- **Error** is a file that includes a protocol that responds to various errors throughout the app with an appropriate message based on the error type. 
+- **Error** is a file, and type, that includes a protocol that responds to various errors throughout the app with an appropriate message based on the error type. 
 
-- **Endpoint** is a file that generates the URL used to make API calls based on a particular endpoint.  
+- **Endpoint** is a file, and type, that generates the URL used to make API calls based in a particular endpoint.
 
-- **SwiftDate** and **IQKeyboard** is used to easily format dates and dismiss the keyboard.
+- **SocialMedia**, is a file, and type that determines the service for any given platform.
+
+- **Error**, **Endpoint**, and **SocialMedia** were written with the purpose of writing reusable code.
+
+- **SwiftDate** and **IQKeyboard** are used to easily format dates and dismiss the keyboard.
 
