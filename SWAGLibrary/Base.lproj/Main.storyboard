@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="f0H-fU-rgz">
-                                <rect key="frame" x="0.0" y="123" width="375" height="533.5"/>
+                                <rect key="frame" x="0.0" y="124" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
@@ -37,16 +37,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nE1-gE-mBB">
-                                                    <rect key="frame" x="18.5" y="11.5" width="337.5" height="92"/>
+                                                    <rect key="frame" x="33.5" y="11.5" width="600" height="92"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Slouching Towards Bethlehem" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="1Bg-GI-EMJ">
-                                                            <rect key="frame" x="18" y="15" width="304" height="27.5"/>
+                                                            <rect key="frame" x="18" y="15" width="540.5" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="17"/>
                                                             <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Joan Didion" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="i3D-a7-Idm">
-                                                            <rect key="frame" x="18" y="44.5" width="304" height="27.5"/>
+                                                            <rect key="frame" x="18" y="44.5" width="540.5" height="27.5"/>
                                                             <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                             <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -88,7 +88,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sI9-ib-Ssr">
-                                <rect key="frame" x="305" y="591" width="60" height="56"/>
+                                <rect key="frame" x="309" y="592" width="56" height="56"/>
                                 <state key="normal" image="MenuButton">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -103,11 +103,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41j-8i-bSe">
-                                <rect key="frame" x="16" y="121.5" width="94" height="1.5"/>
+                                <rect key="frame" x="16" y="121.5" width="94" height="2.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxZ-V5-WL1">
-                                <rect key="frame" x="283" y="532" width="90" height="40"/>
+                                <rect key="frame" x="293" y="532" width="76" height="41"/>
                                 <state key="normal" image="DeleteLibrary">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -119,25 +119,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.25" id="07b-eV-aHs"/>
-                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="trailing" secondItem="f0H-fU-rgz" secondAttribute="trailing" constant="-10" id="4Cc-2A-zZU"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="top" secondItem="GxZ-V5-WL1" secondAttribute="bottom" constant="19" id="4gF-ZH-P7n"/>
                             <constraint firstItem="UBg-78-Aba" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.7" id="Ag3-eX-kFj"/>
+                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="trailing" secondItem="f0H-fU-rgz" secondAttribute="trailing" constant="-10" id="EpQ-eM-3nh"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Hbx-Xi-qm4"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.8" id="QAI-1U-hob"/>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="leading" secondItem="UBg-78-Aba" secondAttribute="leading" id="SOv-O5-kAy"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="top" secondItem="41j-8i-bSe" secondAttribute="bottom" id="Ta6-Nf-X5o"/>
-                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="width" secondItem="f0H-fU-rgz" secondAttribute="width" multiplier="0.16" id="Xh0-c2-pMj"/>
+                            <constraint firstAttribute="trailing" secondItem="GxZ-V5-WL1" secondAttribute="trailing" constant="6" id="Tjz-DC-Ojo"/>
                             <constraint firstItem="UBg-78-Aba" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.07" id="YNT-P7-Yeo"/>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="height" secondItem="UBg-78-Aba" secondAttribute="height" multiplier="0.05" id="Z7w-SY-CyN"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UBg-78-Aba" secondAttribute="leading" id="c8L-5E-g3G"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="GxZ-V5-WL1" secondAttribute="trailing" constant="-14" id="d5m-Bq-1ot"/>
                             <constraint firstItem="UBg-78-Aba" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="dSw-KM-Gih"/>
-                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="height" secondItem="f0H-fU-rgz" secondAttribute="height" multiplier="0.105" id="dhc-l8-BWd"/>
                             <constraint firstItem="41j-8i-bSe" firstAttribute="top" secondItem="UBg-78-Aba" secondAttribute="bottom" constant="3" id="gaE-3d-AWL"/>
                             <constraint firstItem="f0H-fU-rgz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m6g-je-M3d"/>
-                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="top" secondItem="GxZ-V5-WL1" secondAttribute="bottom" constant="19" id="xPK-Aj-jhg"/>
-                            <constraint firstItem="GxZ-V5-WL1" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.06" id="xaC-c2-fgF"/>
-                            <constraint firstItem="sI9-ib-Ssr" firstAttribute="top" secondItem="f0H-fU-rgz" secondAttribute="bottom" constant="-65.5" id="yi6-C3-HIq"/>
-                            <constraint firstItem="GxZ-V5-WL1" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.24" id="zDZ-w7-Fat"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sI9-ib-Ssr" secondAttribute="bottom" constant="19" id="uk0-nu-vA2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Rl-5k-0yd">
@@ -205,7 +201,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mrC-ed-yad">
-                                <rect key="frame" x="27.5" y="477.5" width="319" height="60"/>
+                                <rect key="frame" x="28" y="477" width="319" height="60"/>
                                 <color key="backgroundColor" red="0.14192884059999999" green="0.55723893879999997" blue="0.62632935209999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Checkout">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -222,7 +218,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-qd-8Rl">
-                                <rect key="frame" x="29" y="234" width="300" height="167"/>
+                                <rect key="frame" x="29" y="234" width="300" height="166.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Publisher: Penguin" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="oMs-af-4l6">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="39.5"/>
@@ -237,13 +233,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Checked Out:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JHR-yR-O0z">
-                                        <rect key="frame" x="0.0" y="83" width="300" height="39.5"/>
+                                        <rect key="frame" x="0.0" y="83" width="300" height="39"/>
                                         <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="19"/>
                                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="May 5, 2016 5:55PM" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2JC-RG-2MM">
-                                        <rect key="frame" x="0.0" y="124.5" width="300" height="42.5"/>
+                                        <rect key="frame" x="0.0" y="124" width="300" height="42.5"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
                                         <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -411,7 +407,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="0xq-SJ-LYG">
-                                <rect key="frame" x="37.5" y="178" width="300" height="400"/>
+                                <rect key="frame" x="37.5" y="177.5" width="300" height="400.5"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Book Title" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Lx8-Vu-XbD">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="56"/>
@@ -420,25 +416,25 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Book Author" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="DTM-OC-LcK">
-                                        <rect key="frame" x="0.0" y="86" width="300" height="56"/>
+                                        <rect key="frame" x="0.0" y="86" width="300" height="56.5"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Publisher" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="1Wk-t1-cFK">
-                                        <rect key="frame" x="0.0" y="172" width="300" height="56"/>
+                                        <rect key="frame" x="0.0" y="172.5" width="300" height="56"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Categories" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="7Yg-6d-5yy">
-                                        <rect key="frame" x="0.0" y="258" width="300" height="56"/>
+                                        <rect key="frame" x="0.0" y="258.5" width="300" height="56"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2un-HC-X0X">
-                                        <rect key="frame" x="0.0" y="344" width="300" height="56"/>
+                                        <rect key="frame" x="0.0" y="344.5" width="300" height="56"/>
                                         <color key="backgroundColor" red="0.14192884059999999" green="0.55723893879999997" blue="0.62632935209999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" title="Submit"/>
@@ -449,7 +445,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnn-eS-iGW">
-                                <rect key="frame" x="29" y="91" width="300" height="47"/>
+                                <rect key="frame" x="29" y="91" width="300" height="46.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="28"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -488,6 +484,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addBookTopConstraint" destination="Pfs-G2-Kfi" id="cyk-tC-FzI"/>
                         <outlet property="authorField" destination="DTM-OC-LcK" id="3Te-Lc-BNc"/>
                         <outlet property="categoriesField" destination="7Yg-6d-5yy" id="gIk-oU-bbO"/>
                         <outlet property="publisherField" destination="1Wk-t1-cFK" id="PkO-93-XyA"/>
@@ -527,7 +524,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Publisher" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dYj-WY-XeN">
-                                <rect key="frame" x="16" y="389" width="326.5" height="53.5"/>
+                                <rect key="frame" x="16" y="389.5" width="326.5" height="53.5"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.6151273544520548" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -540,26 +537,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publisher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrN-9B-L2C">
-                                <rect key="frame" x="16" y="353" width="94" height="28"/>
+                                <rect key="frame" x="16" y="353" width="94" height="28.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categories" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cA8-hK-ybt">
-                                <rect key="frame" x="16" y="457.5" width="375" height="28"/>
+                                <rect key="frame" x="16" y="458" width="375" height="28"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="  Categories" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="lE9-An-XmT">
-                                <rect key="frame" x="16" y="486.5" width="326.5" height="53.5"/>
+                                <rect key="frame" x="16" y="487" width="326.5" height="52.5"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.6151273544520548" colorSpace="calibratedRGB"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Book" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZz-5f-Bxz">
-                                <rect key="frame" x="16" y="94" width="337.5" height="47"/>
+                                <rect key="frame" x="16" y="94" width="337.5" height="46.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="28"/>
                                 <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -585,7 +582,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmi-hH-Na7">
-                                <rect key="frame" x="16" y="160" width="135" height="28"/>
+                                <rect key="frame" x="16" y="159.5" width="135" height="28.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -597,7 +594,7 @@
                                 <color key="highlightedColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please add title " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFL-gX-LJU">
-                                <rect key="frame" x="111" y="160" width="225" height="28"/>
+                                <rect key="frame" x="111" y="159.5" width="225" height="28.5"/>
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="highlightedColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>

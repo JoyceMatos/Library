@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddBookVC: UIViewController {
+class AddBookVC: UIViewController, UITextFieldDelegate {
     
     // MARK: - Outlets
     
@@ -18,17 +18,28 @@ class AddBookVC: UIViewController {
     @IBOutlet weak var categoriesField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewVerticalConstraint: NSLayoutConstraint!
+    @IBOutlet weak var addBookTopConstraint: NSLayoutConstraint!
+    
     
     // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
     
+    
     // MARK - View Lifecyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         errorHandler = self
+        
+        titleField.delegate = self
+        authorField.delegate = self
+        publisherField.delegate = self
+        categoriesField.delegate = self
+        
+
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +48,19 @@ class AddBookVC: UIViewController {
     }
     
     // MARK: - View Method
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+
+        
+        addBookTopConstraint.constant = 0
+        
+        
+        print("hiiiiiii")
+        
+        return true
+    }
+    
+
     
     // NOTE: - This animates the view
     func animateLabels() {

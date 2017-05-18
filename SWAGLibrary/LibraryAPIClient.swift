@@ -8,6 +8,12 @@
 
 import Foundation
 
+// TODO: - Refactor repeated code
+// Syntax, warnings, familiarize with ios delegates, etc (frameworks)
+// Consistency
+// Naming conventions for view controllers
+
+
 typealias JSON = [String: Any]
 
 final class LibraryAPIClient {
@@ -196,8 +202,9 @@ final class LibraryAPIClient {
             completion(false)
             return
         }
+        
         let session = URLSession.shared
-        var request = URLRequest(url:url)
+        var request = URLRequest(url: url)
         request.httpMethod = HTTPMethod.delete.rawValue
         
         let task = session.dataTask(with: request) { (data, response, error) in
