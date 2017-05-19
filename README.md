@@ -15,7 +15,7 @@ In this app you have the ability to manage your library and track the status of 
 
 Prolific Library was made in Swift 3.0 and Objective-C, runs on iOS 9+, is compatible with iPhone 4+ and uses Auto Layout.
 
-Inside the actual code you will find comments that explain what each method functionality is. I have also included ‘TODO’ comments in the areas where the code can be further improve.
+Inside the actual code you will find comments that explain what each method functionality is. I have also included ‘TODO’ comments in the areas where the code can be further improved.
 
 ## Tools and 3rd Party Libraries
 
@@ -29,7 +29,7 @@ To use and test Prolific Library open the SWAGLibrary.xcworkspace file on Xcode,
 ## Instructions (View By View)
 
 ### Library View:
-In the library view you will see various books stored in your library and have the ability to perform numerous actions. To add a book, tap on the ‘+’ button and this will segue into the add book screen modally. To view more details and/check out a book, tap on the cell and it will segue into the detail view. To delete or edit a book, swipe left on the cell, and to refresh your library simply pull or swipe down.
+In the library view you will see various books stored in your library and have the ability to perform numerous actions. To add a book, tap on the ‘+’ button and this will segue into the add book screen modally. To view more details and check out a book, tap on the cell and it will segue into the detail view. To delete or edit a book, swipe left on the cell, and to refresh your library simply pull or swipe down.
 To delete all the books from your library, tap the menu button on the bottom right hand corner and then tap the ‘Delete Library’ button. To close the menu button, tap on it again.
 
 ### Detail View:
@@ -54,13 +54,13 @@ In the edit view you will see a number of editable fields with information about
 
 - The **LibraryDataStore** is an object that stores any information that is needed from the server. 
 
-- Both the **APIClient** and **DataStore** objects are singletons. These objects are marked `final` and have a private initializer to prevent this object from being instantiated in other areas of the app. In addition, these objects hold a `sharedInstance` property to allow other objects to easily retrieve and send data to this instance. 
+- Both the **APIClient** and **LibraryDataStore** objects are singletons. These objects are marked `final` and have a private initializer to prevent this object from being instantiated in other areas of the app. In addition, these objects hold a `sharedInstance` property to allow other objects to easily retrieve and send data to this instance. 
 
 - The object used to model the book and encapsulate data from the server is called `Book` and is written in Objective-C. In doing so, the `Book` object is always unwrapped and checked for NSNull values. 
 
 - **Error** is a file, and type, that includes a protocol that responds to various errors throughout the app with an appropriate message based on the error type. 
 
-- **Endpoint** is a file, and type, that generates the URL used to make API calls based in a particular endpoint.
+- **Endpoint** is a file, and type, that generates the URL used to make API calls based on a particular endpoint.
 
 - **SocialMedia**, is a file, and type that determines the service for any given platform.
 
