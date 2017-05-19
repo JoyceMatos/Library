@@ -8,12 +8,6 @@
 
 import Foundation
 
-// TODO: - Refactor repeated code
-// Syntax, warnings, familiarize with ios delegates, etc (frameworks)
-// Consistency
-// Naming conventions for view controllers
-
-
 typealias JSON = [String: Any]
 
 final class LibraryAPIClient {
