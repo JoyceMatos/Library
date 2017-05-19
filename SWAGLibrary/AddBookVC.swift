@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddBookVC: UIViewController, UITextFieldDelegate {
+class AddBookVC: UIViewController {
     
     // MARK: - Outlets
     
@@ -18,7 +18,6 @@ class AddBookVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoriesField: UITextField!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewVerticalConstraint: NSLayoutConstraint!
-    @IBOutlet weak var addBookTopConstraint: NSLayoutConstraint!
     
     
     // MARK: - Properties
@@ -32,14 +31,6 @@ class AddBookVC: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorHandler = self
-        
-        titleField.delegate = self
-        authorField.delegate = self
-        publisherField.delegate = self
-        categoriesField.delegate = self
-        
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,19 +39,6 @@ class AddBookVC: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - View Method
-    
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-
-        
-        addBookTopConstraint.constant = 0
-        
-        
-        print("hiiiiiii")
-        
-        return true
-    }
-    
-
     
     // NOTE: - This animates the view
     func animateLabels() {
