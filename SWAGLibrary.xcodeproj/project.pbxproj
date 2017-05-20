@@ -18,6 +18,9 @@
 		250819171EBBBE09005740FE /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = 250819161EBBBE09005740FE /* Book.m */; };
 		2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */; };
 		250819291EBBE353005740FE /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250819281EBBE353005740FE /* BookCell.swift */; };
+		250BDB311ECFCC77005166DB /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BDB301ECFCC77005166DB /* SearchVC.swift */; };
+		250BDB331ECFCD44005166DB /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BDB321ECFCD44005166DB /* SearchCell.swift */; };
+		250BDB351ECFDAFE005166DB /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BDB341ECFDAFE005166DB /* CustomSearchBar.swift */; };
 		2564A01C1EBE89AB00AB034A /* CheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */; };
 		2564A0561EBFB19000AB034A /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2564A0551EBFB19000AB034A /* SocialMedia.swift */; };
 		25FB7CEB1EBD4CFA005B22EE /* EditBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */; };
@@ -45,6 +48,9 @@
 		250819181EBBBE26005740FE /* Book.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
 		2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryDataStore.swift; sourceTree = "<group>"; };
 		250819281EBBE353005740FE /* BookCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		250BDB301ECFCC77005166DB /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		250BDB321ECFCD44005166DB /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		250BDB341ECFDAFE005166DB /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutVC.swift; sourceTree = "<group>"; };
 		2564A0551EBFB19000AB034A /* SocialMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
 		25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBookVC.swift; sourceTree = "<group>"; };
@@ -125,6 +131,8 @@
 			children = (
 				250818FE1EBB7FD8005740FE /* Main.storyboard */,
 				250819281EBBE353005740FE /* BookCell.swift */,
+				250BDB321ECFCD44005166DB /* SearchCell.swift */,
+				250BDB341ECFDAFE005166DB /* CustomSearchBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -137,6 +145,7 @@
 				2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */,
 				25FEBE081EBC0FC500B02001 /* AddBookVC.swift */,
 				25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */,
+				250BDB301ECFCC77005166DB /* SearchVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -326,10 +335,13 @@
 				25FB7CEF1EBE6C74005B22EE /* Error.swift in Sources */,
 				250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */,
 				25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */,
+				250BDB351ECFDAFE005166DB /* CustomSearchBar.swift in Sources */,
 				2564A01C1EBE89AB00AB034A /* CheckoutVC.swift in Sources */,
 				25FEBE0E1EBCAF5700B02001 /* Extensions.swift in Sources */,
+				250BDB331ECFCD44005166DB /* SearchCell.swift in Sources */,
 				2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */,
 				250819171EBBBE09005740FE /* Book.m in Sources */,
+				250BDB311ECFCC77005166DB /* SearchVC.swift in Sources */,
 				250819121EBB92D1005740FE /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
