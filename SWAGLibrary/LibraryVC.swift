@@ -25,7 +25,6 @@ class LibraryVC: UIViewController {
     let store = LibraryDataStore.sharedInstance
     var errorHandler: ErrorHandling?
     var didDisplayOptions = false
-    var filteredBooks = [Book]()
 
     // MARK: - View Lifecyle
 
@@ -187,13 +186,13 @@ class LibraryVC: UIViewController {
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
-            destVC.book = filteredBooks[indexPath.row]
+            destVC.book = store.books[indexPath.row]
         case SegueIdentifier.showEditVC:
             let destVC = segue.destination as! EditBookVC
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
-            destVC.book = filteredBooks[indexPath.row]
+            destVC.book = store.books[indexPath.row]
         default:
             print("Could not segue")
             // Handle
@@ -211,7 +210,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredBooks.count
+        return store.books.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -234,7 +233,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let bookID = self.filteredBooks[indexPath.row].id as! Int
+        let bookID = self.store.books[indexPath.row].id as! Int
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.deleteBookAlertAction(for: bookID)
         }
@@ -265,54 +264,6 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-extension LibraryVC: UISearchBarDelegate {
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        titleAscending(for: searchText)
-    }
-
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        view.endEditing(false)
-    }
-
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        view.endEditing(false)
-
-    }
-
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        view.endEditing(false)
-
-    }
-
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        view.endEditing(false)
-
-    }
-
-
-    func titleAscending(for text: String?) {
-        guard let keywords = text else {
-            return
-        }
-
-        var searchedBooks = [Book]()
-        for book in store.books {
-            if book.title.contains(keywords) {
-                searchedBooks.append(book)
-            }
-
-            filteredBooks = searchedBooks
-            tableView.reloadData()
-        }
-    }
-
-
-
-
-
-
-}
 
 
 // MARK: - Error Delegate

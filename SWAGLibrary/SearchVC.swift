@@ -9,6 +9,8 @@
 import UIKit
 
 // TODO: - Work on error handling
+// TODO: - Seperate view functionality
+// TODO: - Add search by author
 
 class SearchVC: UIViewController {
     
@@ -45,6 +47,8 @@ class SearchVC: UIViewController {
         }
     }
     
+    
+    // TODO: - Try customizing this in storybaord
     func configureSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
@@ -53,9 +57,9 @@ class SearchVC: UIViewController {
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        searchController.searchBar.barTintColor = UIColor.white
+        searchController.searchBar.tintColor = UIColor.darkGray
     }
-    
-    
 }
 
 extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
@@ -86,7 +90,7 @@ extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
             return
         }
         
-        // Maybe append instead?
+        // Maybe filter instead
         for book in store.books {
             let bookTitle = book.title.lowercased()
             if bookTitle.contains(searchString.lowercased()) {
