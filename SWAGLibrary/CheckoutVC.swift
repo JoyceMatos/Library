@@ -8,9 +8,16 @@
 
 import UIKit
 
+// TODO: - Trailing brackets
+
 class CheckoutVC: UIViewController {
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var checkoutView: UIView!
     @IBOutlet weak var nameField: UITextField!
+    
+    // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
@@ -21,6 +28,22 @@ class CheckoutVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorHandler = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateView()
+    }
+    
+    // MARK: - View Method
+    
+    // NOTE: - This animates the view 
+    func animateView() {
+        let height = view.bounds.size.height * 0.9
+        checkoutView?.transform = CGAffineTransform(translationX: 0, y: height)
+        UIView.animate(withDuration: 0.75, delay: 0.0 * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.checkoutView.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
     
     // MARK: - Action Methods
@@ -35,12 +58,13 @@ class CheckoutVC: UIViewController {
     
     
     // MARK: - API Method
+    
     func checkoutBook() {
         guard let name = nameField.text,
             let bookID = book?.id as? Int else {
-            return
+                return
         }
-        // TODO: - Do something about these trailing brackets
+        
         client.checkout(by: name, for: bookID, with: .getBook(bookID), completion: { (JSON) in
             if JSON == nil {
                 DispatchQueue.main.async {
@@ -50,7 +74,7 @@ class CheckoutVC: UIViewController {
                 self.book = Book(dictionary: JSON)
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .update, object: nil)
-                    self.performSegue(withIdentifier: "unwindToDetailVC", sender: self)
+                        self.performSegue(withIdentifier: "unwindToDetailVC", sender: self)
                 }
             }
         })

@@ -8,23 +8,45 @@
 
 import UIKit
 
-// TODO: - Clean trailing brackets
-
 class AddBookVC: UIViewController {
+    
+    // MARK: - Outlets
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var authorField: UITextField!
     @IBOutlet weak var publisherField: UITextField!
     @IBOutlet weak var categoriesField: UITextField!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackViewVerticalConstraint: NSLayoutConstraint!
+    
+    
+    // MARK: - Properties
     
     let client = LibraryAPIClient.sharedInstance
     var errorHandler: ErrorHandling?
+    
     
     // MARK - View Lifecyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         errorHandler = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateLabels()
+    }
+    
+    // MARK: - View Method
+    
+    // NOTE: - This animates the view
+    func animateLabels() {
+        let stackViewHeight = stackView.bounds.size.height
+        stackView.transform = CGAffineTransform(translationX: 0, y: stackViewHeight)
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.stackView.transform = CGAffineTransform.identity
+        }, completion: nil)
     }
     
     // MARK: - Alert Methods
@@ -39,6 +61,8 @@ class AddBookVC: UIViewController {
         alert.addAction(confirm)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - Action Methods
     
     @IBAction func submitTapped(_ sender: Any) {
         validateSubmission()
@@ -65,8 +89,9 @@ class AddBookVC: UIViewController {
         }
     }
     
-    // MARK: - Helper Method
+    // MARK: - Helper Methods
     
+    // NOTE: - This checks to see if there are any unsaved changes b
     func validateMissingFields() {
         guard let title = titleField.text,
             let author = authorField.text,
@@ -81,7 +106,8 @@ class AddBookVC: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-
+    
+    // NOTE: - This evaluates for missing fields before adding a book
     func validateSubmission() {
         if titleField.text?.characters.count == 0 || authorField.text?.characters.count == 0 {
             self.errorHandler?.displayErrorAlert(for: .missingFields)
@@ -94,7 +120,6 @@ class AddBookVC: UIViewController {
             }
             let bookInfo = ["title": title, "author": author, "publisher": publisher, "categories": categories]
             let book = Book(dictionary: bookInfo)
-            // TODO: - Find a way to clean these trailing brackets and unwrapping
             
             guard let newBook = book else {
                 return

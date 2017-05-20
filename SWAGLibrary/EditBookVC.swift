@@ -8,8 +8,6 @@
 
 import UIKit
 
-// TODO: - Clean validator function
-
 class EditBookVC: UIViewController {
     
     @IBOutlet weak var bookField: UITextField!
@@ -27,13 +25,36 @@ class EditBookVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         errorHandler = self
         configureFields()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        animateViews()
+    }
+    
     // MARK: - View Methods
     
+    // NOTE: - This animates the fields
+    func animateViews() {
+        let views = [bookField, authorField, publisherField, categoriesField]
+        let height = view.bounds.size.height * 0.6
+        var delayCounter = 0
+
+        for item in views {
+            item?.transform = CGAffineTransform(translationX: 0, y: height)
+        }
+        
+        for item in views {
+        UIView.animate(withDuration: 0.75, delay: Double(delayCounter) * 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            item?.transform = CGAffineTransform.identity
+        }, completion: nil)
+        delayCounter += 1
+        }
+    }
+    
+    // NOTE: - This sets the text for the fields
     func configureFields() {
         guard let book = book else {
             return
@@ -49,6 +70,7 @@ class EditBookVC: UIViewController {
         addAuthorLabel.isHidden = true
     }
     
+    // NOTE: - This highlights the title field
     func higlightTitle() {
         bookField.borderStyle = .line
         bookField.layer.borderColor = UIColor.red.cgColor
@@ -56,6 +78,7 @@ class EditBookVC: UIViewController {
         addTitleLabel.isHidden = false
     }
     
+    // NOTE: - This highlights the author field
     func highlightAuthor() {
         authorField.borderStyle = .line
         authorField.layer.borderColor = UIColor.red.cgColor
@@ -78,6 +101,7 @@ class EditBookVC: UIViewController {
             }
         }
     }
+    
     // MARK: - Action Methods
     
     @IBAction func saveTapped(_ sender: Any) {
@@ -91,18 +115,15 @@ class EditBookVC: UIViewController {
     
     // MARK: - Helper Method
     
-    // TODO: - Perhaps add this function while user is typing
+    // TODO: - This can be done better
     func validate() {
         let title = bookField.text?.characters.count
         let author = authorField.text?.characters.count
         
         if title == 0 {
             higlightTitle()
-            highlightAuthor()
-            
         } else if author == 0 {
             highlightAuthor()
-            
         } else {
             guard let title = bookField.text,
                 let author = authorField.text,
@@ -111,7 +132,6 @@ class EditBookVC: UIViewController {
                 let id = book?.id as? Int else {
                 return
             }
-            
             update(book: title, by: author, for: id, publisher: publisher, categories: categories) { (success) in
                 if success {
                     self.dismiss(animated: true, completion: nil)
