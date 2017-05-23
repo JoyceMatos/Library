@@ -471,7 +471,7 @@
 				INFOPLIST_FILE = SWAGLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Joyce-Matos.SWAGLibrary";
+				PRODUCT_BUNDLE_IDENTIFIER = com.joycematos.library;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SWAGLibrary/SWAGLibrary-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -489,7 +489,7 @@
 				INFOPLIST_FILE = SWAGLibrary/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Joyce-Matos.SWAGLibrary";
+				PRODUCT_BUNDLE_IDENTIFIER = com.joycematos.library;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SWAGLibrary/SWAGLibrary-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
