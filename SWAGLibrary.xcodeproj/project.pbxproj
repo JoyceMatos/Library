@@ -23,6 +23,8 @@
 		250BDB351ECFDAFE005166DB /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250BDB341ECFDAFE005166DB /* CustomSearchBar.swift */; };
 		2564A01C1EBE89AB00AB034A /* CheckoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */; };
 		2564A0561EBFB19000AB034A /* SocialMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2564A0551EBFB19000AB034A /* SocialMedia.swift */; };
+		258E02711ED4F117005387DE /* GoogleAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02701ED4F117005387DE /* GoogleAPIClient.swift */; };
+		258E02731ED4F140005387DE /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258E02721ED4F140005387DE /* Secrets.swift */; };
 		25FB7CEB1EBD4CFA005B22EE /* EditBookVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */; };
 		25FB7CEF1EBE6C74005B22EE /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FB7CEE1EBE6C74005B22EE /* Error.swift */; };
 		25FEBE071EBBF1CB00B02001 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FEBE061EBBF1CB00B02001 /* DetailVC.swift */; };
@@ -53,6 +55,8 @@
 		250BDB341ECFDAFE005166DB /* CustomSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 		2564A01B1EBE89AB00AB034A /* CheckoutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckoutVC.swift; sourceTree = "<group>"; };
 		2564A0551EBFB19000AB034A /* SocialMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMedia.swift; sourceTree = "<group>"; };
+		258E02701ED4F117005387DE /* GoogleAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPIClient.swift; sourceTree = "<group>"; };
+		258E02721ED4F140005387DE /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		25FB7CEA1EBD4CFA005B22EE /* EditBookVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBookVC.swift; sourceTree = "<group>"; };
 		25FB7CEE1EBE6C74005B22EE /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		25FEBE061EBBF1CB00B02001 /* DetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 			children = (
 				25FEBE0D1EBCAF5700B02001 /* Extensions.swift */,
 				250819111EBB92D1005740FE /* Constants.swift */,
+				258E02721ED4F140005387DE /* Secrets.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 		25FEBE0C1EBC24EB00B02001 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				258E02701ED4F117005387DE /* GoogleAPIClient.swift */,
 				2508190F1EBB92B9005740FE /* LibraryAPIClient.swift */,
 				2508191C1EBBC3E6005740FE /* LibraryDataStore.swift */,
 				25FEBE0A1EBC1B3200B02001 /* Endpoint.swift */,
@@ -334,11 +340,13 @@
 				250287DF1EBD041200E659D5 /* Alert.swift in Sources */,
 				25FB7CEF1EBE6C74005B22EE /* Error.swift in Sources */,
 				250818FB1EBB7FD8005740FE /* AppDelegate.swift in Sources */,
+				258E02711ED4F117005387DE /* GoogleAPIClient.swift in Sources */,
 				25FEBE091EBC0FC500B02001 /* AddBookVC.swift in Sources */,
 				250BDB351ECFDAFE005166DB /* CustomSearchBar.swift in Sources */,
 				2564A01C1EBE89AB00AB034A /* CheckoutVC.swift in Sources */,
 				25FEBE0E1EBCAF5700B02001 /* Extensions.swift in Sources */,
 				250BDB331ECFCD44005166DB /* SearchCell.swift in Sources */,
+				258E02731ED4F140005387DE /* Secrets.swift in Sources */,
 				2508191D1EBBC3E6005740FE /* LibraryDataStore.swift in Sources */,
 				250819171EBBBE09005740FE /* Book.m in Sources */,
 				250BDB311ECFCC77005166DB /* SearchVC.swift in Sources */,
