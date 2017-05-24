@@ -8,6 +8,8 @@
 
 import Foundation
 
+// TODO: - Check singletons
+
 typealias JSON = [String: Any]
 
 final class LibraryAPIClient {
