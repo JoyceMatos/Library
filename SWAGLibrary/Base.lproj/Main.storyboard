@@ -204,10 +204,10 @@
             </objects>
             <point key="canvasLocation" x="712.79999999999995" y="51.724137931034484"/>
         </scene>
-        <!--View Controller-->
+        <!--Scan View Controller-->
         <scene sceneID="7lk-Gn-hPw">
             <objects>
-                <viewController id="3vX-Bj-0I7" sceneMemberID="viewController">
+                <viewController id="3vX-Bj-0I7" customClass="ScanViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qRr-mk-5nc"/>
                         <viewControllerLayoutGuide type="bottom" id="PR9-yi-taB"/>
