@@ -12,6 +12,7 @@ final class LibraryDataStore {
     
     static let sharedInstance = LibraryDataStore()
     let libraryAPI = LibraryAPIClient.sharedInstance
+    let googleAPI = GoogleAPIClient.sharedInstance
     var books = [Book]()
     private init() { }
     
@@ -37,5 +38,30 @@ final class LibraryDataStore {
                 completion(true)
             }
         }
+    }
+    
+    // TODO: - This function might be better on google api client
+    func retrieve(scanned barcode: String, completion: @escaping (Bool) -> Void) {
+        
+        GoogleAPIClient.sharedInstance.get(barcode) { (bookInfo) in
+            
+            // TODO: - Create a new initializer for book and add this json
+            print(bookInfo)
+            let json = bookInfo?["items"] as! [JSON]
+            let index = json[0]
+            let volumeInfo = index["volumeInfo"] as! JSON
+            let title = volumeInfo["title"] as! String
+            let subtitle = volumeInfo["subtitle"] as! String
+            let author = volumeInfo["authors"] as! [String]
+            let publisher = volumeInfo["publisher"] as! String
+            
+            
+ 
+            completion(true)
+
+        }
+        
+        
+        
     }
 }

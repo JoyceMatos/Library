@@ -29,8 +29,6 @@ final class GoogleAPIClient {
                     completion(nil)
                     return
             }
-            
-            // TODO: - Only get json["items"]
             DispatchQueue.global(qos: .userInitiated).async {
                 completion(responseJSON)
             }
