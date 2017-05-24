@@ -8,6 +8,8 @@
 
 import UIKit
 
+// TODO: - Change all VC's to be named ViewController
+
 class LibraryVC: UIViewController {
 
     // MARK: - Outlets
