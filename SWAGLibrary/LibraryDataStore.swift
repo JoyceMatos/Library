@@ -41,23 +41,31 @@ final class LibraryDataStore {
     }
     
     // TODO: - This function might be better on google api client
-    func retrieve(scanned barcode: String, completion: @escaping (Bool) -> Void) {
+    func retrieve(scanned barcode: String, completion: @escaping (Book?) -> Void) {
         
         GoogleAPIClient.sharedInstance.get(barcode) { (bookInfo) in
             
             // TODO: - Create a new initializer for book and add this json
-            print(bookInfo)
-            let json = bookInfo?["items"] as! [JSON]
-            let index = json[0]
-            let volumeInfo = index["volumeInfo"] as! JSON
-            let title = volumeInfo["title"] as! String
-            let subtitle = volumeInfo["subtitle"] as! String
-            let author = volumeInfo["authors"] as! [String]
-            let publisher = volumeInfo["publisher"] as! String
+           guard let json = bookInfo?["items"] as? [JSON],
+            let index = json[0] as? JSON,
+            let volumeInfo = index["volumeInfo"] as? JSON,
+            let title = volumeInfo["title"] as? String,
+            let subtitle = volumeInfo["subtitle"] as? String,
+            let author = volumeInfo["authors"] as? [String],
+            let publisher = volumeInfo["publisher"] as? String else {
+                completion(nil)
+                return
+            }
             
+            var authors = String()
+            for i in author {
+                authors += i
+            }
             
- 
-            completion(true)
+            let dict = ["title": "\(title) " + subtitle, "author": authors, "publisher": publisher]
+            let book = Book(dictionary: dict)
+    
+            completion(book)
 
         }
         

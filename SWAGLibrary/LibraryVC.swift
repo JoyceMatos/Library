@@ -42,12 +42,12 @@ class LibraryVC: UIViewController {
         refresh()
         hideMenuButtons()
         
-//        GoogleAPIClient.sharedInstance.get("9780140047486") { (json) in
-//            print("We did it!")
-//        }
-//        
         store.retrieve(scanned: "9780140047486") { (book) in
-            print("HELLOOO")
+            print("Here the google book: \(book)")
+            print(book?.title)
+            print(book?.author)
+            print(book?.publisher)
+        
         }
 
     }

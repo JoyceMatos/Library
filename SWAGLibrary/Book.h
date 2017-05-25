@@ -26,6 +26,9 @@
 
 -(id)initWithDictionary: (NSDictionary *)JSON;
 
+-(id)initWithGoogleDic: (NSDictionary *)JSON;
+
+
 
 @end
 
