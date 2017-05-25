@@ -13,9 +13,12 @@ class ScanViewController: UIViewController {
 
     // Properties
     
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var footerView: UIView!
+    
+    var barcodeFrame: UIView?
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var barcodeFrame: UIView?
     
     let supportedCodeTypes = [AVMetadataObjectTypeUPCECode,
                               AVMetadataObjectTypeCode39Code,
