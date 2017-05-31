@@ -81,7 +81,7 @@ class ScanViewController: UIViewController {
                 barcodeFrame.layer.borderWidth = 2
                 view.addSubview(barcodeFrame)
                 cameraView.bringSubview(toFront: barcodeFrame)
-                
+
             }
             
         } catch {
