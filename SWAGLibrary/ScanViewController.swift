@@ -13,6 +13,7 @@ class ScanViewController: UIViewController {
 
     // Properties
     
+    @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var footerView: UIView!
     
@@ -65,9 +66,9 @@ class ScanViewController: UIViewController {
             // Add session to preview layer and configure preview frame
             videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
             videoPreviewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-            videoPreviewLayer?.frame = view.layer.bounds
+            videoPreviewLayer?.frame = cameraView.layer.bounds
             // TODO: - Fix this and unwrap properly
-            view.layer.addSublayer(videoPreviewLayer!)
+            cameraView.layer.addSublayer(videoPreviewLayer!)
             
             // Begin session
             captureSession?.startRunning()
@@ -79,7 +80,7 @@ class ScanViewController: UIViewController {
                 barcodeFrame.layer.borderColor = UIColor.green.cgColor
                 barcodeFrame.layer.borderWidth = 2
                 view.addSubview(barcodeFrame)
-                view.bringSubview(toFront: barcodeFrame)
+                cameraView.bringSubview(toFront: barcodeFrame)
                 
             }
             

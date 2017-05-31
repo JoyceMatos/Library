@@ -214,9 +214,8 @@
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="26"/>
                                 <state key="normal" title="X"/>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hkW-AI-yA1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkW-AI-yA1">
                                 <rect key="frame" x="0.0" y="557" width="375" height="110"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sailing Alone Around the Room" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="bcy-Na-FBc">
                                         <rect key="frame" x="12" y="21" width="351" height="29"/>
@@ -242,9 +241,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.1015089897" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJ3-hH-pNa">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJ3-hH-pNa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please scan your book's barcode" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d16-Jx-KaC">
                                         <rect key="frame" x="34" y="77" width="307" height="29"/>
@@ -256,17 +254,36 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.1015089897260274" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8cn-2O-alm">
+                                <rect key="frame" x="0.0" y="123" width="375" height="433.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hkW-AI-yA1" firstAttribute="top" secondItem="8cn-2O-alm" secondAttribute="bottom" constant="0.5" id="0jv-0t-DfN"/>
+                            <constraint firstItem="8cn-2O-alm" firstAttribute="height" secondItem="4j5-Cg-mbk" secondAttribute="height" multiplier="0.65" id="52P-eI-gbI"/>
+                            <constraint firstItem="hkW-AI-yA1" firstAttribute="width" secondItem="8cn-2O-alm" secondAttribute="width" id="57U-GG-buK"/>
+                            <constraint firstItem="8cn-2O-alm" firstAttribute="top" secondItem="XJ3-hH-pNa" secondAttribute="bottom" constant="3" id="7rl-IW-ntj"/>
+                            <constraint firstItem="XJ3-hH-pNa" firstAttribute="height" secondItem="4j5-Cg-mbk" secondAttribute="height" multiplier="0.18" id="BJz-2t-Xzx"/>
+                            <constraint firstItem="hkW-AI-yA1" firstAttribute="centerX" secondItem="8cn-2O-alm" secondAttribute="centerX" id="Cxv-Jq-nHw"/>
+                            <constraint firstItem="XJ3-hH-pNa" firstAttribute="top" secondItem="qRr-mk-5nc" secondAttribute="bottom" constant="-20" id="Q1t-s0-0nG"/>
+                            <constraint firstItem="XJ3-hH-pNa" firstAttribute="centerX" secondItem="4j5-Cg-mbk" secondAttribute="centerX" id="aEU-IA-hoM"/>
+                            <constraint firstItem="XJ3-hH-pNa" firstAttribute="width" secondItem="4j5-Cg-mbk" secondAttribute="width" id="l3M-VJ-kHG"/>
+                            <constraint firstItem="8cn-2O-alm" firstAttribute="width" secondItem="XJ3-hH-pNa" secondAttribute="width" id="mjy-Jm-pg3"/>
+                            <constraint firstItem="PR9-yi-taB" firstAttribute="top" secondItem="hkW-AI-yA1" secondAttribute="bottom" id="q4g-Af-XRO"/>
+                            <constraint firstItem="8cn-2O-alm" firstAttribute="centerX" secondItem="XJ3-hH-pNa" secondAttribute="centerX" id="unb-fs-ddm"/>
+                        </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraView" destination="8cn-2O-alm" id="ymx-9f-KyB"/>
                         <outlet property="footerView" destination="hkW-AI-yA1" id="pGV-XB-BkI"/>
                         <outlet property="headerView" destination="XJ3-hH-pNa" id="th5-Lg-4BB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-5B-beu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-695" y="-642"/>
+            <point key="canvasLocation" x="-695.20000000000005" y="-642.72863568215894"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="oMj-DY-NcY">
