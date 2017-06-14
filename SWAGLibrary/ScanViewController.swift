@@ -10,8 +10,9 @@ import UIKit
 import AVFoundation
 
 class ScanViewController: UIViewController {
-
+    
     // Properties
+    
     
     @IBOutlet weak var cameraView: UIView!
     @IBOutlet weak var headerView: UIView!
@@ -34,11 +35,10 @@ class ScanViewController: UIViewController {
     // View Lifecyle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureAVFoundation()
     }
     
-    // Barscanning method 
+    // Barscanning method
     
     // TODO: - This method can be better
     func configureAVFoundation() {
@@ -74,15 +74,7 @@ class ScanViewController: UIViewController {
             captureSession?.startRunning()
             
             // Set up frame for barcode
-            barcodeFrame = UIView()
-            
-            if let barcodeFrame = barcodeFrame {
-                barcodeFrame.layer.borderColor = UIColor.green.cgColor
-                barcodeFrame.layer.borderWidth = 2
-                view.addSubview(barcodeFrame)
-                cameraView.bringSubview(toFront: barcodeFrame)
-
-            }
+            setupBarcodeView()
             
         } catch {
             // TODO: - Handle error!
@@ -90,7 +82,25 @@ class ScanViewController: UIViewController {
             return
         }
     }
-
+    
+    // TODO: - Separate into it's own view
+    func setupBarcodeView() {
+        barcodeFrame = UIView()
+        
+        if let barcodeFrame = barcodeFrame {
+            barcodeFrame.layer.borderColor = UIColor.green.cgColor
+            barcodeFrame.layer.borderWidth = 2
+            cameraView.addSubview(barcodeFrame)
+            cameraView.bringSubview(toFront: barcodeFrame)
+        }
+    }
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
 }
 
 // AVCapture Method
@@ -121,9 +131,12 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             print("This is the type: \(metadataObj.type)")
             print("This is the barcode value: \(metadataObj.stringValue)")
             
+            // TODO: - Once barcode is captured, stop searching method
+            
         } else {
             print("ERROOORRR")
         }
+        
         
     }
     

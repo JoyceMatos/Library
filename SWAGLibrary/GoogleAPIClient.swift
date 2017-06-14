@@ -12,12 +12,7 @@ import Foundation
 
 final class GoogleAPIClient {
     
-    static let sharedInstance = GoogleAPIClient()
-    
-    private init() { }
-    
-    func get(_ isbn: String, completion: @escaping (JSON?) -> Void) {
-        
+    class func get(_ isbn: String, completion: @escaping (JSON?) -> Void) {
         guard let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + Secrets.googleAPIKey) else {
             // Handle
             return
@@ -34,10 +29,6 @@ final class GoogleAPIClient {
             }
         }
         task.resume()
-        
-        
-        
-        
     }
     
 }

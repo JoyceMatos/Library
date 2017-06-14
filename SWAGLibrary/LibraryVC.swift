@@ -42,6 +42,7 @@ class LibraryVC: UIViewController {
         refresh()
         hideMenuButtons()
         
+        // NOTE: - For testing purposes
         store.retrieve(scanned: "9780140047486") { (book) in
             print("Here the google book: \(book)")
             print(book?.title)

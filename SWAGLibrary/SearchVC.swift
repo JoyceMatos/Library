@@ -14,25 +14,27 @@ import UIKit
 
 class SearchVC: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var tableView: UITableView!
     
     var searchController: UISearchController!
     var customSearchBar: CustomSearchBar!
-    
     let store = LibraryDataStore.sharedInstance
     var filteredBooks = [Book]()
     var shouldShowSearchResults = false
-    
     var errorHandler: ErrorHandling?
+    
+    // MARK: - View Lifecyle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         errorHandler = self
         fetch()
         configureSearchController()
-        
     }
+    
+    // MARK: - API Method
     
     func fetch() {
         self.store.getBooks { (success) in
@@ -47,6 +49,7 @@ class SearchVC: UIViewController {
         }
     }
     
+    // MARK: - View Method
     
     // TODO: - Try customizing this in storybaord
     func configureSearchController() {
@@ -60,7 +63,17 @@ class SearchVC: UIViewController {
         searchController.searchBar.barTintColor = UIColor.white
         searchController.searchBar.tintColor = UIColor.darkGray
     }
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
 }
+
+// MARK: - Search Methods
 
 extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
     
@@ -102,6 +115,8 @@ extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
     }
 }
 
+// MARK: - TableView Methods
+
 extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -135,8 +150,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-
-
+// MARK: - Error Handling Method
 
 extension SearchVC: ErrorHandling {
     
