@@ -1,4 +1,4 @@
-## Prolific Library
+## Personal Library
 
 <img
 src="http://i67.tinypic.com/hrgffr.png" width = "170"> <img
@@ -8,13 +8,9 @@ src="http://i64.tinypic.com/idtc9d.png" width = "170"> <img
 src="http://i66.tinypic.com/o01lix.png" width = "170">
 
 
-Prolific Library is an app that makes various HTTP requests to the server: 
+Personal Library is an app where you have the ability to manage your library and track the status of each book. As the owner of your library, you have the ability to add, delete, edit, checkout a book, and clear all the books from the library. All changes will be reflected on the server and in the app instantly.
 
-http://prolific-interview.herokuapp.com/590b44550679b5000a4a56be/
-
-In this app you have the ability to manage your library and track the status of each book. As a part of the SWAG library committee, you have the ability to add, delete, edit, checkout a book, and clear all the books from the library. All changes will be reflected on the server and in the app instantly.
-
-Prolific Library was made in Swift 3.0 and Objective-C, runs on iOS 9+, is compatible with iPhone 4+ and uses Auto Layout.
+Personal Library was made in Swift 3.0 and Objective-C, runs on iOS 9+, is compatible with iPhone 4+ and uses Auto Layout.
 
 Inside the actual code you will find comments that explain what each method functionality is. I have also included ‘TODO’ comments in the areas where the code can be further improved.
 
@@ -25,7 +21,7 @@ Inside the actual code you will find comments that explain what each method func
 
 ## The Library
 
-To use and test Prolific Library open the SWAGLibrary.xcworkspace file on Xcode, and run the project.
+To use and test Personal Library open the SWAGLibrary.xcworkspace file on Xcode, and run the project.
 
 ## Instructions (View By View)
 
@@ -47,9 +43,9 @@ In the edit view you will see a number of editable fields with information about
 
 ## Technical Decisions
 
-- The Prolific Library app was architected in MVC.
+- The Personal Library app was architected in MVC.
 
-- The p.list info is set for ‘Allow Arbitrary Loads’ so that the app can access insecure http servers, such as the http://prolific-interview.herokuapp.com/590b44550679b5000a4a56be/ server.
+- The p.list info is set for ‘Allow Arbitrary Loads’ so that the app can access insecure http servers, such as the server used for this project.
 
 - The **APIClient** is an object that is used to interact with the API and make various HTTP requests.
 
@@ -68,4 +64,10 @@ In the edit view you will see a number of editable fields with information about
 - **Error**, **Endpoint**, and **SocialMedia** were written with the purpose of writing reusable code.
 
 - **SwiftDate** and **IQKeyboard** are used to easily format dates and dismiss the keyboard.
+
+## In Progress
+
+- Scanning capabilities that allow you to import a book by scanning it's barcode
+- Search functionality that allows you to easily search for books in your library
+- Data persistence using Realm as opposed to the current server
 
