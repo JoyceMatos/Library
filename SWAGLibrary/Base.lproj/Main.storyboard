@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1qs-xz-8Gq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1qs-xz-8Gq">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -216,33 +216,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hkW-AI-yA1">
-                                <rect key="frame" x="0.0" y="557" width="375" height="110"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sailing Alone Around the Room" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="bcy-Na-FBc">
-                                        <rect key="frame" x="12" y="21" width="351" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="21"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Billy Collins" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="1Gk-P6-PJX">
-                                        <rect key="frame" x="12" y="58" width="351" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="19"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Searching  ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ZZ-Pw-VpP">
-                                        <rect key="frame" x="126" y="56" width="122" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="21"/>
-                                        <color key="textColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.1015089897" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJ3-hH-pNa">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                 <subviews>
@@ -269,32 +242,32 @@
                                 <rect key="frame" x="0.0" y="123" width="375" height="433.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GQN-sc-wMl">
+                                <rect key="frame" x="0.0" y="547" width="375" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="0.1015089897" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hkW-AI-yA1" firstAttribute="top" secondItem="8cn-2O-alm" secondAttribute="bottom" constant="0.5" id="0jv-0t-DfN"/>
                             <constraint firstItem="8cn-2O-alm" firstAttribute="height" secondItem="4j5-Cg-mbk" secondAttribute="height" multiplier="0.65" id="52P-eI-gbI"/>
-                            <constraint firstItem="hkW-AI-yA1" firstAttribute="width" secondItem="8cn-2O-alm" secondAttribute="width" id="57U-GG-buK"/>
                             <constraint firstItem="8cn-2O-alm" firstAttribute="top" secondItem="XJ3-hH-pNa" secondAttribute="bottom" constant="3" id="7rl-IW-ntj"/>
                             <constraint firstItem="XJ3-hH-pNa" firstAttribute="height" secondItem="4j5-Cg-mbk" secondAttribute="height" multiplier="0.18" id="BJz-2t-Xzx"/>
-                            <constraint firstItem="hkW-AI-yA1" firstAttribute="centerX" secondItem="8cn-2O-alm" secondAttribute="centerX" id="Cxv-Jq-nHw"/>
                             <constraint firstItem="XJ3-hH-pNa" firstAttribute="top" secondItem="qRr-mk-5nc" secondAttribute="bottom" constant="-20" id="Q1t-s0-0nG"/>
                             <constraint firstItem="XJ3-hH-pNa" firstAttribute="centerX" secondItem="4j5-Cg-mbk" secondAttribute="centerX" id="aEU-IA-hoM"/>
                             <constraint firstItem="XJ3-hH-pNa" firstAttribute="width" secondItem="4j5-Cg-mbk" secondAttribute="width" id="l3M-VJ-kHG"/>
                             <constraint firstItem="8cn-2O-alm" firstAttribute="width" secondItem="XJ3-hH-pNa" secondAttribute="width" id="mjy-Jm-pg3"/>
-                            <constraint firstItem="PR9-yi-taB" firstAttribute="top" secondItem="hkW-AI-yA1" secondAttribute="bottom" id="q4g-Af-XRO"/>
                             <constraint firstItem="8cn-2O-alm" firstAttribute="centerX" secondItem="XJ3-hH-pNa" secondAttribute="centerX" id="unb-fs-ddm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="8cn-2O-alm" id="ymx-9f-KyB"/>
-                        <outlet property="footerView" destination="hkW-AI-yA1" id="pGV-XB-BkI"/>
                         <outlet property="headerView" destination="XJ3-hH-pNa" id="th5-Lg-4BB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-5B-beu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-695.20000000000005" y="-642.72863568215894"/>
+            <point key="canvasLocation" x="-558" y="-1052"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="oMj-DY-NcY">
@@ -586,7 +559,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syQ-Yz-gep" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xZW-mk-Yqd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1271" y="290"/>
+            <point key="canvasLocation" x="1190" y="290"/>
         </scene>
         <!--Add BookVC-->
         <scene sceneID="Eo1-Vp-xyy">
@@ -885,6 +858,88 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ukb-iB-czj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1574" y="52"/>
+        </scene>
+        <!--CheckoutVC-->
+        <scene sceneID="g8L-y1-Kuk">
+            <objects>
+                <viewController modalPresentationStyle="overFullScreen" id="hkb-dR-UVv" customClass="CheckoutVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="X2c-We-5OS"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZuL-3C-Cmn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oi6-O1-FuT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2RZ-C2-lTu">
+                                <rect key="frame" x="17" y="120" width="341" height="400"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T62-tC-gAk">
+                                        <rect key="frame" x="85.5" y="26" width="170.5" height="60"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="24"/>
+                                        <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Billy Collins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPy-Rj-hmf">
+                                        <rect key="frame" x="26" y="148" width="87" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Penguin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVR-pG-Wbo">
+                                        <rect key="frame" x="26" y="188" width="72" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pU-2W-5CL">
+                                        <rect key="frame" x="185" y="247" width="90" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <state key="normal" title="Add Book"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhE-o7-HIf">
+                                        <rect key="frame" x="50" y="247" width="82" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                        <state key="normal" title="Cancel"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sailing Alone Around the Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Bw-1j-vO6">
+                                        <rect key="frame" x="26" y="94" width="272" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="T62-tC-gAk" firstAttribute="height" secondItem="2RZ-C2-lTu" secondAttribute="height" multiplier="0.15" id="38F-qo-bus"/>
+                                    <constraint firstItem="T62-tC-gAk" firstAttribute="width" secondItem="2RZ-C2-lTu" secondAttribute="width" multiplier="0.5" id="K5V-v6-lLi"/>
+                                    <constraint firstItem="T62-tC-gAk" firstAttribute="centerX" secondItem="2RZ-C2-lTu" secondAttribute="centerX" id="V6G-1X-Pb6"/>
+                                    <constraint firstItem="T62-tC-gAk" firstAttribute="top" secondItem="2RZ-C2-lTu" secondAttribute="top" constant="26" id="hdm-ZK-xuR"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="2RZ-C2-lTu" firstAttribute="width" secondItem="Oi6-O1-FuT" secondAttribute="width" multiplier="0.91" id="8VX-iu-mcA"/>
+                            <constraint firstItem="2RZ-C2-lTu" firstAttribute="centerX" secondItem="Oi6-O1-FuT" secondAttribute="centerX" id="GLB-Mp-B3O"/>
+                            <constraint firstItem="2RZ-C2-lTu" firstAttribute="top" secondItem="X2c-We-5OS" secondAttribute="bottom" constant="100" id="Onr-WK-CVJ"/>
+                            <constraint firstItem="2RZ-C2-lTu" firstAttribute="height" secondItem="Oi6-O1-FuT" secondAttribute="height" multiplier="0.6" id="pDv-p9-mX6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="checkoutView" destination="2RZ-C2-lTu" id="Gbi-9X-Vgk"/>
+                        <segue destination="AZq-EZ-mU7" kind="unwind" identifier="unwindToDetailVC" unwindAction="unwindToDetailVCWithSender:" id="jIQ-CO-VbS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uhm-Dy-CP5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AZq-EZ-mU7" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="205.59999999999999" y="-1052.0239880059971"/>
         </scene>
     </scenes>
     <resources>
