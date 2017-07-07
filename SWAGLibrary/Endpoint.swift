@@ -69,7 +69,7 @@ extension Endpoint {
 extension Endpoint {
     
     func generateURL(with parameter: String) -> URL? {
-        let string = Endpoint.baseURL + Secret.clientID + parameter
+        let string = Endpoint.baseURL + Secrets.serverClientID + parameter
         return URL(string: string)
     }
 

@@ -17,7 +17,6 @@ final class GoogleAPIClient {
     private init() { }
     
     func get(_ isbn: String, completion: @escaping (JSON?) -> Void) {
-        
         guard let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn + "&key=" + Secrets.googleAPIKey) else {
             // Handle
             return

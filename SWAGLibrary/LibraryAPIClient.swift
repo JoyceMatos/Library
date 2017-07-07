@@ -8,7 +8,7 @@
 
 import Foundation
 
-// TODO: - Check singletons
+// TODO: - This does not have to be a singleton. Leave as class instead
 
 typealias JSON = [String: Any]
 

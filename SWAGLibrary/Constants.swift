@@ -39,14 +39,6 @@ struct CellIdentifier {
     
 }
 
-// NOTE: - Really belongs in a separate file and added to the .gitignore
-
-struct Secret {
-    
-    static let clientID = "58ee814c433358000aae035d"
-    
-}
-
 
 
 
