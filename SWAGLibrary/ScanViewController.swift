@@ -131,9 +131,11 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             print("This is the type: \(metadataObj.type)")
             print("This is the barcode value: \(metadataObj.stringValue)")
             
-            // TODO: - Once barcode is captured, stop searching method
+            // TODO: - Once barcode is captured, stop searching method and display pop up
             
         } else {
+            
+            // Handle this
             print("ERROOORRR")
         }
         
