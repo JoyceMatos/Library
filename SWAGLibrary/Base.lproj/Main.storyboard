@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--LibraryVC-->
+        <!--Library View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LibraryVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LibraryViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -123,14 +123,6 @@
                                     <segue destination="3vX-Bj-0I7" kind="presentation" id="8ko-tT-nX7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R6b-9b-KBJ">
-                                <rect key="frame" x="311" y="124" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Search"/>
-                                <connections>
-                                    <segue destination="iEF-l3-BGG" kind="presentation" id="BZF-0H-WFG"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -153,6 +145,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9Rl-5k-0yd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="Rde-qI-Zzj">
+                            <color key="tintColor" red="0.93409991264343262" green="0.53833818435668945" blue="0.52561187744140625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="iEF-l3-BGG" kind="presentation" id="66a-5X-9oq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5cl-6t-Ywb">
                             <color key="tintColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -262,17 +260,17 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="8cn-2O-alm" id="ymx-9f-KyB"/>
-                        <outlet property="headerView" destination="XJ3-hH-pNa" id="th5-Lg-4BB"/>
+                        <segue destination="hkb-dR-UVv" kind="presentation" identifier="showRetrievedBook" id="hfC-WM-ngL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q3h-5B-beu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-558" y="-1052"/>
         </scene>
-        <!--SearchVC-->
+        <!--Search View Controller-->
         <scene sceneID="oMj-DY-NcY">
             <objects>
-                <viewController id="iEF-l3-BGG" customClass="SearchVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iEF-l3-BGG" customClass="SearchViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="16e-9b-98c"/>
                         <viewControllerLayoutGuide type="bottom" id="AEz-Z5-GLO"/>
@@ -358,7 +356,7 @@
         <!--Details-->
         <scene sceneID="1ir-s3-w0W">
             <objects>
-                <viewController title="Details" id="qrI-jX-rlR" customClass="DetailVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Details" id="qrI-jX-rlR" customClass="DetailViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kHh-ze-DPp"/>
                         <viewControllerLayoutGuide type="bottom" id="UET-3g-yth"/>
@@ -463,10 +461,10 @@
             </objects>
             <point key="canvasLocation" x="266" y="291"/>
         </scene>
-        <!--CheckoutVC-->
+        <!--Checkout View Controller-->
         <scene sceneID="RSh-aD-Czb">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="FSB-mG-jzr" customClass="CheckoutVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="FSB-mG-jzr" customClass="CheckoutViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pgO-Kg-IMn"/>
                         <viewControllerLayoutGuide type="bottom" id="bGy-yP-az4"/>
@@ -561,10 +559,10 @@
             </objects>
             <point key="canvasLocation" x="1190" y="290"/>
         </scene>
-        <!--Add BookVC-->
+        <!--Add Book View Controller-->
         <scene sceneID="Eo1-Vp-xyy">
             <objects>
-                <viewController id="NBP-EK-YiH" customClass="AddBookVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="NBP-EK-YiH" customClass="AddBookViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iF0-9w-KdE"/>
                         <viewControllerLayoutGuide type="bottom" id="gZO-MH-rHe"/>
@@ -663,10 +661,10 @@
             </objects>
             <point key="canvasLocation" x="-1236" y="833"/>
         </scene>
-        <!--Edit BookVC-->
+        <!--Edit Book View Controller-->
         <scene sceneID="B1e-lq-bEf">
             <objects>
-                <viewController id="IP6-Aj-cuQ" customClass="EditBookVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="IP6-Aj-cuQ" customClass="EditBookViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Omq-27-6jc"/>
                         <viewControllerLayoutGuide type="bottom" id="VB2-f9-ydt"/>
@@ -859,10 +857,10 @@
             </objects>
             <point key="canvasLocation" x="-1574" y="52"/>
         </scene>
-        <!--CheckoutVC-->
+        <!--Found Book View Controller-->
         <scene sceneID="g8L-y1-Kuk">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="hkb-dR-UVv" customClass="CheckoutVC" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="hkb-dR-UVv" customClass="FoundBookViewController" customModule="SWAGLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="X2c-We-5OS"/>
                         <viewControllerLayoutGuide type="bottom" id="ZuL-3C-Cmn"/>
@@ -881,33 +879,33 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Billy Collins" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPy-Rj-hmf">
-                                        <rect key="frame" x="26" y="148" width="87" height="24"/>
+                                        <rect key="frame" x="26" y="165" width="87" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Penguin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lVR-pG-Wbo">
-                                        <rect key="frame" x="26" y="188" width="72" height="24"/>
+                                        <rect key="frame" x="26" y="213" width="72" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pU-2W-5CL">
-                                        <rect key="frame" x="185" y="247" width="90" height="30"/>
+                                        <rect key="frame" x="190" y="284" width="90" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Add Book"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhE-o7-HIf">
-                                        <rect key="frame" x="50" y="247" width="82" height="30"/>
+                                        <rect key="frame" x="47" y="284" width="82" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
                                         <state key="normal" title="Cancel"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sailing Alone Around the Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Bw-1j-vO6">
-                                        <rect key="frame" x="26" y="94" width="272" height="39"/>
+                                        <rect key="frame" x="26" y="106" width="272" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
                                         <nil key="textColor"/>

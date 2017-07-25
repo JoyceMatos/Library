@@ -44,7 +44,7 @@ final class LibraryDataStore {
         
         GoogleAPIClient.get(barcode) { (bookInfo) in
             
-            // TODO: - Create a new initializer for book and add this json
+            // TODO: - Create a new initializer for book and add do the parsing there
            guard let json = bookInfo?["items"] as? [JSON],
             let index = json[0] as? JSON,
             let volumeInfo = index["volumeInfo"] as? JSON,

@@ -10,7 +10,7 @@ import UIKit
 
 // TODO: - Trailing brackets
 
-class CheckoutVC: UIViewController {
+class CheckoutViewController: UIViewController {
     
     // MARK: - Outlets
     
@@ -84,7 +84,7 @@ class CheckoutVC: UIViewController {
 
 // MARK: - Error Handling Method
 
-extension CheckoutVC: ErrorHandling {
+extension CheckoutViewController: ErrorHandling {
     
     func displayErrorAlert(for type: ErrorType) {
         let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)

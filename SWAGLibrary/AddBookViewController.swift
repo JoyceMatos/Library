@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddBookVC: UIViewController {
+class AddBookViewController: UIViewController {
     
     // MARK: - Outlets
     
@@ -136,7 +136,7 @@ class AddBookVC: UIViewController {
 
 // MARK: - Error Method
 
-extension AddBookVC: ErrorHandling {
+extension AddBookViewController: ErrorHandling {
     
     func displayErrorAlert(for type: ErrorType) {
         let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)

@@ -12,7 +12,7 @@ import UIKit
 // TODO: - Seperate view functionality
 // TODO: - Add search by author
 
-class SearchVC: UIViewController {
+class SearchViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -75,7 +75,7 @@ class SearchVC: UIViewController {
 
 // MARK: - Search Methods
 
-extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
+extension SearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         shouldShowSearchResults = true
@@ -103,11 +103,15 @@ extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
             return
         }
         
+        filteredBooks.removeAll()
+        
         // Maybe filter instead
         for book in store.books {
             let bookTitle = book.title.lowercased()
-            if bookTitle.contains(searchString.lowercased()) {
-                filteredBooks = [book]
+            let bookAuthor = book.author.lowercased()
+            if bookTitle.contains(searchString.lowercased()) || bookAuthor.contains(searchString.lowercased()) {
+                filteredBooks.append(book)
+
             }
         }
         
@@ -117,7 +121,7 @@ extension SearchVC: UISearchResultsUpdating, UISearchBarDelegate {
 
 // MARK: - TableView Methods
 
-extension SearchVC: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -152,7 +156,7 @@ extension SearchVC: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - Error Handling Method
 
-extension SearchVC: ErrorHandling {
+extension SearchViewController: ErrorHandling {
     
     func displayErrorAlert(for type: ErrorType) {
         let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)

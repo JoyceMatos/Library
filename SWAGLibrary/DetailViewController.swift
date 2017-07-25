@@ -10,7 +10,7 @@ import UIKit
 import Social
 import SwiftDate
 
-class DetailVC: UIViewController {
+class DetailViewController: UIViewController {
     
     // MARK: - Outlets
     
@@ -130,14 +130,10 @@ class DetailVC: UIViewController {
         }
     }
     
-    // NOTE: - This formats the date based on a given string and works only for new york
-    // TODO: - This should display device's Time zone, ie: EST, along with hour, minutes, seconds
+    // NOTE: - This formats the Date
     func format(_ date: String) -> String? {
         let region = Region(tz: TimeZoneName.currentAutoUpdating.timeZone, cal: CalendarName.current.calendar, loc: LocaleName.currentAutoUpdating.locale)
-
-        // NOTE: - newDate is formatted in the correct style but if I return this and change my function's return to 'DateInRegion?', I will only get the EDT version of the time and not the EST
-       let newDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"), fromRegion: region)
-        
+        let newDate = try? DateInRegion(string: date, format: .custom("yyyy-MM-dd HH:mm:ss"), fromRegion: region)
         let formattedDate = newDate?.string(dateStyle: .long, timeStyle: .none)
 
         return formattedDate
@@ -199,14 +195,14 @@ class DetailVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.showCheckoutVC {
-            let destVC = segue.destination as! CheckoutVC
+            let destVC = segue.destination as! CheckoutViewController
             destVC.book = book
         }
     }
     
     @IBAction func unwindToDetailVC(sender: UIStoryboardSegue) {
         DispatchQueue.global(qos: .userInitiated).async {
-            if let sourceViewController = sender.source as? CheckoutVC {
+            if let sourceViewController = sender.source as? CheckoutViewController {
                 self.book = sourceViewController.book
                 DispatchQueue.main.async {
                     // Find a way to use didSets instead of configuring views over and over

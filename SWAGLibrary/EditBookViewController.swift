@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditBookVC: UIViewController {
+class EditBookViewController: UIViewController {
     
     @IBOutlet weak var bookField: UITextField!
     @IBOutlet weak var authorField: UITextField!
@@ -147,7 +147,7 @@ class EditBookVC: UIViewController {
 
 // MARK: - Error Handling Method
 
-extension EditBookVC: ErrorHandling {
+extension EditBookViewController: ErrorHandling {
 
     func displayErrorAlert(for type: ErrorType) {
         let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)

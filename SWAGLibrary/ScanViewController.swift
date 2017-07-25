@@ -13,9 +13,9 @@ class ScanViewController: UIViewController {
     
     // Properties
     
-    
     @IBOutlet weak var cameraView: UIView!
     
+    let store = LibraryDataStore.sharedInstance
     var barcodeFrame: UIView?
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -28,6 +28,7 @@ class ScanViewController: UIViewController {
                               AVMetadataObjectTypeEAN13Code,
                               AVMetadataObjectTypeAztecCode,
                               AVMetadataObjectTypePDF417Code]
+    var scannedBook: Book?
     
     // View Lifecyle
     override func viewDidLoad() {
@@ -92,17 +93,41 @@ class ScanViewController: UIViewController {
         }
     }
     
+    // MARK: - API Method
+    func getBook(from isbn: String, completion: @escaping (Bool) -> Void) {
+        store.retrieve(scanned: isbn) { (book) in
+            if book != nil {
+                self.scannedBook = book
+                completion(true)
+            } else {
+                print("Could not retrieve book")
+                completion(false)
+                // Handle: Could not retrieve book
+            }
+        }
+    }
+    
+    
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Segue Method
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifier.showFoundBookVC {
+            let destVC = segue.destination as! FoundBookViewController
+            destVC.book = scannedBook
+        }
+    }
     
 }
 
 // AVCapture Method
 
 extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
+    
+    // TODO: - Refactor!!
     
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputMetadataObjects metadataObjects: [Any]!, from connection: AVCaptureConnection!) {
         
@@ -127,17 +152,30 @@ extension ScanViewController: AVCaptureMetadataOutputObjectsDelegate {
             
             print("This is the type: \(metadataObj.type)")
             print("This is the barcode value: \(metadataObj.stringValue)")
-            
-            // TODO: - Once barcode is captured, stop searching method and display pop up
+            if let barcode = metadataObj.stringValue {
+                getBook(from: barcode, completion: { (success) in
+                    if success {
+                        
+                        //                let foundBookVC = FoundBookViewController()
+                        // TODO: - Pass info along in segue
+                        //                foundBookVC.book = scannedBook
+                        //                present(foundBookVC, animated: true, completion: nil)
+                        
+                        
+                        self.performSegue(withIdentifier: SegueIdentifier.showFoundBookVC, sender: nil)
+                    } else {
+                        // Handle this case
+                    }
+                })
+                
+                
+            }
             
         } else {
             
             // Handle this
             print("ERROOORRR")
         }
-        
-        
     }
-    
     
 }

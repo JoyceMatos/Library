@@ -10,12 +10,11 @@ import UIKit
 
 // TODO: - Change all VC's to be named ViewController
 
-class LibraryVC: UIViewController {
+class LibraryViewController: UIViewController {
 
     // MARK: - Outlets
 
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var deleteLibraryButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
@@ -193,13 +192,13 @@ class LibraryVC: UIViewController {
 
         switch identifier {
         case SegueIdentifier.showDetailVC:
-            let destVC = segue.destination as! DetailVC
+            let destVC = segue.destination as! DetailViewController
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
             destVC.book = store.books[indexPath.row]
         case SegueIdentifier.showEditVC:
-            let destVC = segue.destination as! EditBookVC
+            let destVC = segue.destination as! EditBookViewController
             guard let indexPath = tableView.indexPath(for: sender as! UITableViewCell) else {
                 return
             }
@@ -214,7 +213,7 @@ class LibraryVC: UIViewController {
 
 // MARK: - Table View Methods
 
-extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
+extension LibraryViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -279,7 +278,7 @@ extension LibraryVC: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - Error Delegate
 
-extension LibraryVC: ErrorHandling {
+extension LibraryViewController: ErrorHandling {
 
     func displayErrorAlert(for type: ErrorType) {
         let alert = UIAlertController(title: type.errorMessage.title, message: type.errorMessage.message, preferredStyle: .alert)
